@@ -18,27 +18,27 @@ With `OpenCatapult`, you can:
 
 ## The Circle of Magic
 
-![Circle of Magic](img/circle.jpeg)
+![Circle of Magic](../img/circle.jpeg)
 
 There is no magic, it's all just automation logics. But you will see what you believe, right?
 
 ## The Components
 
-![Architecture](img/general-arch.jpeg)
+![Architecture](../img/general-arch.jpeg)
 
 `OpenCatapult` consists of the following components:
 
 ### API
 
-API is the central of `OpenCatapult` logics. It is an HTTP REST API system which usually acts as the bridge between `OpenCatapult` components. You can find more details of the features in [API References](api/api.md).
+API is the central of `OpenCatapult` logics. It is an HTTP REST API system which usually acts as the bridge between `OpenCatapult` components. You can find more details of the features in [API References](../api/api.md).
 
 ### User Interface
 
-This is the front-facing interface which is used by user to interact with `OpenCatapult`. User can choose to work with [Command Line Interface \(CLI\)](cli/cli.md), Web \(coming soon\), or Mobile \(coming soon\). User Interface doesn't contain any logics. It just forwards the requests to API endpoints and waits for the response.
+This is the front-facing interface which is used by user to interact with `OpenCatapult`. User can choose to work with [Command Line Interface \(CLI\)](../cli/cli.md), Web \(coming soon\), or Mobile \(coming soon\). User Interface doesn't contain any logics. It just forwards the requests to API endpoints and waits for the response.
 
 ### Engine
 
-Engine runs as a stand-alone console application which waits for any queued jobs to be executed. It orchestrates the execution of job tasks, and reports back the result to the API asynchronously. You can find more details about its capability in the [Engine References](engine/engine.md).
+Engine runs as a stand-alone console application which waits for any queued jobs to be executed. It orchestrates the execution of job tasks, and reports back the result to the API asynchronously. You can find more details about its capability in the [Engine References](../engine/engine.md).
 
 ### Service Providers \(Plugins\)
 
