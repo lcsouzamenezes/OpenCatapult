@@ -1,9 +1,8 @@
 # Table of contents
 
-* [Introduction](index.md)
-
 ## Home
 
+* [Introduction](home/intro.md)
 * [Quick Start](home/start.md)
 * [About this doc](home/about.md)
 
