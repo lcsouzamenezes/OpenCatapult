@@ -2,9 +2,9 @@
 
 OpenCatapult uses [EditorConfig](https://editorconfig.org/) to help developers adhere with consistence coding style.
 
-For usage in `Visual Studio 2017`, you can find the guide in this article [https://docs.microsoft.com/en-us/visualstudio/ide/create-portable-custom-editor-options?view=vs-2017](https://docs.microsoft.com/en-us/visualstudio/ide/create-portable-custom-editor-options?view=vs-2017).
+For usage in `Visual Studio 2017`, you can find the guide in this [article](https://docs.microsoft.com/en-us/visualstudio/ide/create-portable-custom-editor-options?view=vs-2017).
 
-If you work with `Visual Studio Code`, you can use this plugin [https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig). There are various plugins available for many IDE of your choice, which you can find the list in the `EditorConfig` website.
+If you work with `Visual Studio Code`, you can use this [plugin](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig). There are various plugins available for many IDE of your choice, which you can find the list in the `EditorConfig` website.
 
 ## Naming Guidelines
 
