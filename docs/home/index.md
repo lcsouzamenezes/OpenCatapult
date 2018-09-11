@@ -20,27 +20,27 @@ With `OpenCatapult`, you can:
 
 ## The Circle of Magic
 
-![Circle of Magic](.gitbook/assets/circle.jpeg)
+![Circle of Magic](../.gitbook/assets/circle%20%281%29.jpeg)
 
 There is no magic, it's all just automation logics. But you will see what you believe, right?
 
 ## The Components
 
-![Architecture](.gitbook/assets/general-arch%20%284%29.jpeg)
+![Architecture](../.gitbook/assets/general-arch%20%281%29.jpeg)
 
 `OpenCatapult` consists of the following components:
 
 ### API
 
-API is the central of `OpenCatapult` logics. It is an HTTP REST API system which usually acts as the bridge between `OpenCatapult` components. You can find more details of the features in [API References](references/index-1.md).
+API is the central of `OpenCatapult` logics. It is an HTTP REST API system which usually acts as the bridge between `OpenCatapult` components. You can find more details of the features in [API References](../references/index-1.md).
 
 ### User Interface
 
-This is the front-facing interface which is used by user to interact with `OpenCatapult`. User can choose to work with [Command Line Interface \(CLI\)](references/index/), Web \(coming soon\), or Mobile \(coming soon\). User Interface doesn't contain any logics. It just forwards the requests to API endpoints and waits for the response.
+This is the front-facing interface which is used by user to interact with `OpenCatapult`. User can choose to work with [Command Line Interface \(CLI\)](../references/index/), Web \(coming soon\), or Mobile \(coming soon\). User Interface doesn't contain any logics. It just forwards the requests to API endpoints and waits for the response.
 
 ### Engine
 
-Engine runs as a stand-alone console application which waits for any queued jobs to be executed. It orchestrates the execution of job tasks, and reports back the result to the API asynchronously. You can find more details about its capability in the [Engine References](references/index-2.md).
+Engine runs as a stand-alone console application which waits for any queued jobs to be executed. It orchestrates the execution of job tasks, and reports back the result to the API asynchronously. You can find more details about its capability in the [Engine References](../references/index-2.md).
 
 ### Service Providers \(Plugins\)
 

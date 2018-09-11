@@ -1,3 +1,0 @@
-# Mobile
-
-[coming soon]
