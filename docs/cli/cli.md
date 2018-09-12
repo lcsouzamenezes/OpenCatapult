@@ -156,7 +156,7 @@ Usage:
 * [restart](queue.md#restart)
 
 ## Service		
-External service manager commands
+External service related commands
 
 Usage: 
 `dotnet pc.dll service [subcommands]`
