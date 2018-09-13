@@ -1,6 +1,6 @@
 # Manage external services
 
-When connecting to external service such as github, we would need to provide some security token, or our user and password, to connect to the service. 
+When connecting to external service such as github, we would need to provide some security token, or our user and password, to connect to the service. To make it easier for the user to reuse the external service account, user can store their external service configuration, and catapult will manage it securely in the API.
 
 ## Add new external service connection
 

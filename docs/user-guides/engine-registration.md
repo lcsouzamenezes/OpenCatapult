@@ -1,6 +1,6 @@
 # Manage engine registration
 
-Engine is the program that will run project's queue. Since typically engine process is takes quite a long time, due to many processes it does, you can setup multiple engine instances to have high availability.
+Engine is the program that will run project's queue. Since typically engine process takes quite a long time, due to many processes it does, you can setup multiple engine instances to have high availability.
 
 ## Register a new Engine
 
