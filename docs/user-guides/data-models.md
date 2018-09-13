@@ -18,8 +18,7 @@ dotnet pc.dll model list --project my-project
 
 You can update adata model by specifying the project name and the new data model name, then specify the new name or other options to be updated
 ```sh
-dotnet PC.dll model update --project my-project --name Product
---rename Item --description "Item data model" --label Item
+dotnet PC.dll model update --project my-project --name Product --rename Item --description "Item data model" --label Item
 ```
 
 ## Remove data model
