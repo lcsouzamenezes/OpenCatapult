@@ -40,6 +40,7 @@ Open new shell, go to the root folder, build and run a CLI command:
 
 ```sh
 dotnet build .\src\CLI\Polyrific.Catapult.Cli\Polyrific.Catapult.Cli.csproj -c Release
+dotnet .\src\CLI\Polyrific.Catapult.Cli\bin\Release\PC.dll config set -n ApiUrl -v https://localhost:5001
 dotnet .\src\CLI\Polyrific.Catapult.Cli\bin\Release\PC.dll --help
 ```
 
