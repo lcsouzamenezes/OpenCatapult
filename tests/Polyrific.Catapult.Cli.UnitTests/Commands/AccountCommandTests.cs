@@ -141,5 +141,31 @@ namespace Polyrific.Catapult.Cli.UnitTests.Commands
 
             Assert.Equal("User user2@opencatapult.net is not found", resultMessage);
         }
+
+        [Fact]
+        public void AccountUpdate_Execute_ReturnsSuccessMessage()
+        {
+            var command = new UpdateCommand(_console.Object, LoggerMock.GetLogger<UpdateCommand>().Object, _accountService.Object)
+            {
+                Email = "user1@opencatapult.net"
+            };
+
+            var resultMessage = command.Execute();
+
+            Assert.Equal("User user1@opencatapult.net has been updated", resultMessage);
+        }
+
+        [Fact]
+        public void AccountUpdate_Execute_ReturnsNotFoundMessage()
+        {
+            var command = new UpdateCommand(_console.Object, LoggerMock.GetLogger<UpdateCommand>().Object, _accountService.Object)
+            {
+                Email = "user2@opencatapult.net"
+            };
+
+            var resultMessage = command.Execute();
+
+            Assert.Equal("User user2@opencatapult.net is not found", resultMessage);
+        }
     }
 }
