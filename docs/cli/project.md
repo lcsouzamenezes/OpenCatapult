@@ -1,6 +1,4 @@
-# Project
-
-## Archive
+# Archive
 
 Archive a project
 

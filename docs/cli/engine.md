@@ -1,6 +1,4 @@
-# Engine
-
-## Activate
+# Activate
 
 Activate a suspended engine
 

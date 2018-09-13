@@ -1,6 +1,4 @@
-# Job
-
-## Add
+# Add
 
 Add a new job definition
 

@@ -1,6 +1,4 @@
-# Member
-
-## Add
+# Add
 
 Add user as a project member
 

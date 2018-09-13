@@ -1,6 +1,4 @@
-# Property
-
-## Add
+# Add
 
 Add a project data model property
 

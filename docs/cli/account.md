@@ -1,6 +1,4 @@
-# Account
-
-## Activate
+# Activate
 
 Activate a suspended user
 
