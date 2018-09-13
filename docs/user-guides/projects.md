@@ -1,5 +1,7 @@
 # Manage projects
 
+In catapult, a project is a software project you are working on. It can have several applications in it. For example, a project can contain an API, an Admin application, and a front-facing customer application.
+
 ## Create project
 Create a project by specifying the name and optionally the client of this project
 ```sh
@@ -17,6 +19,11 @@ dotnet PC.dll project create --name my-project --client Polyrific --property cre
 ```
 
 For the configuration key that the service provider have, please refer to each service provider's page.
+
+All of the created projects can be viewed using the `list` command:
+```sh
+dotnet pc.dll project list
+```
 
 ## Update project
 
