@@ -22,6 +22,13 @@ Go to the root folder:
 cd OpenCatapult
 ```
 
+Modify the connection string in `.\src\API\Polyrific.Catapult.Api\appsettings.json` to connect to your database server
+
+Run the migration srcript to initialize the database:
+```sh
+dotnet ef database update --startup-project .\src\API\Polyrific.Catapult.Api\Polyrific.Catapult.Api.csproj --project .\src\API\Polyrific.Catapult.Api.Data\Polyrific.Catapult.Api.Data.csproj
+```
+
 Run the API:
 
 ```sh
