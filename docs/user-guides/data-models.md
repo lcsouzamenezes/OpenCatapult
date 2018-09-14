@@ -89,13 +89,13 @@ Control types of data model property:
 - `checkbox`
 - `select`
 - `radio`
-- `datetimecalendar`
+- `calendar`
 - `image`
 
 ## Data model property relationship
 
 Types of data model relationship:
-- `one-to-one`: Have basic view access of the project
-- `one-to-many`: Have access to edit the models and jobs
-- `many-to-many`: Have access to run the job queue for the project
+- `one-to-one`: The property is related to one object instance of the related model
+- `one-to-many`: The property contains list of object instances of the related model
+- `many-to-many`: The property contains list of object instances of the related model, and the related model may also have list of object instances of the current model.
 
