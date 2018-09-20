@@ -7,16 +7,17 @@ branches:
     - master
 only_commits:
   files:
-    - cli.appveyor.yml
-    - src/CLI/
+    - appveyor/engine.appveyor.yml
+    - src/Engine/
     - src/Shared/Polyrific.Catapult.Shared.ApiClient/
+    - src/Shared/Polyrific.Catapult.Shared.Common/
     - src/Shared/Polyrific.Catapult.Shared.Dto/
     - src/Shared/Polyrific.Catapult.Shared.Service/
-    - tests/Polyrific.Catapult.Cli.UnitTests/
+    - tests/Polyrific.Catapult.Engine.UnitTests/
 configuration: Release
 dotnet_csproj:
   patch: true
-  file: '**\Polyrific.Catapult.Cli.csproj'
+  file: '**\Polyrific.Catapult.Engine.csproj'
   version: '{version}'
   package_version: '{version}'
   assembly_version: '{version}'
@@ -24,13 +25,13 @@ dotnet_csproj:
   informational_version: '{version}'
 before_build:
   - cmd: dotnet --version
-  - cmd: dotnet restore ./src/CLI/Polyrific.Catapult.Cli/Polyrific.Catapult.Cli.csproj
+  - cmd: dotnet restore ./src/Engine/Polyrific.Catapult.Engine/Polyrific.Catapult.Engine.csproj
 build_script:
-  - cmd: dotnet publish ./src/CLI/Polyrific.Catapult.Cli/Polyrific.Catapult.Cli.csproj
+  - cmd: dotnet publish ./src/Engine/Polyrific.Catapult.Engine/Polyrific.Catapult.Engine.csproj
 test_script:
-  - cmd: dotnet test ./tests/Polyrific.Catapult.Cli.UnitTests/Polyrific.Catapult.Cli.UnitTests.csproj
+  - cmd: dotnet test ./tests/Polyrific.Catapult.Engine.UnitTests/Polyrific.Catapult.Engine.UnitTests.csproj
 artifacts:
-  - path: 'src/CLI/Polyrific.Catapult.Cli/bin/$(configuration)/publish/'
-    name: CLI
+  - path: 'src/Engine/Polyrific.Catapult.Engine/bin/$(configuration)/publish/'
+    name: Engine
     type: zip
 deploy: off
