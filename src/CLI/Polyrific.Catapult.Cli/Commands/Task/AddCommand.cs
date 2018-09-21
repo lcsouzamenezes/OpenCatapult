@@ -36,6 +36,9 @@ namespace Polyrific.Catapult.Cli.Commands.Task
         [Option("-n|--name <NAME>", "Name of the job task definition", CommandOptionType.SingleValue)]
         public string Name { get; set; }
 
+        [Option("-prov|--Provider <PROVIDER>", "Provider of the job task definition", CommandOptionType.SingleValue)]
+        public string Provider { get; set; }
+
         [Option("-t|--type <TYPE>", "Type of the task", CommandOptionType.SingleValue)]
         [AllowedValues(JobTaskDefinitionType.Generate, JobTaskDefinitionType.Push, JobTaskDefinitionType.Build, 
             JobTaskDefinitionType.Deploy, JobTaskDefinitionType.DeployDb, IgnoreCase = true)]
@@ -43,6 +46,9 @@ namespace Polyrific.Catapult.Cli.Commands.Task
 
         [Option("-prop|--property <KEY>:<PROPERTY>", "Property of the task", CommandOptionType.MultipleValue)]
         public (string, string)[] Property { get; set; }
+
+        [Option("-s|--Sequence <SEQUENCE>", "Sequence order of the job task definition", CommandOptionType.SingleValue)]
+        public int? Sequence { get; set; }
 
         public override string Execute()
         {
@@ -59,7 +65,9 @@ namespace Polyrific.Catapult.Cli.Commands.Task
                     var task = _jobDefinitionService.CreateJobTaskDefinition(project.Id, job.Id, new CreateJobTaskDefinitionDto
                     {
                         Name = Name,
+                        Provider = Provider,
                         Type = Type,
+                        Sequence = Sequence,
                         Config = Property?.ToDictionary(x => x.Item1, x => x.Item2)
                     }).Result;
 

@@ -42,8 +42,8 @@ namespace Polyrific.Catapult.Api.Core.Entities
     {
         public string Name { get; set; }
         public string Type { get; set; }
+        public string Provider { get; set; }
         public Dictionary<string, string> Config { get; set; }
-        public bool? ContinueWhenError { get; set; }
         public int? Sequence { get; set; }
     }
 }

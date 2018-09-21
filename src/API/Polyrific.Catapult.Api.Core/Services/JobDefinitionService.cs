@@ -143,8 +143,8 @@ namespace Polyrific.Catapult.Api.Core.Services
             if (jobTaskDefinition != null)
             {
                 jobTaskDefinition.Type = editedJobTaskDefinition.Type;
+                jobTaskDefinition.Provider = editedJobTaskDefinition.Provider;
                 jobTaskDefinition.ConfigString = editedJobTaskDefinition.ConfigString;
-                jobTaskDefinition.ContinueWhenError = editedJobTaskDefinition.ContinueWhenError;
                 jobTaskDefinition.Sequence = editedJobTaskDefinition.Sequence;
                 await _jobTaskDefinitionRepository.Update(jobTaskDefinition, cancellationToken);
             }
