@@ -40,7 +40,7 @@ Open new shell, go to the root folder, build and start the Engine:
 ```sh
 dotnet build .\src\Engine\Polyrific.Catapult.Engine\Polyrific.Catapult.Engine.csproj -c Release
 dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll config set -n ApiUrl -v https://localhost:5001
-dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll start
+dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll --help
 ```
 
 Open new shell, go to the root folder, build and run a CLI command:
@@ -71,7 +71,44 @@ We strongly advise you to change your password using the `account updateuser` co
 dotnet PC.dll account updateuser --email admin@opencatapult.net
 ```
 
-You can then create your first project using the `project create` command
+Before adding the project, we need to prepare the external service that will be used by the project. For our sample project, it would need a `GitHub` and `AzureAppService` external service
 ```sh
-dotnet PC.dll project create --name my-project --client Polyrific
+dotnet PC.dll service add --name github-default --type GitHub
+```
+Then you will be prompted to enter the required details for `GitHub`
+
+```sh
+dotnet PC.dll service add --name azure-default --type AzureAppService
+```
+Then you will be prompted to enter the required details for `AzureAppService`
+
+
+We can then create our first project using the `project create` command. We will use a sample template that is provided out of the box, to make the demo easier
+```sh
+dotnet PC.dll project create --name my-project --client Polyrific --template sample
+```
+
+You will be prompted to enter some additional configuration such as Azure subscription id, resource group, etc. Once it's done, your project will be created and we're ready to run the job to generate and deploy our applications.
+
+To run the job, use the `queue` command:
+```sh
+dotnet PC.dll queue add --project my-project --job Default
+```
+
+We have succesfully queue our project to be processed by engine.
+
+But first, we need to register a new engine instance, and get the engine access token so it can communicate to the API:
+```sh
+dotnet PC.dll engine register --name Engine01
+dotnet PC.dll engine token --name Engine01
+```
+
+Copy the engine token, then open a new CLI and go to the catapult directory. Run the following command to set authorization token of the engine:
+```sh
+dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll config set config set -n AuthorizationToken -v <paste the token here>
+```
+
+Finally, start the engine so that it will process our queued job:
+```sh
+dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll start
 ```

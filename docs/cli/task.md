@@ -3,7 +3,7 @@
 Add a new job task definition
 
 Usage: 
-`dotnet pc.dll task add --project [project] --job [job] --name [name] --type [type] --property [propname]:[propvalue]`
+`dotnet pc.dll task add --project [project] --job [job] --name [name] --type [type] --provider [provider] --property [propname]:[propvalue]`
 
 **Options**
 * project (mandatory)
@@ -18,8 +18,11 @@ Usage:
 * type
     * Type of the task
     * Usage: `--type` (alias: `-t`)
-    * Allowed values: `generate` | `push` | `build` | `deploy` | `deploydb`
-    * Default value: `generate`
+    * Allowed values: `Clone` | `Generate` | `Push` | `Merge` | `Build` | `PublishArtifact` | `Deploy` | `DeployDb` | `Test`
+    * Default value: `Generate`
+* provider
+    * Name of the provider used in the task
+    * Usage: `--provider` (alias: `-prov`)
 * property
     * Property of the task
     * Usage: `--property [propname]:[propvalue]` (alias: `-prop`)
@@ -60,7 +63,7 @@ Usage:
 Update a job task definition
 
 Usage: 
-`dotnet pc.dll task update --project [project] --job [job] --name [name] --rename [newname] --type [type] --property [propname]:[propvalue]`
+`dotnet pc.dll task update --project [project] --job [job] --name [name] --rename [newname] --type [type] --provider [provider] --property [propname]:[propvalue]`
 
 **Options**
 * project (mandatory)
@@ -78,8 +81,10 @@ Usage:
 * type
     * Type of the task
     * Usage: `--type` (alias: `-t`)
-    * Allowed values: `generate` | `push` | `build` | `deploy` | `deploydb`
-    * Default value: `generate`
+    * Allowed values: `Clone` | `Generate` | `Push` | `Merge` | `Build` | `PublishArtifact` | `Deploy` | `DeployDb` | `Test`
+* provider
+    * Name of the provider used in the task
+    * Usage: `--provider` (alias: `-prov`)
 * property
     * Property of the task
     * Usage: `--property [propname]:[propvalue]` (alias: `-prop`)
