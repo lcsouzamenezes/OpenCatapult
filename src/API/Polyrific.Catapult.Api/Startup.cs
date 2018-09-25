@@ -94,6 +94,8 @@ namespace Polyrific.Catapult.Api
 
             services.AddSignalR();
 
+            services.AddNotifications(Configuration);
+
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {

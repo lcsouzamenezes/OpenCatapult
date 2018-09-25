@@ -1,5 +1,8 @@
 ﻿// Copyright (c) Polyrific, Inc 2018. All rights reserved.
 
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,11 +11,9 @@ using Polyrific.Catapult.Api.Core.Exceptions;
 using Polyrific.Catapult.Api.Core.Services;
 using Polyrific.Catapult.Api.Identity;
 using Polyrific.Catapult.Shared.Common;
+using Polyrific.Catapult.Shared.Common.Notification;
 using Polyrific.Catapult.Shared.Dto.Constants;
 using Polyrific.Catapult.Shared.Dto.User;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Web;
 
 namespace Polyrific.Catapult.Api.Controllers
 {
@@ -22,11 +23,13 @@ namespace Polyrific.Catapult.Api.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly NotificationProvider _notificationProvider;
 
-        public AccountController(IUserService service, IMapper mapper)
+        public AccountController(IUserService service, IMapper mapper, NotificationProvider notificationProvider)
         {
             _userService = service;
             _mapper = mapper;
+            _notificationProvider = notificationProvider;
         }
 
         /// <summary>
@@ -38,7 +41,6 @@ namespace Polyrific.Catapult.Api.Controllers
         public async Task<IActionResult> RegisterUser(RegisterUserDto dto)
         {
             int userId = 0;
-            string confirmToken = "";
 
             try
             {
@@ -48,7 +50,21 @@ namespace Polyrific.Catapult.Api.Controllers
                     userId = createdUser.Id;
 
                     var token = await _userService.GenerateConfirmationToken(createdUser.Id);
-                    confirmToken = HttpUtility.UrlEncode(token);
+                    string confirmToken = HttpUtility.UrlEncode(token);
+
+                    // TODO: We might need to change the confirm url into the web UI url, when it's ready
+                    var confirmUrl = $"{this.Request.Scheme}://{Request.Host}/account/{userId}/confirm?token={confirmToken}";
+                    _notificationProvider.SendNotification(new SendNotificationRequest
+                    {
+                        MessageType = NotificationConfig.RegistrationCompleted,
+                        Emails = new List<string>
+                        {
+                            dto.Email
+                        }
+                    }, new Dictionary<string, string>
+                    {
+                        {MessageParameter.ConfirmUrl, confirmUrl}
+                    });
                 }
             }
             catch (UserCreationFailedException uex)
@@ -56,7 +72,10 @@ namespace Polyrific.Catapult.Api.Controllers
                 return BadRequest(uex.GetExceptionMessageList());
             }
 
-            return Ok(new { userId, confirmToken });
+            return Ok(new RegisterUserResultDto
+            {
+                UserId = userId
+            });
         }
 
         /// <summary>
