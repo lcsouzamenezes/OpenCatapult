@@ -43,3 +43,7 @@
 * [Web UI](web/web.md)
 * [Mobile](mobile/mobile.md)
 
+## Management
+
+* [Roadmap](management/roadmap.md)
+
