@@ -126,5 +126,5 @@ dotnet PC.dll project create --name first-project --client Polyrific
 After creating your first project, you can:
 - [add models to the project](../user-guides/data-models.md)
 - [explore what else you can do with the project](../user-guides/user-guides.md)
-- [create another project by using `Sample` project template](../user-guides/sample-project.md)
+- [create another project by using Sample project template](../user-guides/sample-project.md)
 - check references of [API](../api/api.md), [Engine](../engine/engine.md), [CLI](../cli/cli.md)
