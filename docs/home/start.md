@@ -2,13 +2,24 @@
 
 This document will guide you to get started with `OpenCatapult`.
 
+_Note: although it is planned that OpenCatapult will support multi-platform environments in the future, but the defined steps below are tested in Windows environment only for now._
+
 ## Setup from release library
 
-Please go to [release page](https://opencatapult.net/releases) to download the latest version of `OpenCatapult`.
-
-Unzip the release package into your local directory, and run the components.
+[coming soon]
 
 ## Build from source code
+
+**Prerequisites:**
+
+- Git (https://git-scm.com/)
+- .Net Core 2.1 SDK (https://dot.net)
+  - You can download the latest version of the installer
+- SQL Server 2017 (https://www.microsoft.com/en-us/sql-server/sql-server-2017)
+  - You can use the `Express` or `Developer` version for local usage
+- Code editor, e.g. Visual Studio Code (https://code.visualstudio.com/)
+
+**Get the source code**
 
 Clone `OpenCatapult` source code from the repository:
 
@@ -22,36 +33,58 @@ Go to the root folder:
 cd OpenCatapult
 ```
 
-Modify the connection string in `.\src\API\Polyrific.Catapult.Api\appsettings.json` to connect to your database server
+**Setup database**
+
+Create a database in SQL Server, and put the connection string in `.\src\API\Polyrific.Catapult.Api\appsettings.json`, e.g.
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Database=opencatapult-db;User ID=sa;Password=sapassword;"
+  }
+}
+```
 
 Run the migration script to initialize the database:
 ```sh
 dotnet ef database update --startup-project .\src\API\Polyrific.Catapult.Api\Polyrific.Catapult.Api.csproj --project .\src\API\Polyrific.Catapult.Api.Data\Polyrific.Catapult.Api.Data.csproj
 ```
 
-Run the API:
+**Run the API**
+
+Let's run the API in localhost:
 
 ```sh
 dotnet run -p .\src\API\Polyrific.Catapult.Api\Polyrific.Catapult.Api.csproj -c Release
 ```
 
-Open new shell, go to the root folder, build and set the Api Url for the engine:
+**Prepare the Engine**
+
+Open new shell, go to the root folder, and build the Engine project:
 
 ```sh
 dotnet build .\src\Engine\Polyrific.Catapult.Engine\Polyrific.Catapult.Engine.csproj -c Release
-dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll config set -n ApiUrl -v https://localhost:5001
-dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll --help
 ```
 
-Open new shell, go to the root folder, build and run a CLI command:
+Set API URL in the Engine's config:
+
+```sh
+dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll config set -n ApiUrl -v https://localhost:5001
+```
+
+**Prepare the CLI**
+
+Open new shell, go to the root folder, and build the CLI project:
 
 ```sh
 dotnet build .\src\CLI\Polyrific.Catapult.Cli\Polyrific.Catapult.Cli.csproj -c Release
-dotnet .\src\CLI\Polyrific.Catapult.Cli\bin\Release\PC.dll config set -n ApiUrl -v https://localhost:5001
-dotnet .\src\CLI\Polyrific.Catapult.Cli\bin\Release\PC.dll --help
 ```
 
-You are now ready to create your first catapult project.
+Set API URL in the CLI's config:
+
+```sh
+dotnet .\src\CLI\Polyrific.Catapult.Cli\bin\Release\PC.dll config set -n ApiUrl -v https://localhost:5001
+```
 
 Note:
 
@@ -60,62 +93,38 @@ If you have some error related to ssl, you can try to run the following command,
 dotnet dev-certs https --trust
 ```
 
-## Create your first project
+You are now ready to create your first catapult project.
 
-To make further command shorter, go to the release folder of the catapult CLI:
+## Create your first (empty) project
+
+Activate the previously opened CLI shell, and go to the output folder:
+
 ```sh
 cd src\CLI\Polyrific.Catapult.Cli\bin\Release
 ```
 
-The first thing to do is to login into the API. During instalation above, a default admin user is created in the database:
+When you previously applied migrations to initiate the database, a default user was created. You can use this user to login. When you're prompted to enter the password, the default password is `opencatapult`.
+
 ```sh
 dotnet PC.dll login --user admin@opencatapult.net
 ```
-Then enter the password: `opencatapult`
 
-We strongly advise you to change your password using the `account updateuser` command:
+We strongly advise you to change the default password, especially when you deploy the API into public environment:
+
 ```sh
 dotnet PC.dll account updateuser --email admin@opencatapult.net
 ```
 
-Before adding the project, we need to prepare the external service that will be used by the project. For our sample project, it would need a `GitHub` and `AzureAppService` external service
-```sh
-dotnet PC.dll service add --name github-default --type GitHub
-```
-Then you will be prompted to enter the required details for `GitHub`
+And now, let's create an empty project:
 
 ```sh
-dotnet PC.dll service add --name azure-default --type AzureAppService
-```
-Then you will be prompted to enter the required details for `AzureAppService`
-
-
-We can then create our first project using the `project create` command. We will use a sample template that is provided out of the box, to make the demo easier
-```sh
-dotnet PC.dll project create --name my-project --client Polyrific --template sample
+dotnet PC.dll project create --name first-project --client Polyrific
 ```
 
-You will be prompted to enter some additional configuration such as Azure subscription id, resource group, etc. Once it's done, your project will be created and we're ready to run the job to generate and deploy our applications.
+## Next steps
 
-To run the job, use the `queue` command:
-```sh
-dotnet PC.dll queue add --project my-project --job Default
-```
-
-We have succesfully queue our project to be processed by engine.
-
-But first, we need to register a new engine instance, and get the engine access token so it can communicate to the API:
-```sh
-dotnet PC.dll engine register --name Engine01
-dotnet PC.dll engine token --name Engine01
-```
-
-Copy the engine token, then open a new CLI and go to the catapult directory. Run the following command to set authorization token of the engine:
-```sh
-dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll config set -n AuthorizationToken -v <paste the token here>
-```
-
-Finally, start the engine so that it will process our queued job:
-```sh
-dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll start
-```
+After creating your first project, you can:
+- [create a complete project by using `Sample` project template](user-guides/sample-project.md)
+- [add models to the project](user-guides/data-models.md)
+- [explore what else you can do with the project](user-guides/user-guides.md)
+- check references of [API](api/api.md), [Engine](engine/engine.md), [CLI](cli/cli.md)
