@@ -18,6 +18,7 @@
   * [Manage external services](user-guides/external-services.md)
   * [Manage engine registration](user-guides/engine-registration.md)
   * [Manage plugins](user-guides/plugins.md)
+  * [Sample project template](user-guides/sample-project.md)
 * [Developer Guide](dev-guides/dev-guides.md)
   * [Create a plugin](dev-guides/create-plugin.md)
   * [Coding Style](dev-guides/coding-style.md)
