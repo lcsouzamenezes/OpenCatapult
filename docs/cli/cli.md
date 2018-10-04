@@ -20,7 +20,8 @@ Logout from catapult
 
 Usage:
 ```sh
-dotnet pc.dll logout`
+dotnet pc.dll logout
+```
 
 ## Account		
 User account related commands			

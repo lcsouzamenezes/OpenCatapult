@@ -2,7 +2,9 @@
 Display configurations
 
 Usage: 
-`dotnet pc.dll config get --name [name]`
+```sh
+dotnet pc.dll config get --name [name]
+```
 
 **Options**
 * all
@@ -16,7 +18,9 @@ Usage:
 Import configuration from a config file
 
 Usage: 
-`dotnet pc.dll config import --file [file]`
+```sh
+dotnet pc.dll config import --file [file]
+```
 
 **Options**
 * file (mandatory)
@@ -27,7 +31,9 @@ Usage:
 Remove configurations
 
 Usage: 
-`dotnet pc.dll config remove --name [name]`
+```sh
+dotnet pc.dll config remove --name [name]
+```
 
 **Options**
 * all
@@ -41,7 +47,9 @@ Usage:
 Set configurations
 
 Usage: 
-`dotnet pc.dll config set --name [name] --value [value]` 
+```sh
+dotnet pc.dll config set --name [name] --value [value]
+``` 
 
 **Options**
 * all
