@@ -6,14 +6,14 @@ You can queue a job into the engine, and monitor the result.
 
 You can queue a job by specifying the project name and the job definition name to be queued.
 ```sh
-dotnet pc.dll queue add --project my-project --job Default
+dotnet pc.dll queue add --project MyProject --job Default
 ```
 
 You will get a queue id. Use this id for other command such as getting the job status.
 
 All of the queued job can be viewed using the `list` command:
 ```sh
-dotnet pc.dll queue list --project my-project
+dotnet pc.dll queue list --project MyProject
 ```
 
 ## Get job status

@@ -63,7 +63,7 @@ Then you will be prompted to enter the required details for `AzureAppService`.
 After all required components in place, now you can start to create the project by using Sample template.
 
 ```sh
-dotnet PC.dll project create --name my-project --client Polyrific --template sample
+dotnet PC.dll project create --name SampleProject --client Polyrific --template sample
 ```
 
 You will be prompted to enter some additional configurations.
@@ -92,5 +92,5 @@ dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll start
 At this state, you should be able to direclty send the job from your created project to the queue:
 
 ```sh
-dotnet PC.dll queue add --project my-project --job Default
+dotnet PC.dll queue add --project SampleProject --job Default
 ```

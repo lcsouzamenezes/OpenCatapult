@@ -14,4 +14,4 @@ dotnet PC.dll plugin register --file d:\MyPlugin\plugin.yml
 To uninstall the plugin, use the name of the plugin as the parameter:
 ```sh
 dotnet PC.dll plugin remove --name MyPlugin 
-
+```
