@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Polyrific.Catapult.Api.Data;
 
 namespace Polyrific.Catapult.Api.Data.Migrations
 {
     [DbContext(typeof(CatapultDbContext))]
-    partial class CatapultDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181004023029_AddBuiltInPluginSeed")]
+    partial class AddBuiltInPluginSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,13 +83,14 @@ namespace Polyrific.Catapult.Api.Data.Migrations
                     b.ToTable("ExternalServiceProperties");
 
                     b.HasData(
-                        new { Id = 1, AllowedValues = "userPassword,authToken", ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d65", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Remote Credential Type (\"userPassword\" or \"authToken\")", ExternalServiceTypeId = 1, IsRequired = true, IsSecret = false, Name = "RemoteCredentialType" },
-                        new { Id = 2, ConcurrencyStamp = "4bd86c55-ffc1-4c49-a4e4-c1ee809f311d", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Remote Username", ExternalServiceTypeId = 1, IsRequired = false, IsSecret = false, Name = "RemoteUsername" },
-                        new { Id = 3, ConcurrencyStamp = "c1eeaa4b-bdc2-4ef9-a52d-393fe9dca59a", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Remote Password", ExternalServiceTypeId = 1, IsRequired = false, IsSecret = true, Name = "RemotePassword" },
-                        new { Id = 4, ConcurrencyStamp = "416fcf67-35cf-4ea3-b534-dade4a81da88", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Repository Auth Token", ExternalServiceTypeId = 1, IsRequired = false, IsSecret = true, Name = "RepoAuthToken" },
-                        new { Id = 5, ConcurrencyStamp = "416fcf67-35cf-4ea3-b534-dade4a81da89", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Application Id", ExternalServiceTypeId = 2, IsRequired = true, IsSecret = false, Name = "ApplicationId" },
-                        new { Id = 6, ConcurrencyStamp = "416fcf67-35cf-4ea3-b534-dade4a81da8a", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Application Key", ExternalServiceTypeId = 2, IsRequired = true, IsSecret = true, Name = "ApplicationKey" },
-                        new { Id = 7, ConcurrencyStamp = "416fcf67-35cf-4ea3-b534-dade4a81da8b", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Tenant Id", ExternalServiceTypeId = 2, IsRequired = true, IsSecret = false, Name = "TenantId" }
+                        new { Id = 1, ConcurrencyStamp = "bb36270b-654f-42bc-8508-c8bd0acafb5b", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Remote Url", ExternalServiceTypeId = 1, IsRequired = true, IsSecret = false, Name = "RemoteUrl" },
+                        new { Id = 2, AllowedValues = "userPassword,authToken", ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d65", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Remote Credential Type (\"userPassword\" or \"authToken\")", ExternalServiceTypeId = 1, IsRequired = true, IsSecret = false, Name = "RemoteCredentialType" },
+                        new { Id = 3, ConcurrencyStamp = "4bd86c55-ffc1-4c49-a4e4-c1ee809f311d", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Remote Username", ExternalServiceTypeId = 1, IsRequired = false, IsSecret = false, Name = "RemoteUsername" },
+                        new { Id = 4, ConcurrencyStamp = "c1eeaa4b-bdc2-4ef9-a52d-393fe9dca59a", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Remote Password", ExternalServiceTypeId = 1, IsRequired = false, IsSecret = true, Name = "RemotePassword" },
+                        new { Id = 5, ConcurrencyStamp = "416fcf67-35cf-4ea3-b534-dade4a81da88", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Repository Auth Token", ExternalServiceTypeId = 1, IsRequired = false, IsSecret = true, Name = "RepoAuthToken" },
+                        new { Id = 6, ConcurrencyStamp = "416fcf67-35cf-4ea3-b534-dade4a81da89", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Application Id", ExternalServiceTypeId = 2, IsRequired = true, IsSecret = false, Name = "ApplicationId" },
+                        new { Id = 7, ConcurrencyStamp = "416fcf67-35cf-4ea3-b534-dade4a81da8a", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Application Key", ExternalServiceTypeId = 2, IsRequired = true, IsSecret = true, Name = "ApplicationKey" },
+                        new { Id = 8, ConcurrencyStamp = "416fcf67-35cf-4ea3-b534-dade4a81da8b", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Description = "Tenant Id", ExternalServiceTypeId = 2, IsRequired = true, IsSecret = false, Name = "TenantId" }
                     );
                 });
 
