@@ -10,4 +10,7 @@ Build status:
 | CLI       | [![Build status](https://ci.appveyor.com/api/projects/status/4eogolso3j23ud2v/branch/master?svg=true)](https://ci.appveyor.com/project/Frandi28567/opencatapult-4vn9h/branch/master) |
 | Plugin: AspNetCoreMvc | [![Build status](https://ci.appveyor.com/api/projects/status/s0ap554n7nof4rtl/branch/master?svg=true)](https://ci.appveyor.com/project/Frandi28567/opencatapult-gsy03/branch/master) |
 | Plugin: DotNetCore | [![Build status](https://ci.appveyor.com/api/projects/status/sc28u4acjqdyq5it/branch/master?svg=true)](https://ci.appveyor.com/project/Frandi28567/opencatapult-hk5be/branch/master) |
+| Plugin: DotNetCoreTest | [![Build status](https://ci.appveyor.com/api/projects/status/h7kbd1ea3qgycrb3/branch/master?svg=true)](https://ci.appveyor.com/project/Frandi28567/opencatapult-aakqj/branch/master) |
+| Plugin: EntityFrameworkCore | [![Build status](https://ci.appveyor.com/api/projects/status/n4n2vyv2f9pbirty/branch/master?svg=true)](https://ci.appveyor.com/project/Frandi28567/opencatapult-jkmet/branch/master) |
 | Plugin: GitHub | [![Build status](https://ci.appveyor.com/api/projects/status/3p4jf52ms265lnq3/branch/master?svg=true)](https://ci.appveyor.com/project/Frandi28567/opencatapult-4ma5g/branch/master) |
+| Plugin: AzureAppService | [![Build status](https://ci.appveyor.com/api/projects/status/loej7m5sne7qcwae/branch/master?svg=true)](https://ci.appveyor.com/project/Frandi28567/opencatapult-7rxh2/branch/master) |
