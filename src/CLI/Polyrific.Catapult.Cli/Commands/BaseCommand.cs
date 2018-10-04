@@ -33,6 +33,11 @@ namespace Polyrific.Catapult.Cli.Commands
         /// <returns>Execution result message</returns>
         public abstract string Execute();
 
+        public virtual string GetHelpFooter()
+        {
+            return "";
+        }
+
         protected virtual int OnExecute(CommandLineApplication app)
         {
             Console.WriteLine("-----------------------------");

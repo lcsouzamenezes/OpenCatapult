@@ -73,6 +73,8 @@ namespace Polyrific.Catapult.Cli
                 .UseDefaultConventions()
                 .UseConstructorInjection(serviceProvider);
 
+            app.HelpTextGenerator = new CatapultHelpTextGenerator();
+
             app.ValueParsers.Add(new CatapultOptionParser());
 
             app.RegisterCommands();
