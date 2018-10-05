@@ -32,6 +32,5 @@ Each endpoint could define the needed authorization in order to access them. Fol
 - `Authenticated`: The request to the API require any authenticated user
 - `Anonymous`: The endpoint does not require authentication
 
-
 ## Further Reference
 A more detailed documentation about each endpoints request and response is available within API's swagger page. Simply open the API base url in the browser to navigate the the swagger page.
