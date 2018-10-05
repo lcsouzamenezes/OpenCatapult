@@ -88,3 +88,20 @@ dotnet pc.dll account updatepassword --email [email]
 * email (mandatory)
     * Email of the user
     * Usage: `--email` (alias `-e`)
+    
+# SetRole
+Set a user role so it can have needed access
+
+Usage: 
+```sh
+dotnet pc.dll account setrole --email [email] --role [role]
+```
+
+**Options**
+* email (mandatory)
+    * Email of the user
+    * Usage: `--email` (alias `-e`)
+* role
+    * Role of the user
+    * Usage: `--role` (alias: `-r`)
+    * Allowed values: `Administrator` | `Basic` | `Guest`

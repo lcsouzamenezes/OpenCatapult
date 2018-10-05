@@ -42,6 +42,14 @@ Activate a suspended user by specifying the email of the user to be activated
 dotnet pc.dll account activate --email john.smith@opencatapult.net
 ```
 
+## Set user role
+
+The API have some authorization needed to access the endpoints. For example, only user with at least Basic permission can create a new project. To set this role for a user, use the following command.
+
+```sh
+dotnet pc.dll account setrole --email john.smith@opencatapult.net --role Basic
+```
+
 ## User Roles
 
 Available user roles in catapult:

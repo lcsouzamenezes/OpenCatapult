@@ -1,0 +1,3 @@
+# Health
+
+> TODO: endpoints details
