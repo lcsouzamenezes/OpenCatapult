@@ -29,6 +29,7 @@ Each endpoint could define the needed authorization in order to access them. Fol
 - `UserRoleAdminAccess`: The user have an `Administrator` user role
 - `UserRoleBasicAccess`: The user have `Basic` user role or higher
 - `UserRoleGuestAccess`: The user have `Guest` user role or higher
+- `UserRoleEngineAccess`: The endpoint can only be invoked by catapult engine
 - `Authenticated`: The request to the API require any authenticated user
 - `Anonymous`: The endpoint does not require authentication
 
