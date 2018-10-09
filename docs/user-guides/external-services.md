@@ -4,9 +4,9 @@ When connecting to external service such as github, we would need to provide som
 
 ## Add new external service connection
 
-Add a new external service by specifying the name and the properties of the external service. You can also specify the type 
+Add a new external service by specifying the name and type of the external service. You will then be prompted to enter the service properties based on the Type you provided.
 ```sh
-dotnet PC.dll service add --name default-github --property authorizationToken:123456xxx --description "Default github account" --type github
+dotnet PC.dll service add --name default-github --description "Default github account" --type github
 ```
 
 All of the created external services can be viewed using the `list` command:
@@ -23,5 +23,5 @@ dotnet PC.dll service remove --name default-github
 
 ## Use external service properties
 
-> TODO: Describe ways to make use of the recorded external service properties
+After you've added external services, you can then use them in a task. When you add a certain task, you will be prompted to enter the external service name of a specific service type the task Provider require. For example, if you add Push task with provider `GitHub`, you will then be prompted to enter the name of GitHub external service you want to use.
 

@@ -22,7 +22,7 @@ dotnet pc.dll plugin list --type [type]
 **Options**
 * type
     * Type of the plugins
-    * Usage: `--role` (alias: `-r`)
+    * Usage: `--type` (alias: `-t`)
     * Allowed values: `all` | `BuildProvider` | `DatabaseProvider` | `GeneratorProvider` | `HostingProvider` | `RepositoryProvider` | `StorageProvider` | `TestProvider`
     * Default value: `all`
 
