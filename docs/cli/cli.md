@@ -1,8 +1,14 @@
-# Command Line Intefrace Commands
+# Command Line Interface
 
-Opencatapult provide a command line interface to interact with the API
+## Architecture
 
-## Login
+![Architecture](../img/cli-arch.jpeg)
+
+
+## Commands
+Opencatapult provide a command line interface to interact with the API. Following are the commands available:
+
+### Login
 Login to catapult. You will be prompted to input the user's password.
 
 Usage:
@@ -15,7 +21,7 @@ dotnet pc.dll login --user [user]
     * The user email used for login
     * Usage: `--user` (alias: `-u`)
 
-## Logout
+### Logout
 Logout from catapult
 
 Usage:
@@ -23,17 +29,17 @@ Usage:
 dotnet pc.dll logout
 ```
 
-## Account		
+### Account		
 User account related commands			
 
-### Subcommands
+#### Subcommands
 
 * [Register](account.md#register)
 * [Remove](account.md#remove)
 * [Suspend](account.md#suspend)
 * [Activate](account.md#activate)
 
-## Config		
+### Config		
 CLI Configurations
 
 Usage: 
@@ -41,14 +47,14 @@ Usage:
 dotnet pc.dll config [subcommands]
 ```
 
-### Subcommands
+#### Subcommands
 
 * [get](config.md#get)
 * [import](config.md#import)
 * [remove](config.md#remove)
 * [set](config.md#set)
 
-## Engine		
+### Engine		
 Catapult engine registration commands
 
 Usage: 
@@ -56,7 +62,7 @@ Usage:
 dotnet pc.dll engine [subcommands]
 ```
 
-### Subcommands
+#### Subcommands
 
 * [activate](engine.md#activate)
 * [get](engine.md#get)
@@ -66,7 +72,7 @@ dotnet pc.dll engine [subcommands]
 * [suspend](engine.md#suspend)
 * [token](engine.md#token)
 
-## Job		
+### Job		
 Job Definition related commands
 
 Usage: 
@@ -74,13 +80,13 @@ Usage:
 dotnet pc.dll job [subcommands]
 ```
 
-### Subcommands
+#### Subcommands
 
 * [add](job.md#add)
 * [list](job.md#list)
 * [remove](job.md#remove)
 
-## Member		
+### Member		
 Project member related commands
 
 Usage: 
@@ -88,14 +94,14 @@ Usage:
 dotnet pc.dll member [subcommands]
 ```
 
-### Subcommands
+#### Subcommands
 
 * [add](member.md#add)
 * [list](member.md#list)
 * [remove](member.md#remove)
 * [update](member.md#update)
 
-## Model		
+### Model		
 Project Data Model related commands
 
 Usage: 
@@ -103,14 +109,14 @@ Usage:
 dotnet pc.dll model [subcommands]
 ```
 
-### Subcommands
+#### Subcommands
 
 * [add](model.md#add)
 * [list](model.md#list)
 * [remove](model.md#remove)
 * [update](model.md#update)
 
-## Plugin		
+### Plugin		
 Plugin registration commands
 
 Usage: 
@@ -118,14 +124,14 @@ Usage:
 dotnet pc.dll plugin [subcommands]
 ```
 
-### Subcommands
+#### Subcommands
 
 * [get](plugin.md#get)
 * [list](plugin.md#list)
 * [register](plugin.md#register)
 * [remove](plugin.md#remove)
 
-## Project		
+### Project		
 Project related commands
 
 Usage: 
@@ -133,7 +139,7 @@ Usage:
 dotnet pc.dll project [subcommands]
 ```
 
-### Subcommands
+#### Subcommands
 
 * [archive](project.md#archive)
 * [clone](project.md#clone)
@@ -144,7 +150,7 @@ dotnet pc.dll project [subcommands]
 * [remove](project.md#remove)
 * [restore](project.md#restore)
 
-## Property		
+### Property		
 Project Data Model Property related commands
 
 Usage: 
@@ -152,14 +158,14 @@ Usage:
 dotnet pc.dll property [subcommands]
 ```
 
-### Subcommands
+#### Subcommands
 
 * [add](property.md#add)
 * [list](property.md#list)
 * [remove](property.md#remove)
 * [update](property.md#update)
 
-## Queue		
+### Queue		
 Job Queue related commands
 
 Usage: 
@@ -167,14 +173,14 @@ Usage:
 dotnet pc.dll queue [subcommands]
 ```
 
-### Subcommands
+#### Subcommands
 
 * [add](queue.md#add)
 * [get](queue.md#get)
 * [list](queue.md#list)
 * [restart](queue.md#restart)
 
-## Service		
+### Service		
 External service related commands
 
 Usage: 
@@ -182,7 +188,7 @@ Usage:
 dotnet pc.dll service [subcommands]
 ```
 
-### Subcommands
+#### Subcommands
 
 * [add](service.md#add)
 * [get](service.md#get)
@@ -190,7 +196,7 @@ dotnet pc.dll service [subcommands]
 * [remove](service.md#remove)
 * [update](service.md#update)
 
-## Task		
+### Task		
 Job Task Definitions related commands
 
 Usage: 
@@ -198,7 +204,7 @@ Usage:
 dotnet pc.dll task [subcommands]
 ```
 
-### Subcommands
+#### Subcommands
 
 * [add](task.md#add)
 * [list](task.md#list)
