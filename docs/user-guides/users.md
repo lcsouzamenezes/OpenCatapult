@@ -6,6 +6,7 @@ Register a new user by specifying the email and password:
 ```sh
 dotnet pc.dll account register --email john.smith@opencatapult.net
 ```
+A confirmation email will be emailed to you (Make sure you set the [smtp](#setting-email) properly)
 
 ## Update user
 
@@ -27,7 +28,7 @@ When you forgot your password, you can request password reset using the followin
 ```sh
 dotnet pc.dll account password resettoken --email john.smith@opencatapult.net
 ```
-The reset password token will then be emailed to you. Afterward, use the following command to set your new password:
+The reset password token will then be emailed to you (Make sure you set the [smtp](#setting-email) properly). Afterward, use the following command to set your new password:
 ```sh
 dotnet pc.dll account password reset --email john.smith@opencatapult.net --token [emailed token]
 ```
