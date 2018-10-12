@@ -34,7 +34,7 @@ namespace Polyrific.Catapult.Cli.Commands
                 Password = _consoleReader.GetPassword("Enter password:")
             }).Result;
 
-            _tokenStore.SaveToken(token);
+            _tokenStore.SaveToken(token).Wait();
 
             return $"Logged in as {Username}";
         }
