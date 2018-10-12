@@ -18,7 +18,18 @@ dotnet pc.dll account update --email john.smith@opencatapult.net --firstname Joh
 
 Update user password by specifying the email. Then you will be prompt to enter the old and new password.
 ```sh
-dotnet pc.dll account updatepassword --email john.smith@opencatapult.net
+dotnet pc.dll password update --email john.smith@opencatapult.net
+```
+
+## Reset password
+
+When you forgot your password, you can request password reset using the following command:
+```sh
+dotnet pc.dll account password resettoken --email john.smith@opencatapult.net
+```
+The reset password token will then be emailed to you. Afterward, use the following command to set your new password:
+```sh
+dotnet pc.dll account password reset --email john.smith@opencatapult.net --token [emailed token]
 ```
 
 ## Remove user
@@ -57,4 +68,14 @@ Available user roles in catapult:
 - `Basic`: Have access to create a new project
 - `Administrator`: Have all access within the application
 
-
+## Setting Email
+Email is required during registration and reset password. To set the smtp, update the following section in API's `appsettings.json`:
+```json
+"SmtpSetting": {
+    "Server": "localhost",
+    "Port": 0,
+    "Username": "username",
+    "Password": "password",
+    "SenderEmail": "admin@opencatapult.net"
+  }
+```
