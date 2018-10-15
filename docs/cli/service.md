@@ -3,7 +3,7 @@ Add new external service
 
 Usage: 
 ```sh
-dotnet pc.dll service add --name [name] --type [service type] --description [description]
+dotnet occli.dll service add --name [name] --type [service type] --description [description]
 ```
 
 **Options**
@@ -22,7 +22,7 @@ Get a single service details
 
 Usage: 
 ```sh
-dotnet pc.dll service get --name [name]
+dotnet occli.dll service get --name [name]
 ```
 
 **Options**
@@ -35,7 +35,7 @@ List all registered services
 
 Usage: 
 ```sh
-dotnet pc.dll service list
+dotnet occli.dll service list
 ```
 
 # Remove
@@ -43,7 +43,7 @@ Remove an external service
 
 Usage: 
 ```sh
-dotnet pc.dll service remove --name [name]
+dotnet occli.dll service remove --name [name]
 ``` 
 
 **Options**
@@ -56,7 +56,7 @@ Update an external service
 
 Usage: 
 ```sh
-dotnet pc.dll service update --name [name] --rename [new name]
+dotnet occli.dll service update --name [name] --rename [new name]
 ``` 
 
 **Options**

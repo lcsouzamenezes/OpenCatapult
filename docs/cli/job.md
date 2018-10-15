@@ -4,7 +4,7 @@ Add a new job definition
 
 Usage: 
 ```sh
-dotnet pc.dll job add --project [project] --name [name]
+dotnet occli.dll job add --project [project] --name [name]
 ```
 
 **Options**
@@ -20,7 +20,7 @@ List project's job definition
 
 Usage: 
 ```sh
-dotnet pc.dll job list --project [project]
+dotnet occli.dll job list --project [project]
 ```
 
 **Options**
@@ -33,7 +33,7 @@ Remove a job definition
 
 Usage: 
 ```sh
-dotnet pc.dll job remove --project [project] --name [name]
+dotnet occli.dll job remove --project [project] --name [name]
 ```
 
 **Options**

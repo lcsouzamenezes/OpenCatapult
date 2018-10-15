@@ -4,7 +4,7 @@ Add a new job task definition
 
 Usage: 
 ```sh
-dotnet pc.dll task add --project [project] --job [job] --name [name] --type [type] --provider [provider] --property [propname]:[propvalue]
+dotnet occli.dll task add --project [project] --job [job] --name [name] --type [type] --provider [provider] --property [propname]:[propvalue]
 ```
 
 **Options**
@@ -35,7 +35,7 @@ List job task definitions
 
 Usage: 
 ```sh
-dotnet pc.dll task list --project [project] --job [job]
+dotnet occli.dll task list --project [project] --job [job]
 ```
 
 **Options**
@@ -51,7 +51,7 @@ Remove a job task definition
 
 Usage: 
 ```sh
-dotnet pc.dll task remove --project [project] --job [job] --name [name]
+dotnet occli.dll task remove --project [project] --job [job] --name [name]
 ```
 
 **Options**
@@ -70,7 +70,7 @@ Update a job task definition
 
 Usage: 
 ```sh
-dotnet pc.dll task update --project [project] --job [job] --name [name] --rename [newname] --type [type] --provider [provider] --property [propname]:[propvalue]
+dotnet occli.dll task update --project [project] --job [job] --name [name] --rename [newname] --type [type] --provider [provider] --property [propname]:[propvalue]
 ```
 
 **Options**

@@ -4,7 +4,7 @@ Add a project data model
 
 Usage: 
 ```sh
-dotnet pc.dll model add --project [project] --name [name]
+dotnet occli.dll model add --project [project] --name [name]
 ```
 
 **Options**
@@ -26,7 +26,7 @@ List data models in a project
 
 Usage: 
 ```sh
-dotnet pc.dll model list --project [project]
+dotnet occli.dll model list --project [project]
 ```
 
 **Options**
@@ -39,7 +39,7 @@ Remove a project data model
 
 Usage: 
 ```sh
-dotnet pc.dll model remove --project [project] --name [name]
+dotnet occli.dll model remove --project [project] --name [name]
 ```
 
 **Options**
@@ -55,7 +55,7 @@ Update a project data model
 
 Usage: 
 ```sh
-dotnet pc.dll model update --project [project] --name [name] --rename [newname]
+dotnet occli.dll model update --project [project] --name [name] --rename [newname]
 ```
 
 **Options**

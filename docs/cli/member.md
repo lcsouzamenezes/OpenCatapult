@@ -4,7 +4,7 @@ Add user as a project member
 
 Usage: 
 ```sh
-dotnet pc.dll member add --project [project] --user [user] --role [role]
+dotnet occli.dll member add --project [project] --user [user] --role [role]
 ```
 
 **Options**
@@ -25,7 +25,7 @@ List members of the project
 
 Usage: 
 ```sh
-dotnet pc.dll member list --project [project]
+dotnet occli.dll member list --project [project]
 ```
 
 **Options**
@@ -43,7 +43,7 @@ Remove a project member
 
 Usage: 
 ```sh
-dotnet pc.dll member remove --project [project] --user [user]
+dotnet occli.dll member remove --project [project] --user [user]
 ```
 
 **Options**
@@ -59,7 +59,7 @@ Update the role of a project member
 
 Usage: 
 ```sh
-dotnet pc.dll member update --project [project] --user [user] --role [role]
+dotnet occli.dll member update --project [project] --user [user] --role [role]
 ``` 
 
 **Options**

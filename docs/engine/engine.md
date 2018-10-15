@@ -10,7 +10,7 @@ Check for a queud job.
 
 Usage:
 ```sh
-dotnet pcengine.dll check
+dotnet ocengine.dll check
 ```
 
 **Options:**
@@ -23,7 +23,7 @@ Set/modify engine Configurations
 
 Usage: 
 ```sh
-dotnet pcengine.dll config [subcommands]
+dotnet ocengine.dll config [subcommands]
 ```
 
 #### Subcommands
@@ -38,5 +38,5 @@ Start the engine to periodically check for job queues and execute them.
 
 Usage: 
 ```sh
-dotnet pcengine.dll start
+dotnet ocengine.dll start
 ```

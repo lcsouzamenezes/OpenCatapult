@@ -13,7 +13,7 @@ Login to catapult. You will be prompted to input the user's password.
 
 Usage:
 ```sh
-dotnet pc.dll login --user [user]
+dotnet occli.dll login --user [user]
 ```
 
 **Options:**
@@ -26,7 +26,7 @@ Logout from catapult
 
 Usage:
 ```sh
-dotnet pc.dll logout
+dotnet occli.dll logout
 ```
 
 ### Account		
@@ -50,7 +50,7 @@ CLI Configurations
 
 Usage: 
 ```sh
-dotnet pc.dll config [subcommands]
+dotnet occli.dll config [subcommands]
 ```
 
 #### Subcommands
@@ -65,7 +65,7 @@ Catapult engine registration commands
 
 Usage: 
 ```sh
-dotnet pc.dll engine [subcommands]
+dotnet occli.dll engine [subcommands]
 ```
 
 #### Subcommands
@@ -83,7 +83,7 @@ Job Definition related commands
 
 Usage: 
 ```sh
-dotnet pc.dll job [subcommands]
+dotnet occli.dll job [subcommands]
 ```
 
 #### Subcommands
@@ -97,7 +97,7 @@ Project member related commands
 
 Usage: 
 ```sh
-dotnet pc.dll member [subcommands]
+dotnet occli.dll member [subcommands]
 ```
 
 #### Subcommands
@@ -112,7 +112,7 @@ Project Data Model related commands
 
 Usage: 
 ```sh
-dotnet pc.dll model [subcommands]
+dotnet occli.dll model [subcommands]
 ```
 
 #### Subcommands
@@ -127,7 +127,7 @@ Plugin registration commands
 
 Usage: 
 ```sh
-dotnet pc.dll plugin [subcommands]
+dotnet occli.dll plugin [subcommands]
 ```
 
 #### Subcommands
@@ -142,7 +142,7 @@ Project related commands
 
 Usage: 
 ```sh
-dotnet pc.dll project [subcommands]
+dotnet occli.dll project [subcommands]
 ```
 
 #### Subcommands
@@ -161,7 +161,7 @@ Project Data Model Property related commands
 
 Usage: 
 ```sh
-dotnet pc.dll property [subcommands]
+dotnet occli.dll property [subcommands]
 ```
 
 #### Subcommands
@@ -176,7 +176,7 @@ Job Queue related commands
 
 Usage: 
 ```sh
-dotnet pc.dll queue [subcommands]
+dotnet occli.dll queue [subcommands]
 ```
 
 #### Subcommands
@@ -191,7 +191,7 @@ External service related commands
 
 Usage: 
 ```sh
-dotnet pc.dll service [subcommands]
+dotnet occli.dll service [subcommands]
 ```
 
 #### Subcommands
@@ -207,7 +207,7 @@ Job Task Definitions related commands
 
 Usage: 
 ```sh
-dotnet pc.dll task [subcommands]
+dotnet occli.dll task [subcommands]
 ```
 
 #### Subcommands

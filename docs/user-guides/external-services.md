@@ -6,19 +6,19 @@ When connecting to external service such as github, we would need to provide som
 
 Add a new external service by specifying the name and type of the external service. You will then be prompted to enter the service properties based on the Type you provided.
 ```sh
-dotnet PC.dll service add --name default-github --description "Default github account" --type github
+dotnet occli.dll service add --name default-github --description "Default github account" --type github
 ```
 
 All of the created external services can be viewed using the `list` command:
 ```sh
-dotnet pc.dll service list
+dotnet occli.dll service list
 ```
 
 ## Remove external service connection
 
 Remove an external service by specifying the name of the service to be removed:
 ```sh
-dotnet PC.dll service remove --name default-github
+dotnet occli.dll service remove --name default-github
 ```
 
 ## Use external service properties

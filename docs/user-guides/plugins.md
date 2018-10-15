@@ -6,12 +6,12 @@ Aside from the built-in catapult provider in each job task definition, you can i
 
 To install a plugin, use the `plugin register` command, and specify the path to `plugin.yml` file:
 ```sh
-dotnet PC.dll plugin register --file d:\MyPlugin\plugin.yml
+dotnet occli.dll plugin register --file d:\MyPlugin\plugin.yml
 ```
 
 ## Remove plugin
 
 To uninstall the plugin, use the name of the plugin as the parameter:
 ```sh
-dotnet PC.dll plugin remove --name MyPlugin 
+dotnet occli.dll plugin remove --name MyPlugin 
 ```

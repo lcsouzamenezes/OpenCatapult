@@ -45,7 +45,7 @@ After you have all of the required values above, next is to store them securely 
 Let's create an External Service for `GitHub`:
 
 ```sh
-dotnet PC.dll service add --name github-default --type GitHub
+dotnet occli.dll service add --name github-default --type GitHub
 ```
 
 Then you will be prompted to enter the required details for `GitHub`.
@@ -53,7 +53,7 @@ Then you will be prompted to enter the required details for `GitHub`.
 And now, let's create External Service for `Azure App Service`:
 
 ```sh
-dotnet PC.dll service add --name azure-default --type AzureAppService
+dotnet occli.dll service add --name azure-default --type AzureAppService
 ```
 
 Then you will be prompted to enter the required details for `AzureAppService`.
@@ -63,7 +63,7 @@ Then you will be prompted to enter the required details for `AzureAppService`.
 After all required components in place, now you can start to create the project by using Sample template.
 
 ```sh
-dotnet PC.dll project create --name SampleProject --client Polyrific --template sample
+dotnet occli.dll project create --name SampleProject --client Polyrific --template sample
 ```
 
 You will be prompted to enter some additional configurations.
@@ -73,8 +73,8 @@ After your project is created, you can check what you have in it, e.g. models, j
 One important thing to do before doing further action is that you need to register an engine instance to allow it picking up any jobs from your projects. To do it, let's register the Engine and generate an access token:
 
 ```sh
-dotnet PC.dll engine register --name Engine01
-dotnet PC.dll engine token --name Engine01
+dotnet occli.dll engine register --name Engine01
+dotnet occli.dll engine token --name Engine01
 ```
 
 Copy the engine access token, then open a new CLI and go to the catapult directory. Run the following command to set authorization token of the engine:
@@ -92,5 +92,5 @@ dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll start
 At this state, you should be able to direclty send the job from your created project to the queue:
 
 ```sh
-dotnet PC.dll queue add --project SampleProject --job Default
+dotnet occli.dll queue add --project SampleProject --job Default
 ```

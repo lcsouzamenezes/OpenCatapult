@@ -4,7 +4,7 @@ Add job to queue
 
 Usage: 
 ```sh
-dotnet pc.dll queue add --project [project] --job [job]
+dotnet occli.dll queue add --project [project] --job [job]
 ```
 
 **Options**
@@ -20,7 +20,7 @@ List queued jobs
 
 Usage: 
 ```sh
-dotnet pc.dll queue list --project [project]
+dotnet occli.dll queue list --project [project]
 ```
 
 **Options**
@@ -33,7 +33,7 @@ Get complete log of a queued job
 
 Usage: 
 ```sh
-dotnet pc.dll queue get --project [project] --number [number]
+dotnet occli.dll queue get --project [project] --number [number]
 ```
 
 **Options**
@@ -49,7 +49,7 @@ Restart the pending queue
 
 Usage: 
 ```sh
-dotnet pc.dll queue restart --project [project] --number [number]
+dotnet occli.dll queue restart --project [project] --number [number]
 ```
 
 **Options**

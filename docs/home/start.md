@@ -106,19 +106,19 @@ cd src\CLI\Polyrific.Catapult.Cli\bin\Release
 When you previously applied migrations to initiate the database, a default user was created. You can use this user to login. When you're prompted to enter the password, the default password is `opencatapult`.
 
 ```sh
-dotnet PC.dll login --user admin@opencatapult.net
+dotnet occli.dll login --user admin@opencatapult.net
 ```
 
 We strongly advise you to change the default password, especially when you deploy the API into public environment:
 
 ```sh
-dotnet PC.dll account updateuser --email admin@opencatapult.net
+dotnet occli.dll account updateuser --email admin@opencatapult.net
 ```
 
 And now, let's create an empty project:
 
 ```sh
-dotnet PC.dll project create --name first-project --client Polyrific
+dotnet occli.dll project create --name first-project --client Polyrific
 ```
 
 ## Next steps

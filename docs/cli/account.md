@@ -4,7 +4,7 @@ Activate a suspended user
 
 Usage: 
 ```sh
-dotnet pc.dll account activate --email [email]
+dotnet occli.dll account activate --email [email]
 ```
 
 **Options**
@@ -17,7 +17,7 @@ List users
 
 Usage: 
 ```sh
-dotnet pc.dll account list --status [status] --role [role]
+dotnet occli.dll account list --status [status] --role [role]
 ```
 
 **Options**
@@ -37,7 +37,7 @@ Register a catapult user by admin
 
 Usage: 
 ```sh
-dotnet pc.dll account register --email [email] --firstname [firstname] --lastname [lastname]
+dotnet occli.dll account register --email [email] --firstname [firstname] --lastname [lastname]
 ```
 
 **Options**
@@ -56,7 +56,7 @@ Remove a user
 
 Usage: 
 ```sh
-dotnet pc.dll account remove --email [email]
+dotnet occli.dll account remove --email [email]
 ```
 
 **Options**
@@ -69,7 +69,7 @@ Suspend a user
 
 Usage: 
 ```sh
-dotnet pc.dll account suspend --email [email]
+dotnet occli.dll account suspend --email [email]
 ```
 
 **Options**
@@ -82,7 +82,7 @@ Update user profile
 
 Usage: 
 ```sh
-dotnet pc.dll account update --email [email] --firstname [firstname] --lastname [lastname]
+dotnet occli.dll account update --email [email] --firstname [firstname] --lastname [lastname]
 ```
 
 **Options**
@@ -101,7 +101,7 @@ Update user's password. You will be prompted to input the old and new password.
 
 Usage: 
 ```sh
-dotnet pc.dll account password update --email [email]
+dotnet occli.dll account password update --email [email]
 ```
 **Options**
 * email (mandatory)
@@ -113,7 +113,7 @@ Request reset password token
 
 Usage: 
 ```sh
-dotnet pc.dll account password resettoken --email [email]
+dotnet occli.dll account password resettoken --email [email]
 ```
 **Options**
 * email (mandatory)
@@ -125,7 +125,7 @@ Reset the user's password
 
 Usage: 
 ```sh
-dotnet pc.dll account password reset --email [email] --token [reset password token]
+dotnet occli.dll account password reset --email [email] --token [reset password token]
 ```
 
 **Options**
@@ -141,7 +141,7 @@ Set a user role so it can have needed access
 
 Usage: 
 ```sh
-dotnet pc.dll account setrole --email [email] --role [role]
+dotnet occli.dll account setrole --email [email] --role [role]
 ```
 
 **Options**

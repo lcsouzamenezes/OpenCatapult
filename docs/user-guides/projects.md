@@ -5,69 +5,69 @@ In catapult, a project is a software project you are working on. It can have sev
 ## Create project
 Create a project by specifying the name and optionally the client of this project
 ```sh
-dotnet PC.dll project create --name MyProject --client Polyrific
+dotnet occli.dll project create --name MyProject --client Polyrific
 ```
 
 You can also create a project based on a previously exported project, by using the `template` option:
 ```sh
-dotnet PC.dll project create --name MyProject --client Polyrific --template my-previous-project
+dotnet occli.dll project create --name MyProject --client Polyrific --template my-previous-project
 ```
 
 Finally, [service providers](../home/intro.md#service-providers-plugins) may have some configuration key that you can override for each project. You can set this when creating the project by using the `property` option:
 ```sh
-dotnet PC.dll project create --name MyProject --client Polyrific --property createAdmin:false  
+dotnet occli.dll project create --name MyProject --client Polyrific --property createAdmin:false  
 ```
 
 For the configuration key that the service provider have, please refer to each service provider's page.
 
 All of the created projects can be viewed using the `list` command:
 ```sh
-dotnet pc.dll project list
+dotnet occli.dll project list
 ```
 
 ## Update project
 
 You can update the project's client or property by using the `update` command:
 ```sh
-dotnet PC.dll project update --name MyProject --client Polyrific --property createAdmin:false
+dotnet occli.dll project update --name MyProject --client Polyrific --property createAdmin:false
 ```
 
 ## Remove project
 
 Remove a project by specifying the name of the project to be removed:
 ```sh
-dotnet PC.dll project remove --name MyProject
+dotnet occli.dll project remove --name MyProject
 ```
 
 ## Archive project
 
 When you want to remove external services of a project, but don't want to remove the project from the database, you can opt to archive it. The archived project can be [restored](#restore-project) later.
 ```sh
-dotnet PC.dll project archive --name MyProject
+dotnet occli.dll project archive --name MyProject
 ```
 
 ## Restore project
 
 Restore an archived project by specifying the name of the project:
 ```sh
-dotnet PC.dll project restore --name MyProject
+dotnet occli.dll project restore --name MyProject
 ```
 
 ## Clone project
 
 You can clone an existing project, and create a new one. The new project will have the [models](data-models.md) copied from the cloned project. You can optionally copy the [members](project-members.md) and [jobs](job-definitions.md) by using the option `includemember` and `includejob` respectively:
 ```sh
-dotnet pc.dll project clone --project MyProject --name my-other-project --includemember --includejob
+dotnet occli.dll project clone --project MyProject --name my-other-project --includemember --includejob
 ```
 
 ## Export project
 
 You can export an existing project into a yaml file, when then can be used as a template when you create a new project. 
 ```sh
-dotnet pc.dll project export --name MyProject
+dotnet occli.dll project export --name MyProject
 ```
 
 The yaml file will be created in the AppData folder. You can also specify a specific location for the template file to be saved:
 ```sh
-dotnet pc.dll project export --name MyProject --output D:/MyProject.yaml
+dotnet occli.dll project export --name MyProject --output D:/MyProject.yaml
 ```

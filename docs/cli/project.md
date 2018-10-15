@@ -4,7 +4,7 @@ Archive a project
 
 Usage: 
 ```sh
-dotnet pc.dll project archive --name [name]
+dotnet occli.dll project archive --name [name]
 ```
 
 **Options**
@@ -17,7 +17,7 @@ Clone a project
 
 Usage: 
 ```sh
-dotnet pc.dll project clone --project [project] --name [name] --includemember --includejob
+dotnet occli.dll project clone --project [project] --name [name] --includemember --includejob
 ```
 
 **Options**
@@ -39,7 +39,7 @@ Create a project
 
 Usage: 
 ```sh
-dotnet pc.dll project create --name [name] --client [client] --template [template] --property [propname]:[propvalue]
+dotnet occli.dll project create --name [name] --client [client] --template [template] --property [propname]:[propvalue]
 ```
 
 **Options**
@@ -62,7 +62,7 @@ Update a project
 
 Usage: 
 ```sh
-dotnet pc.dll project update --name [name] --client [client] --property [propname]:[propvalue]
+dotnet occli.dll project update --name [name] --client [client] --property [propname]:[propvalue]
 ```
 
 **Options**
@@ -82,7 +82,7 @@ Export project into a yaml file
 
 Usage: 
 ```sh
-dotnet pc.dll project export --name [name]
+dotnet occli.dll project export --name [name]
 ```
 
 **Options**
@@ -98,7 +98,7 @@ List projects which the user has access to
 
 Usage: 
 ```sh
-dotnet pc.dll project list --status [status]
+dotnet occli.dll project list --status [status]
 ```
 
 **Options**
@@ -113,7 +113,7 @@ Remove a project
 
 Usage: 
 ```sh
-dotnet pc.dll project remove --name [name]
+dotnet occli.dll project remove --name [name]
 ```
 
 **Options**
@@ -126,7 +126,7 @@ Restore an archived project
 
 Usage: 
 ```sh
-dotnet pc.dll project restore --name [name]
+dotnet occli.dll project restore --name [name]
 ```
 
 **Options**

@@ -3,7 +3,7 @@ Display configurations
 
 Usage: 
 ```sh
-dotnet pcengine.dll config get --name [name]
+dotnet ocengine.dll config get --name [name]
 ```
 
 **Options**
@@ -19,7 +19,7 @@ Import configuration from a config file
 
 Usage: 
 ```sh
-dotnet pcengine.dll config import --file [file]
+dotnet ocengine.dll config import --file [file]
 ```
 
 **Options**
@@ -32,7 +32,7 @@ Remove configurations
 
 Usage: 
 ```sh
-dotnet pcengine.dll config remove --name [name]
+dotnet ocengine.dll config remove --name [name]
 ```
 
 **Options**
@@ -48,7 +48,7 @@ Set configurations
 
 Usage: 
 ```sh
-dotnet pcengine.dll config set --name [name] --value [value]
+dotnet ocengine.dll config set --name [name] --value [value]
 ``` 
 
 **Options**

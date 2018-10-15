@@ -4,7 +4,7 @@ Add a project data model property
 
 Usage: 
 ```sh
-dotnet pc.dll property add --project [project] --model [model] --name [name] --label [label] --type [type] --controltype [controltype] --relational [relational] --relationaltype [relationaltype]
+dotnet occli.dll property add --project [project] --model [model] --name [name] --label [label] --type [type] --controltype [controltype] --relational [relational] --relationaltype [relationaltype]
 ```
 
 **Options**
@@ -44,7 +44,7 @@ List properties in a data model
 
 Usage: 
 ```sh
-dotnet pc.dll property list --project [project] --model [model]
+dotnet occli.dll property list --project [project] --model [model]
 ```
 
 **Options**
@@ -60,7 +60,7 @@ Remove a project data model property
 
 Usage: 
 ```sh
-dotnet pc.dll property remove --project [project] --model [model] --name [name]
+dotnet occli.dll property remove --project [project] --model [model] --name [name]
 ```
 
 **Options**
@@ -79,7 +79,7 @@ Update a project data model property
 
 Usage: 
 ```sh
-dotnet pc.dll property update --project [project] --name [name] --rename [newname] --label [label] --type [type] --controltype [controltype] --relational [relational] --relationaltype [relationaltype]
+dotnet occli.dll property update --project [project] --name [name] --rename [newname] --label [label] --type [type] --controltype [controltype] --relational [relational] --relationaltype [relationaltype]
 ```
 
 **Options**

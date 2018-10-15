@@ -4,7 +4,7 @@ Activate a suspended engine
 
 Usage: 
 ```sh
-dotnet pc.dll engine activate --name [name]
+dotnet occli.dll engine activate --name [name]
 ```
 
 **Options**
@@ -17,7 +17,7 @@ Get a single engine record
 
 Usage: 
 ```sh
-dotnet pc.dll engine get --name [name]
+dotnet occli.dll engine get --name [name]
 ```
 
 **Options**
@@ -30,7 +30,7 @@ List registered engines
 
 Usage: 
 ```sh
-dotnet pc.dll engine list --status [status]
+dotnet occli.dll engine list --status [status]
 ```
 
 **Options**
@@ -45,7 +45,7 @@ Register a new engine
 
 Usage: 
 ```sh
-dotnet pc.dll engine register --name [name]
+dotnet occli.dll engine register --name [name]
 ```
 
 **Options**
@@ -58,7 +58,7 @@ Remove an engine
 
 Usage: 
 ```sh
-dotnet pc.dll engine remove --name [name]
+dotnet occli.dll engine remove --name [name]
 ```
 
 **Options**
@@ -71,7 +71,7 @@ Suspend an engine
 
 Usage: 
 ```sh
-dotnet pc.dll engine suspend --name [name]
+dotnet occli.dll engine suspend --name [name]
 ```
 
 **Options**
@@ -84,7 +84,7 @@ Generate a token for the engine
 
 Usage: 
 ```sh
-dotnet pc.dll engine token --name [name]
+dotnet occli.dll engine token --name [name]
 ```
 
 **Options**

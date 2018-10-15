@@ -3,7 +3,7 @@ Get a single plugin details
 
 Usage: 
 ```sh
-dotnet pc.dll plugin get --name [name]
+dotnet occli.dll plugin get --name [name]
 ```
 
 **Options**
@@ -16,7 +16,7 @@ List all registered plugins
 
 Usage: 
 ```sh
-dotnet pc.dll plugin list --type [type]
+dotnet occli.dll plugin list --type [type]
 ```
 
 **Options**
@@ -31,7 +31,7 @@ Register a plugin
 
 Usage: 
 ```sh
-dotnet pc.dll plugin register --file [path to plugin.yml file]
+dotnet occli.dll plugin register --file [path to plugin.yml file]
 ``` 
 
 **Options**
@@ -44,7 +44,7 @@ Remove a plugin
 
 Usage: 
 ```sh
-dotnet pc.dll plugin remove --name [name]
+dotnet occli.dll plugin remove --name [name]
 ``` 
 
 **Options**

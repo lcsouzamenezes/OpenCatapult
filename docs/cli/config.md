@@ -3,7 +3,7 @@ Display configurations
 
 Usage: 
 ```sh
-dotnet pc.dll config get --name [name]
+dotnet occli.dll config get --name [name]
 ```
 
 **Options**
@@ -19,7 +19,7 @@ Import configuration from a config file
 
 Usage: 
 ```sh
-dotnet pc.dll config import --file [file]
+dotnet occli.dll config import --file [file]
 ```
 
 **Options**
@@ -32,7 +32,7 @@ Remove configurations
 
 Usage: 
 ```sh
-dotnet pc.dll config remove --name [name]
+dotnet occli.dll config remove --name [name]
 ```
 
 **Options**
@@ -48,7 +48,7 @@ Set configurations
 
 Usage: 
 ```sh
-dotnet pc.dll config set --name [name] --value [value]
+dotnet occli.dll config set --name [name] --value [value]
 ``` 
 
 **Options**
