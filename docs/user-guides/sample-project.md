@@ -77,16 +77,16 @@ dotnet occli.dll engine register --name Engine01
 dotnet occli.dll engine token --name Engine01
 ```
 
-Copy the engine access token, then open a new CLI and go to the catapult directory. Run the following command to set authorization token of the engine:
+Copy the engine access token, then open the Engine shell and go to the catapult directory. Run the following command to set authorization token of the engine:
 
 ```sh
-dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll config set -n AuthorizationToken -v <paste the token here>
+dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\ocengine.dll config set -n AuthorizationToken -v <paste the token here>
 ```
 
 Start the engine to make it ready to execute any queued jobs from your projects:
 
 ```sh
-dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll start
+dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\ocengine.dll start
 ```
 
 At this state, you should be able to direclty send the job from your created project to the queue:

@@ -69,7 +69,7 @@ dotnet build .\src\Engine\Polyrific.Catapult.Engine\Polyrific.Catapult.Engine.cs
 Set API URL in the Engine's config:
 
 ```sh
-dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\PCEngine.dll config set -n ApiUrl -v https://localhost:5001
+dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\ocengine.dll config set -n ApiUrl -v https://localhost:5001
 ```
 
 **Prepare the CLI**
@@ -83,7 +83,7 @@ dotnet build .\src\CLI\Polyrific.Catapult.Cli\Polyrific.Catapult.Cli.csproj -c R
 Set API URL in the CLI's config:
 
 ```sh
-dotnet .\src\CLI\Polyrific.Catapult.Cli\bin\Release\PC.dll config set -n ApiUrl -v https://localhost:5001
+dotnet .\src\CLI\Polyrific.Catapult.Cli\bin\Release\occli.dll config set -n ApiUrl -v https://localhost:5001
 ```
 
 Note:
