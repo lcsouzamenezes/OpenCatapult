@@ -34,10 +34,16 @@ User account related commands
 
 #### Subcommands
 
+* [Activate](account.md#activate)
+* [List](account.md#list)
 * [Register](account.md#register)
 * [Remove](account.md#remove)
 * [Suspend](account.md#suspend)
-* [Activate](account.md#activate)
+* [Update](account.md#update)
+* [SetRole](account.md#setrole)
+* [Password Update](account.md#password-update)
+* [Password ResetToken](account.md#password-resettoken)
+* [Password Reset](account.md#password-reset)
 
 ### Config		
 CLI Configurations

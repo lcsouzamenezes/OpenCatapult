@@ -11,9 +11,29 @@ dotnet pc.dll account activate --email [email]
 * email (mandatory)
     * Email of the user to be activated
     * Usage: `--email` (alias `-e`)
+    
+# List
+List users
+
+Usage: 
+```sh
+dotnet pc.dll account list --status [status] --role [role]
+```
+
+**Options**
+* status
+    * Status of the users
+    * Usage: `--status` (alias `-s`)
+    * Allowed values: `all` | `Active` | `Suspended`
+    * Default value: `all`
+* role
+    * Role of the users
+    * Usage: `--role` (alias `-r`)
+    * Allowed values: `all` | `Administrator` | `Basic` | `Guest`
+    * Default value: `all`
 
 # Register
-Register a catapult user
+Register a catapult user by admin
 
 Usage: 
 ```sh
@@ -76,18 +96,45 @@ dotnet pc.dll account update --email [email] --firstname [firstname] --lastname 
     * Last name of the user
     * Usage: `--lastname` (alias: `-ln`)
     
-# Updatepassword
+# Password Update
 Update user's password. You will be prompted to input the old and new password.
 
 Usage: 
 ```sh
-dotnet pc.dll account updatepassword --email [email]
+dotnet pc.dll account password update --email [email]
+```
+**Options**
+* email (mandatory)
+    * Email of the user
+    * Usage: `--email` (alias `-e`)
+
+# Password ResetToken
+Request reset password token
+
+Usage: 
+```sh
+dotnet pc.dll account password resettoken --email [email]
+```
+**Options**
+* email (mandatory)
+    * Email of the user
+    * Usage: `--email` (alias `-e`)
+
+# Password Reset
+Reset the user's password
+
+Usage: 
+```sh
+dotnet pc.dll account password reset --email [email] --token [reset password token]
 ```
 
 **Options**
 * email (mandatory)
     * Email of the user
     * Usage: `--email` (alias `-e`)
+* token (mandatory)
+    * Reset password token emailed to the user
+    * Usage: `--token` (alias `-t`)
     
 # SetRole
 Set a user role so it can have needed access

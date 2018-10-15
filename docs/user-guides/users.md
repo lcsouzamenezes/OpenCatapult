@@ -1,12 +1,28 @@
 # Manage users
 
+## Login
+To login into the application, use the following command:
+```sh
+dotnet pc.dll login -e admin@opencatapult.net
+```
+
+To logout, use the `logout` command:
+```sh
+dotnet pc.dll logout
+```
+
 ## Register user
 
 Register a new user by specifying the email and password:
 ```sh
 dotnet pc.dll account register --email john.smith@opencatapult.net
 ```
-A confirmation email will be emailed to you (Make sure you set the [smtp](#setting-email) properly)
+A confirmation email will be emailed to the user (Make sure you set the [smtp](#setting-email) properly). User will need to confirm their email before being able to login to the application
+
+To list the users registered in the opencatapult, use the `account list`
+```sh
+dotnet pc.dll account list
+```
 
 ## Update user
 
