@@ -18,26 +18,26 @@ namespace Polyrific.Catapult.Cli.Commands.Account
         }
 
         [Required]
-        [Option("-e|--email <EMAIL>", "Email of the user", CommandOptionType.SingleValue)]
-        public string Email { get; set; }
+        [Option("-u|--user <USER>", "Username (email) of the user", CommandOptionType.SingleValue)]
+        public string User { get; set; }
 
         public override string Execute()
         {
-            Console.WriteLine($"Trying to suspend user {Email}...");
+            Console.WriteLine($"Trying to suspend user {User}...");
 
             string message;
 
-            var user = _accountService.GetUserByEmail(Email).Result;
+            var user = _accountService.GetUserByEmail(User).Result;
             if (user != null)
             {
                 _accountService.SuspendUser(int.Parse(user.Id)).Wait();
 
-                message = $"User {Email} has been suspended";
+                message = $"User {User} has been suspended";
                 Logger.LogInformation(message);
             }
             else
             {
-                message = $"User {Email} was not found";
+                message = $"User {User} was not found";
             }
 
             return message;

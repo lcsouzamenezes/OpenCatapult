@@ -20,8 +20,8 @@ namespace Polyrific.Catapult.Cli.Commands.Account
         }
 
         [Required]
-        [Option("-e|--email <EMAIL>", "Email of the user", CommandOptionType.SingleValue)]
-        public string Email { get; set; }
+        [Option("-u|--user <USER>", "Username (email) of the user", CommandOptionType.SingleValue)]
+        public string User { get; set; }
 
         [Required]
         [Option("-r|--role <ROLE>", "Role of user", CommandOptionType.SingleValue)]
@@ -30,11 +30,11 @@ namespace Polyrific.Catapult.Cli.Commands.Account
 
         public override string Execute()
         {
-            Console.WriteLine($"Trying to update role of user {Email}...");
+            Console.WriteLine($"Trying to update role of user {User}...");
 
             string message;
 
-            var user = _accountService.GetUserByEmail(Email).Result;
+            var user = _accountService.GetUserByEmail(User).Result;
             if (user != null)
             {
                 var userId = int.Parse(user.Id);
@@ -44,12 +44,12 @@ namespace Polyrific.Catapult.Cli.Commands.Account
                     RoleName = Role,
                 }).Wait();
 
-                message = $"User {Email} has been assigned to role \"{Role}\"";
+                message = $"User {User} has been assigned to role \"{Role}\"";
                 Logger.LogInformation(message);
             }
             else
             {
-                message = $"User {Email} was not found";
+                message = $"User {User} was not found";
             }
 
             return message;

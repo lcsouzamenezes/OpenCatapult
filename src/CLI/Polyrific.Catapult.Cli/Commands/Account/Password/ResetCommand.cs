@@ -21,8 +21,8 @@ namespace Polyrific.Catapult.Cli.Commands.Account.Password
         }
 
         [Required]
-        [Option("-e|--email <EMAIL>", "Email of the user", CommandOptionType.SingleValue)]
-        public string Email { get; set; }
+        [Option("-u|--user <USER>", "Username (email) of the user", CommandOptionType.SingleValue)]
+        public string User { get; set; }
 
         [Required]
         [Option("-t|--token <TOKEN>", "Reset password token", CommandOptionType.SingleValue)]
@@ -30,11 +30,11 @@ namespace Polyrific.Catapult.Cli.Commands.Account.Password
 
         public override string Execute()
         {
-            Console.WriteLine($"Trying to reset password for user {Email}...");
+            Console.WriteLine($"Trying to reset password for user {User}...");
 
             string message;
-            
-            var user = _accountService.GetUserByEmail(Email).Result;
+
+            var user = _accountService.GetUserByEmail(User).Result;
             if (user != null)
             {
                 var userId = int.Parse(user.Id);
@@ -46,12 +46,12 @@ namespace Polyrific.Catapult.Cli.Commands.Account.Password
                     ConfirmNewPassword = _consoleReader.GetPassword("Re-enter new password:")
                 }).Wait();
 
-                message = $"Password for user {Email} has been reset";
+                message = $"Password for user {User} has been reset";
                 Logger.LogInformation(message);
             }
             else
             {
-                message = $"User {Email} is not found";
+                message = $"User {User} is not found";
             }
 
             return message;

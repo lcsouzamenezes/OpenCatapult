@@ -19,8 +19,8 @@ namespace Polyrific.Catapult.Cli.Commands.Account
         }
 
         [Required]
-        [Option("-e|--email <EMAIL>", "Email of the user", CommandOptionType.SingleValue)]
-        public string Email { get; set; }
+        [Option("-u|--user <USER>", "Username (email) of the user", CommandOptionType.SingleValue)]
+        public string User { get; set; }
 
         [Option("-fn|--firstname <FIRSTNAME>", "First name  of the user", CommandOptionType.SingleValue)]
         public string FirstName { get; set; }
@@ -30,11 +30,11 @@ namespace Polyrific.Catapult.Cli.Commands.Account
 
         public override string Execute()
         {
-            Console.WriteLine($"Trying to update user {Email}...");
+            Console.WriteLine($"Trying to update user {User}...");
 
             string message;
-            
-            var user = _accountService.GetUserByEmail(Email).Result;
+
+            var user = _accountService.GetUserByEmail(User).Result;
             if (user != null)
             {
                 var userId = int.Parse(user.Id);
@@ -45,12 +45,12 @@ namespace Polyrific.Catapult.Cli.Commands.Account
                     LastName = LastName ?? user.LastName
                 }).Wait();
 
-                message = $"User {Email} has been updated";
+                message = $"User {User} has been updated";
                 Logger.LogInformation(message);
             }
             else
             {
-                message = $"User {Email} was not found";
+                message = $"User {User} was not found";
             }
 
             return message;
