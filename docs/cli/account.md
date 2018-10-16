@@ -4,13 +4,13 @@ Activate a suspended user
 
 Usage: 
 ```sh
-dotnet occli.dll account activate --email [email]
+dotnet occli.dll account activate --user [user]
 ```
 
 **Options**
-* email (mandatory)
+* user (mandatory)
     * Email of the user to be activated
-    * Usage: `--email` (alias `-e`)
+    * Usage: `--user` (alias `-u`)
     
 # List
 List users
@@ -56,39 +56,39 @@ Remove a user
 
 Usage: 
 ```sh
-dotnet occli.dll account remove --email [email]
+dotnet occli.dll account remove --user [user]
 ```
 
 **Options**
-* email (mandatory)
+* user (mandatory)
     * Email of the user to be removed
-    * Usage: `--email` (alias: `-e`)
+    * Usage: `--user` (alias: `-u`)
 
 # Suspend
 Suspend a user	
 
 Usage: 
 ```sh
-dotnet occli.dll account suspend --email [email]
+dotnet occli.dll account suspend --user [user]
 ```
 
 **Options**
-* email (mandatory)
+* user (mandatory)
     * Email of the user to be suspended
-    * Usage: `--email` (alias: `-e`)
+    * Usage: `--user` (alias: `-u`)
 
 # Update
 Update user profile
 
 Usage: 
 ```sh
-dotnet occli.dll account update --email [email] --firstname [firstname] --lastname [lastname]
+dotnet occli.dll account update --user [user] --firstname [firstname] --lastname [lastname]
 ```
 
 **Options**
-* email (mandatory)
+* user (mandatory)
     * Email of the user
-    * Usage: `--email` (alias `-e`)
+    * Usage: `--user` (alias `-u`)
 * firstname
     * First name of the user
     * Usage: `--firstname` (alias: `-fn`)
@@ -97,41 +97,41 @@ dotnet occli.dll account update --email [email] --firstname [firstname] --lastna
     * Usage: `--lastname` (alias: `-ln`)
     
 # Password Update
-Update user's password. You will be prompted to input the old and new password.
+Update current user's password. You will be prompted to input the old and new password.
 
 Usage: 
 ```sh
-dotnet occli.dll account password update --email [email]
+dotnet occli.dll account password update
 ```
 **Options**
-* email (mandatory)
+* user (mandatory)
     * Email of the user
-    * Usage: `--email` (alias `-e`)
+    * Usage: `--user` (alias `-u`)
 
 # Password ResetToken
 Request reset password token
 
 Usage: 
 ```sh
-dotnet occli.dll account password resettoken --email [email]
+dotnet occli.dll account password resettoken --user [user]
 ```
 **Options**
-* email (mandatory)
+* user (mandatory)
     * Email of the user
-    * Usage: `--email` (alias `-e`)
+    * Usage: `--user` (alias `-u`)
 
 # Password Reset
 Reset the user's password
 
 Usage: 
 ```sh
-dotnet occli.dll account password reset --email [email] --token [reset password token]
+dotnet occli.dll account password reset --user [user] --token [reset password token]
 ```
 
 **Options**
-* email (mandatory)
+* user (mandatory)
     * Email of the user
-    * Usage: `--email` (alias `-e`)
+    * Usage: `--user` (alias `-u`)
 * token (mandatory)
     * Reset password token emailed to the user
     * Usage: `--token` (alias `-t`)
@@ -141,13 +141,13 @@ Set a user role so it can have needed access
 
 Usage: 
 ```sh
-dotnet occli.dll account setrole --email [email] --role [role]
+dotnet occli.dll account setrole --user [user] --role [role]
 ```
 
 **Options**
-* email (mandatory)
+* user (mandatory)
     * Email of the user
-    * Usage: `--email` (alias `-e`)
+    * Usage: `--user` (alias `-u`)
 * role
     * Role of the user
     * Usage: `--role` (alias: `-r`)

@@ -112,7 +112,7 @@ dotnet occli.dll login --user admin@opencatapult.net
 We strongly advise you to change the default password, especially when you deploy the API into public environment:
 
 ```sh
-dotnet occli.dll account updateuser --email admin@opencatapult.net
+dotnet occli.dll account password update
 ```
 
 And now, let's create an empty project:
