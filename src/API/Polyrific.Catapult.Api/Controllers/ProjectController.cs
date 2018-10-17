@@ -3,10 +3,12 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Polyrific.Catapult.Api.Core.Entities;
 using Polyrific.Catapult.Api.Core.Exceptions;
 using Polyrific.Catapult.Api.Core.Services;
 using Polyrific.Catapult.Api.Identity;
+using Polyrific.Catapult.Shared.Dto.JobDefinition;
 using Polyrific.Catapult.Shared.Dto.Project;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +23,14 @@ namespace Polyrific.Catapult.Api.Controllers
         private readonly IProjectService _projectService;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly ILogger _logger;
 
-        public ProjectController(IProjectService projectService, IUserService userService, IMapper mapper)
+        public ProjectController(IProjectService projectService, IUserService userService, IMapper mapper, ILogger<ProjectController> logger)
         {
             _projectService = projectService;
             _userService = userService;
             _mapper = mapper;
+            _logger = logger;
         }
 
         /// <summary>
@@ -38,6 +42,8 @@ namespace Polyrific.Catapult.Api.Controllers
         [Authorize(Policy = AuthorizePolicy.ProjectMemberAccess)]
         public async Task<IActionResult> GetProjects(string status = null)
         {
+            _logger.LogInformation("Getting projects. Filtered by status = {status}", status);
+
             try
             {
                 var currentUserId = User.GetUserId();
@@ -48,6 +54,7 @@ namespace Polyrific.Catapult.Api.Controllers
             }
             catch (FilterTypeNotFoundException ex)
             {
+                _logger.LogWarning(ex, "Filter type not found");
                 return BadRequest(ex);
             }
         }
@@ -56,6 +63,8 @@ namespace Polyrific.Catapult.Api.Controllers
         [Authorize(Policy = AuthorizePolicy.ProjectAccess)]
         public async Task<IActionResult> GetProjectByName(string projectName)
         {
+            _logger.LogInformation("Getting project {projectName}", projectName);
+
             var project = await _projectService.GetProjectByName(projectName);
             var result = _mapper.Map<ProjectDto>(project);
             return Ok(result);
@@ -70,6 +79,8 @@ namespace Polyrific.Catapult.Api.Controllers
         [Authorize(Policy = AuthorizePolicy.ProjectAccess)]
         public async Task<IActionResult> GetProject(int projectId)
         {
+            _logger.LogInformation("Getting project {projectId}", projectId);
+
             var project = await _projectService.GetProjectById(projectId);
             var result = _mapper.Map<ProjectDto>(project);
             return Ok(result);
@@ -85,6 +96,29 @@ namespace Polyrific.Catapult.Api.Controllers
         [ProducesResponseType(201)]
         public async Task<IActionResult> CreateProject(NewProjectDto newProject)
         {
+            // exclude task's additional configs since it may contain secret values
+            var requestBodyToLog = new NewProjectDto
+            {
+                Name = newProject.Name,
+                Members = newProject.Members,
+                Client = newProject.Client,
+                Config = newProject.Config,
+                Models = newProject.Models,
+                Jobs = newProject.Jobs?.Select(j => new CreateJobDefinitionWithTasksDto
+                {
+                    Name = j.Name,
+                    Tasks = j.Tasks?.Select(t => new CreateJobTaskDefinitionDto
+                    {
+                        Name = t.Name,
+                        Configs = t.Configs,
+                        Provider = t.Provider,
+                        Sequence = t.Sequence,
+                        Type = t.Type
+                    }).ToList()
+                }).ToList()
+            };
+            _logger.LogInformation("Creating project. Request body: {@requestBodyToLog}", requestBodyToLog);
+
             try
             {
                 var projectMembers = newProject.Members.Select(m => (m.UserId, m.ProjectMemberRoleId)).ToList();
@@ -106,26 +140,32 @@ namespace Polyrific.Catapult.Api.Controllers
             }
             catch (DuplicateProjectException dupEx)
             {
+                _logger.LogWarning(dupEx, "Duplicate project name");
                 return BadRequest(dupEx.Message);
             }
             catch (ProjectDataModelNotFoundException modelEx)
             {
+                _logger.LogWarning(modelEx, "Project data model not found");
                 return BadRequest(modelEx.Message);
             }
             catch (ProviderNotInstalledException provEx)
             {
+                _logger.LogWarning(provEx, "Provider not installed");
                 return BadRequest(provEx.Message);
             }
             catch (ExternalServiceRequiredException esrEx)
             {
+                _logger.LogWarning(esrEx, "External service required");
                 return BadRequest(esrEx.Message);
             }
             catch (ExternalServiceNotFoundException esnfEx)
             {
+                _logger.LogWarning(esnfEx, "External service not found");
                 return BadRequest(esnfEx.Message);
             }
             catch (IncorrectExternalServiceTypeException iestEx)
             {
+                _logger.LogWarning(iestEx, "Incorrect external service type");
                 return BadRequest(iestEx.Message);
             }
         }
@@ -140,10 +180,15 @@ namespace Polyrific.Catapult.Api.Controllers
         [Authorize(Policy = AuthorizePolicy.ProjectOwnerAccess)]
         public async Task<IActionResult> UpdateProject(int projectId, UpdateProjectDto updatedProject)
         {
+            _logger.LogInformation("Updating project {projectId}. Request body: {@updatedProject}", projectId, updatedProject);
+
             try
             {
                 if (projectId != updatedProject.Id)
-                    return BadRequest("project Id doesn't match.");
+                {
+                    _logger.LogWarning("Project Id doesn't match");
+                    return BadRequest("Project Id doesn't match.");
+                }                    
 
                 var entity = _mapper.Map<Project>(updatedProject);
                 await _projectService.UpdateProject(entity);
@@ -152,6 +197,7 @@ namespace Polyrific.Catapult.Api.Controllers
             }
             catch (DuplicateProjectException dupEx)
             {
+                _logger.LogWarning(dupEx, "Duplicate project name");
                 return BadRequest(dupEx.Message);
             }
         }
@@ -167,6 +213,8 @@ namespace Polyrific.Catapult.Api.Controllers
         [Authorize(Policy = AuthorizePolicy.ProjectOwnerAccess)]
         public async Task<IActionResult> CloneProject(int projectId, CloneProjectOptionDto option)
         {
+            _logger.LogInformation("Cloning project {projectId}. Request body: {@option}", projectId, option);
+
             try
             {
                 var createdProject = await _projectService.CloneProject(projectId, option.NewProjectName,
@@ -177,10 +225,12 @@ namespace Polyrific.Catapult.Api.Controllers
             }
             catch (DuplicateProjectException dupEx)
             {
+                _logger.LogWarning(dupEx, "Duplicate project name");
                 return BadRequest(dupEx.Message);
             }
             catch (ProjectNotFoundException nopEx)
             {
+                _logger.LogWarning(nopEx, "Project not found");
                 return BadRequest(nopEx.Message);
             }
         }
@@ -194,6 +244,8 @@ namespace Polyrific.Catapult.Api.Controllers
         [Authorize(Policy = AuthorizePolicy.ProjectOwnerAccess)]
         public async Task<IActionResult> DeleteProject(int projectId)
         {
+            _logger.LogInformation("Deleting project {projectId}", projectId);
+
             await _projectService.DeleteProject(projectId);
 
             return NoContent();
@@ -208,6 +260,8 @@ namespace Polyrific.Catapult.Api.Controllers
         [Authorize(Policy = AuthorizePolicy.ProjectOwnerAccess)]
         public async Task<IActionResult> ArchiveProject(int projectId)
         {
+            _logger.LogInformation("Archiving project {projectId}", projectId);
+
             await _projectService.ArchiveProject(projectId);
 
             return NoContent();
@@ -222,6 +276,8 @@ namespace Polyrific.Catapult.Api.Controllers
         [Authorize(Policy = AuthorizePolicy.ProjectOwnerAccess)]
         public async Task<IActionResult> RestoreProject(int projectId)
         {
+            _logger.LogInformation("Restoring project {projectId}", projectId);
+
             await _projectService.RestoreProject(projectId);
 
             return Ok();
@@ -231,6 +287,8 @@ namespace Polyrific.Catapult.Api.Controllers
         [Authorize(Policy = AuthorizePolicy.ProjectOwnerAccess)]
         public async Task<IActionResult> ExportProject(int projectId)
         {
+            _logger.LogInformation("Exporting project {projectId}", projectId);
+
             try
             {
                 var yamlText = await _projectService.ExportProject(projectId);
@@ -238,6 +296,7 @@ namespace Polyrific.Catapult.Api.Controllers
             }
             catch (ProjectNotFoundException ex)
             {
+                _logger.LogWarning(ex, "Project not found");
                 return BadRequest(ex.Message);
             }
         }
