@@ -3,6 +3,7 @@
 ## Home
 
 * [Introduction](home/intro.md)
+* [Concept](home/concept.md)
 * [Quick Start](home/start.md)
 * [About this doc](home/about.md)
 
