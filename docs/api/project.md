@@ -5,11 +5,11 @@ These endpoints provide methods to add, edit, and delete project related data
 ## Get Project List
 Method: `GET`
 
-Uri: `/Project?status={status}`
+Uri: `/Project?status={status}&all={all}`
 
 Authorization: `ProjectMemberAccess`
 
-Get list of projects in which the user is a member. Optionally filter it by status (all | active | archived)
+Get list of projects in which the user is a member. Optionally filter it by status (all | active | archived). Using and administrator account, you can use the `all` query parameter to retrieve all projects including the ones the current user is not a member.
 
 ## Create Project
 Method: `POST`
