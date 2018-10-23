@@ -98,7 +98,7 @@ List projects which the user has access to
 
 Usage: 
 ```sh
-dotnet occli.dll project list --status [status]
+dotnet occli.dll project list --status [status] --all
 ```
 
 **Options**
@@ -107,6 +107,9 @@ dotnet occli.dll project list --status [status]
     * Usage: `--status` (alias: `-s`)
     * Allowed values: `all` | `active` | `archived`
     * Default value: `all`
+* all
+    * Retrieve all projects including the ones the current user are not the member (for administrator only)
+    * Usage: `all` (alias: `-a`)
 
 # Remove
 Remove a project
