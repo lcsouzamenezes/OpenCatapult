@@ -29,6 +29,28 @@ dotnet occli.dll task add --project [project] --job [job] --name [name] --type [
     * Property of the task
     * Usage: `--property [propname]:[propvalue]` (alias: `-prop`)
     * Allows multiple values
+* sequence
+    * The sequence of the task when run by engine
+    * Usage: `--sequence` (alias: `-s`)
+
+# Get
+Get a single job task definition
+
+Usage: 
+```sh
+dotnet occli.dll task get --project [project] --job [job] --name [name]
+```
+
+**Options**
+* project (mandatory)
+    * Name of the project
+    * Usage: `--project` (alias: `-p`)
+* job (mandatory)
+    * Name of the job definition
+    * Usage: `--job` (alias: `-j`)
+* name (mandatory)
+    * Name of the new job task definition
+    * Usage: `--name` (alias: `-n`)
 
 # List
 List job task definitions
@@ -64,6 +86,9 @@ dotnet occli.dll task remove --project [project] --job [job] --name [name]
 * name (mandatory)
     * Name of the new job task definition
     * Usage: `--name` (alias: `-n`)
+* autoconfirm
+    * Perform the removal without asking for confirmation
+    * Usage: `--autoconfirm` (alias: `-ac`)
 
 # Update
 Update a job task definition
@@ -97,3 +122,6 @@ dotnet occli.dll task update --project [project] --job [job] --name [name] --ren
     * Property of the task
     * Usage: `--property [propname]:[propvalue]` (alias: `-prop`)
     * Allows multiple values
+* sequence
+    * The sequence of the task when run by engine
+    * Usage: `--sequence` (alias: `-s`)

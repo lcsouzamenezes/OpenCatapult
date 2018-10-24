@@ -53,6 +53,9 @@ dotnet occli.dll member remove --project [project] --user [user]
 * user (mandatory)
     * Username (email) of the user
     * Usage: `--user` (alias: `-u`)
+* autoconfirm
+    * Perform the removal without asking for confirmation
+    * Usage: `--autoconfirm` (alias: `-ac`)
 
 # Update
 Update the role of a project member

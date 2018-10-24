@@ -213,5 +213,7 @@ dotnet occli.dll task [subcommands]
 #### Subcommands
 
 * [add](task.md#add)
+* [get](task.md#get)
 * [list](task.md#list)
 * [remove](task.md#remove)
+* [update](task.md#update)

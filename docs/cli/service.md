@@ -50,6 +50,9 @@ dotnet occli.dll service remove --name [name]
 * name (mandatory)
     * Name of the external service
     * Usage: `--name` (alias: `-n`)
+* autoconfirm
+    * Perform the removal without asking for confirmation
+    * Usage: `--autoconfirm` (alias: `-ac`)
 
 # Update
 Update an external service

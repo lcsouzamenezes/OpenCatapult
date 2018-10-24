@@ -51,3 +51,6 @@ dotnet occli.dll plugin remove --name [name]
 * name (mandatory)
     * Name of the plugin
     * Usage: `--name` (alias: `-n`)
+* autoconfirm
+    * Perform the removal without asking for confirmation
+    * Usage: `--autoconfirm` (alias: `-ac`)

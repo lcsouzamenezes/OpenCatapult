@@ -109,7 +109,7 @@ dotnet occli.dll project list --status [status] --all
     * Default value: `all`
 * all
     * Retrieve all projects including the ones the current user are not the member (for administrator only)
-    * Usage: `all` (alias: `-a`)
+    * Usage: `--all` (alias: `-a`)
 
 # Remove
 Remove a project
@@ -123,6 +123,9 @@ dotnet occli.dll project remove --name [name]
 * name (mandatory)
     * Name of the project to be removed
     * Usage: `--name` (alias: `-n`)
+* autoconfirm
+    * Perform the removal without asking for confirmation
+    * Usage: `--autoconfirm` (alias: `-ac`)
 
 # restore
 Restore an archived project

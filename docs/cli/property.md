@@ -73,6 +73,9 @@ dotnet occli.dll property remove --project [project] --model [model] --name [nam
 * name (mandatory)
     * Name of the data model property
     * Usage: `--name` (alias: `-n`)
+* autoconfirm
+    * Perform the removal without asking for confirmation
+    * Usage: `--autoconfirm` (alias: `-ac`)
 
 # Update
 Update a project data model property

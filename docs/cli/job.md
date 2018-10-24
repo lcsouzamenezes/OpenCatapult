@@ -43,3 +43,6 @@ dotnet occli.dll job remove --project [project] --name [name]
 * name (mandatory)
     * Name of the job definition to be removed
     * Usage: `--name` (alias: `-n`)
+* autoconfirm
+    * Perform the removal without asking for confirmation
+    * Usage: `--autoconfirm` (alias: `-ac`)

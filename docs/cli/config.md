@@ -42,6 +42,9 @@ dotnet occli.dll config remove --name [name]
 * name
     * Name of the configuration item
     * Usage: `--name` (alias: `-n`)
+* autoconfirm
+    * Perform the removal without asking for confirmation
+    * Usage: `--autoconfirm` (alias: `-ac`)
 
 # Set
 Set configurations

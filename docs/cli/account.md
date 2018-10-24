@@ -63,6 +63,9 @@ dotnet occli.dll account remove --user [user]
 * user (mandatory)
     * Email of the user to be removed
     * Usage: `--user` (alias: `-u`)
+* autoconfirm
+    * Perform the removal without asking for confirmation
+    * Usage: `--autoconfirm` (alias: `-ac`)
 
 # Suspend
 Suspend a user	

@@ -65,6 +65,9 @@ dotnet occli.dll engine remove --name [name]
 * name (mandatory)
     * Name of the engine to be removed
     * Usage: `--name` (alias: `-n`)
+* autoconfirm
+    * Perform the removal without asking for confirmation
+    * Usage: `--autoconfirm` (alias: `-ac`)
 
 # Suspend
 Suspend an engine
