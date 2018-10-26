@@ -93,7 +93,7 @@ namespace AspNetCoreMvc.ProjectGenerators
             sb.AppendLine("    }");
             sb.AppendLine("}");
 
-            _projectHelper.AddFileToProject(Name, $"RepositoryInjection.cs", sb.ToString());
+            _projectHelper.AddFileToProject(Name, $"RepositoryInjection.cs", sb.ToString(), true);
 
             return Task.FromResult("RepositoryInjection generated");
         }
