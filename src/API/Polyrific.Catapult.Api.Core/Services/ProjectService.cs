@@ -197,10 +197,19 @@ namespace Polyrific.Catapult.Api.Core.Services
 
                     if (job.Tasks != null)
                     {
+                        var duplicateTasks = job.Tasks.GroupBy(x => x.Name.ToLower())
+                          .Where(g => g.Count() > 1)
+                          .Select(y => y.Key)
+                          .ToList();
+                        if (duplicateTasks.Count > 0)
+                        {
+                            throw new DuplicateJobTaskDefinitionException(string.Join(DataDelimiter.Comma.ToString(), duplicateTasks));
+                        }
+
                         foreach (var task in job.Tasks)
                         {
                             task.Created = DateTime.UtcNow;
-                            await _jobDefinitionService.ValidateTaskConfig(task);
+                            await _jobDefinitionService.ValidateJobTaskDefinition(task);
                         }
                     }
                 }
