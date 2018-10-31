@@ -89,8 +89,10 @@ dotnet occli.dll job [subcommands]
 #### Subcommands
 
 * [add](job.md#add)
+* [get](job.md#get)
 * [list](job.md#list)
 * [remove](job.md#remove)
+* [update](job.md#update)
 
 ### Member		
 Project member related commands
@@ -118,6 +120,7 @@ dotnet occli.dll model [subcommands]
 #### Subcommands
 
 * [add](model.md#add)
+* [get](model.md#get)
 * [list](model.md#list)
 * [remove](model.md#remove)
 * [update](model.md#update)
@@ -150,11 +153,12 @@ dotnet occli.dll project [subcommands]
 * [archive](project.md#archive)
 * [clone](project.md#clone)
 * [create](project.md#create)
-* [update](project.md#update)
 * [export](project.md#export)
-* [List](project.md#list)
+* [get](project.md#get)
+* [list](project.md#list)
 * [remove](project.md#remove)
 * [restore](project.md#restore)
+* [update](project.md#update)
 
 ### Property		
 Project Data Model Property related commands
@@ -184,6 +188,7 @@ dotnet occli.dll queue [subcommands]
 * [add](queue.md#add)
 * [get](queue.md#get)
 * [list](queue.md#list)
+* [log](queue.md#log)
 * [restart](queue.md#restart)
 
 ### Service		

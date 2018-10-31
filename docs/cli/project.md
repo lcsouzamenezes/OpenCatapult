@@ -57,6 +57,19 @@ dotnet occli.dll project create --name [name] --client [client] --template [temp
     * Usage: `--property [propname]:[propvalue]` (alias: `-prop`)
     * Allows multiple values
 
+# Get
+Get a single project detailed record
+
+Usage: 
+```sh
+dotnet occli.dll project get --name [name]
+```
+
+**Options**
+* name (mandatory)
+    * Name of the project
+    * Usage: `--name` (alias: `-n`)
+
 # Update
 Update a project
 

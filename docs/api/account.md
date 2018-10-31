@@ -105,7 +105,7 @@ Update a user password. Only administrator would be able to call this endpoint f
 ## Request reset password
 Method: `GET`
 
-Uri: `/Account/{userId}/resetpassword`
+Uri: `/Account/email/{email}/resetpassword`
 
 Authorization: `Anonymous`
 
@@ -115,7 +115,7 @@ Send a request password token to the email of the user
 
 Method: `POST`
 
-Uri: `/Account/{userId}/resetpassword`
+Uri: `/Account/email/{email}/resetpassword`
 
 Authorization: `Anonymous`
 

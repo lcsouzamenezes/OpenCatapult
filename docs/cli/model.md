@@ -21,6 +21,22 @@ dotnet occli.dll model add --project [project] --name [name]
     * Label of the data model
     * Usage: `--label` (alias: `-l`)
 
+# Get
+Get a single project data model detailed record
+
+Usage: 
+```sh
+dotnet occli.dll model get --project [project] --name [name]
+```
+
+**Options**
+* project (mandatory)
+    * Name of the project
+    * Usage: `--project` (alias: `-p`)
+* name (mandatory)
+    * Name of the data model
+    * Usage: `--name` (alias: `-n`)
+
 # List
 List data models in a project
 
