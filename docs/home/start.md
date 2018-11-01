@@ -33,6 +33,56 @@ Go to the root folder:
 cd OpenCatapult
 ```
 
+From this point you have two options: build the source code using PowerShell scripts, or build manually.
+
+### Build using PowerShell scripts
+
+Note: when running the scripts, you might get execution policy error. In most of the time it can be fixed by setting the execution policy to `RemoteSigned`:
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+```
+
+Please check the following [article](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-6) for more details about execution policies.
+
+**Run pre-requisites script**
+
+This script will check your environment for required tools to build OpenCatapult source code:
+```powershell
+.\builds\build-prerequisites.ps1
+```
+
+**Run API build script**
+
+Before running the script, you need to prepare a database, which the connection string needs to be inputted later.
+
+Let's run the script to publish and run the API:
+```powershell
+.\builds\build-api.ps1
+```
+
+By default it will listen to url https://localhost:44305. If you want to set it to different url, please use `-url` parameter:
+```powershell
+.\builds\build-api.ps1 -url https://localhost:5001
+```
+
+**Run Engine build script**
+
+Open a new PowerShell instance, and run the script to publish the Engine:
+```powershell
+.\builds\build-engine.ps1
+```
+
+**Run CLI build script**
+
+Open a new PowerShell instance, and run the script to publish the CLI:
+```powershell
+.\builds\build-cli.ps1
+```
+
+### Build from source code manually
+
+If you want more control when building the source code, you could do it manually instead of running the script.
+
 **Setup database**
 
 Create a database in SQL Server, and put the connection string in `.\src\API\Polyrific.Catapult.Api\appsettings.json`, e.g.
@@ -52,24 +102,26 @@ dotnet ef database update --startup-project .\src\API\Polyrific.Catapult.Api\Pol
 
 **Run the API**
 
-Let's run the API in localhost:
+Let's publish and run the API in localhost:
 
 ```sh
-dotnet run -p .\src\API\Polyrific.Catapult.Api\Polyrific.Catapult.Api.csproj -c Release
+dotnet publish .\src\API\Polyrific.Catapult.Api\Polyrific.Catapult.Api.csproj -c Release -o ..\..\..\publish\api
+cd .\publish\api\
+dotnet .\Polyrific.Catapult.Api.dll
 ```
 
 **Prepare the Engine**
 
-Open new shell, go to the root folder, and build the Engine project:
+Open new shell, go to the root folder, and publish the Engine:
 
 ```sh
-dotnet build .\src\Engine\Polyrific.Catapult.Engine\Polyrific.Catapult.Engine.csproj -c Release
+dotnet publish .\src\Engine\Polyrific.Catapult.Engine\Polyrific.Catapult.Engine.csproj -c Release -o ..\..\..\publish\engine
 ```
 
 Set API URL in the Engine's config:
 
 ```sh
-dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\ocengine.dll config set -n ApiUrl -v https://localhost:5001
+dotnet .\publish\engine\ocengine.dll config set -n ApiUrl -v https://localhost:5001
 ```
 
 **Prepare the CLI**
@@ -77,13 +129,13 @@ dotnet .\src\Engine\Polyrific.Catapult.Engine\bin\Release\ocengine.dll config se
 Open new shell, go to the root folder, and build the CLI project:
 
 ```sh
-dotnet build .\src\CLI\Polyrific.Catapult.Cli\Polyrific.Catapult.Cli.csproj -c Release
+dotnet publish .\src\CLI\Polyrific.Catapult.Cli\Polyrific.Catapult.Cli.csproj -c Release -o ..\..\..\publish\cli
 ```
 
 Set API URL in the CLI's config:
 
 ```sh
-dotnet .\src\CLI\Polyrific.Catapult.Cli\bin\Release\occli.dll config set -n ApiUrl -v https://localhost:5001
+dotnet .\publish\cli\occli.dll config set -n ApiUrl -v https://localhost:5001
 ```
 
 Note:
@@ -97,10 +149,10 @@ You are now ready to create your first catapult project.
 
 ## Create your first (empty) project
 
-Activate the previously opened CLI shell, and go to the output folder:
+Activate the previously opened CLI shell, and go to the published folder:
 
 ```sh
-cd src\CLI\Polyrific.Catapult.Cli\bin\Release
+cd .\publish\cli\
 ```
 
 When you previously applied migrations to initiate the database, a default user was created. You can use this user to login. When you're prompted to enter the password, the default password is `opencatapult`.
