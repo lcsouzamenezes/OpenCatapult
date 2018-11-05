@@ -7,10 +7,9 @@ Usage:
 dotnet occli.dll account activate --user [user]
 ```
 
-**Options**
-* user (mandatory)
-    * Email of the user to be activated
-    * Usage: `--user` (alias `-u`)
+| Option | Alias | Description | Allowed Values | DefaultValue | Mandatory |
+| --- | --- | --- | --- | --- | --- |
+| --user | -u | Username of the suspended user ||| Yes |
     
 # List
 List users
@@ -20,17 +19,10 @@ Usage:
 dotnet occli.dll account list --status [status] --role [role]
 ```
 
-**Options**
-* status
-    * Status of the users
-    * Usage: `--status` (alias `-s`)
-    * Allowed values: `all` | `Active` | `Suspended`
-    * Default value: `all`
-* role
-    * Role of the users
-    * Usage: `--role` (alias `-r`)
-    * Allowed values: `all` | `Administrator` | `Basic` | `Guest`
-    * Default value: `all`
+| Option | Alias | Description | Allowed Values | Default Value | Mandatory |
+| --- | --- | --- | --- | --- | --- |
+| --status | -s | Status of the users | all, Active, Suspended | all | No |
+| --role | -r | Role of the users | all, Administrator, Basic, Guest | all | No |
 
 # Register
 Register a catapult user by admin
@@ -40,16 +32,11 @@ Usage:
 dotnet occli.dll account register --email [email] --firstname [firstname] --lastname [lastname]
 ```
 
-**Options**
-* email (mandatory)
-    * Email of the user
-    * Usage: `--email` (alias `-e`)
-* firstname
-    * First name of the user
-    * Usage: `--firstname` (alias: `-fn`)
-* lastname
-    * Last name of the user
-    * Usage: `--lastname` (alias: `-ln`)
+| Option | Alias | Description | Allowed Values | Default Value | Mandatory |
+| --- | --- | --- | --- | --- | --- |
+| --email | -e | Email of the user ||| Yes |
+| --firstname | -fn | First name of the user ||| No |
+| --lastname | -ln | Last name of the user ||| No |
 
 # Remove
 Remove a user
@@ -59,13 +46,10 @@ Usage:
 dotnet occli.dll account remove --user [user]
 ```
 
-**Options**
-* user (mandatory)
-    * Email of the user to be removed
-    * Usage: `--user` (alias: `-u`)
-* autoconfirm
-    * Perform the removal without asking for confirmation
-    * Usage: `--autoconfirm` (alias: `-ac`)
+| Option | Alias | Description | Allowed Values | Default Value | Mandatory |
+| --- | --- | --- | --- | --- | --- |
+| --user | -u | Email of the user ||| Yes |
+| --autoconfirm | -ac | Perform the removal without asking for confirmation || false | No |
 
 # Suspend
 Suspend a user	
@@ -75,10 +59,9 @@ Usage:
 dotnet occli.dll account suspend --user [user]
 ```
 
-**Options**
-* user (mandatory)
-    * Email of the user to be suspended
-    * Usage: `--user` (alias: `-u`)
+| Option | Alias | Description | Allowed Values | Default Value | Mandatory |
+| --- | --- | --- | --- | --- | --- |
+| --user | -u | Email of the active user ||| Yes |
 
 # Update
 Update user profile
@@ -88,17 +71,12 @@ Usage:
 dotnet occli.dll account update --user [user] --firstname [firstname] --lastname [lastname]
 ```
 
-**Options**
-* user (mandatory)
-    * Email of the user
-    * Usage: `--user` (alias `-u`)
-* firstname
-    * First name of the user
-    * Usage: `--firstname` (alias: `-fn`)
-* lastname
-    * Last name of the user
-    * Usage: `--lastname` (alias: `-ln`)
-    
+| Option | Alias | Description | Allowed Values | Default Value | Mandatory |
+| --- | --- | --- | --- | --- | --- |
+| --user | -u | Username of the user ||| Yes |
+| --firstname | -fn | First name of the user ||| No |
+| --lastname | -ln | Last name of the user ||| No |
+
 # Password Update
 Update current user's password. You will be prompted to input the old and new password.
 
@@ -106,10 +84,10 @@ Usage:
 ```sh
 dotnet occli.dll account password update
 ```
-**Options**
-* user (mandatory)
-    * Email of the user
-    * Usage: `--user` (alias `-u`)
+
+| Option | Alias | Description | Allowed Values | Default Value | Mandatory |
+| --- | --- | --- | --- | --- | --- |
+| --user | -u | Username of the user ||| Yes |
 
 # Password ResetToken
 Request reset password token
@@ -118,10 +96,10 @@ Usage:
 ```sh
 dotnet occli.dll account password resettoken --user [user]
 ```
-**Options**
-* user (mandatory)
-    * Email of the user
-    * Usage: `--user` (alias `-u`)
+
+| Option | Alias | Description | Allowed Values | Default Value | Mandatory |
+| --- | --- | --- | --- | --- | --- |
+| --user | -u | Username of the user ||| Yes |
 
 # Password Reset
 Reset the user's password
@@ -131,13 +109,10 @@ Usage:
 dotnet occli.dll account password reset --user [user] --token [reset password token]
 ```
 
-**Options**
-* user (mandatory)
-    * Email of the user
-    * Usage: `--user` (alias `-u`)
-* token (mandatory)
-    * Reset password token emailed to the user
-    * Usage: `--token` (alias `-t`)
+| Option | Alias | Description | Allowed Values | Default Value | Mandatory |
+| --- | --- | --- | --- | --- | --- |
+| --user | -u | Username of the user ||| Yes |
+| --token | -t | Reset password token emailed to the user ||| Yes |
     
 # SetRole
 Set a user role so it can have needed access
@@ -147,11 +122,7 @@ Usage:
 dotnet occli.dll account setrole --user [user] --role [role]
 ```
 
-**Options**
-* user (mandatory)
-    * Email of the user
-    * Usage: `--user` (alias `-u`)
-* role
-    * Role of the user
-    * Usage: `--role` (alias: `-r`)
-    * Allowed values: `Administrator` | `Basic` | `Guest`
+| Option | Alias | Description | Allowed Values | Default Value | Mandatory |
+| --- | --- | --- | --- | --- | --- |
+| --user | -u | Username of the user ||| Yes |
+| --role | -r | New role the user | Administrator, Basic, Guest || Yes |
