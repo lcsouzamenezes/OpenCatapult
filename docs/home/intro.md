@@ -46,3 +46,4 @@ Service Providers are specific implementation of job tasks. As Engine is a platf
 
 For example, Engine actually knows nothing about GitHub repository. All Engine knows is just it wants to push some code to a remote repository via Push Task. So we need to provide a plugin for the Push Task, e.g. `GitHubRepositoryProvider`, which will handle the source code delivery in a specific way to GitHub.
 
+`OpenCatapult` is packed with some built-in plugins. Please check them in the [Plugins References](../plugins/plugins.md).

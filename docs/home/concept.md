@@ -14,7 +14,7 @@ After setting up a new `OpenCatapult` instance, you will get a blank workspace. 
 
 ## User Account
 
-Administrators can add as many as users they want. Each user can be assigned to a different role which will affect on her ability to access `OpenCatapult` elements.
+Administrators can add as many application users as they want. Each user can be assigned to a different role which will affect on her ability to access `OpenCatapult` elements.
 
 [See more details](../user-guides/users.md)
 
@@ -31,7 +31,7 @@ In this Project scope, you can define:
 
 ### Project Member
 
-Project member is a user who is given access to a project with specific role. Project member should be an active user.
+Project member is user who has certain access to a project with specific role. Project member should be an active application user.
 
 [See more details](../user-guides/project-members.md)
 
@@ -47,7 +47,7 @@ Data Model consists of many **Properties**, which usually can be translated into
 
 Job Definition is a unit of work which is used to define specific action. It may consist of many **Task** definitions.
 
-For example, you can define a job which sequentially will execute the following tasks: generate code, push it to a code repository, and deploy it to a hosting service.
+For example, you can define a job which will sequentially execute the following tasks: generate code, push it to a code repository, and deploy it to a hosting service.
 
 [See more details](../user-guides/job-definitions.md)
 

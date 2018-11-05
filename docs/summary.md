@@ -57,6 +57,14 @@
   * [Config](engine/config.md)
 * [Web UI](web/web.md)
 * [Mobile](mobile/mobile.md)
+* [Built-In Plugins](plugins/plugins.md)
+  * [Build Provider](plugins/build-provider.md)
+  * [Database Provider](plugins/database-provider.md)
+  * [Generator Provider](plugins/generator-provider.md)
+  * [Hosting Provider](plugins/hosting-provider.md)
+  * [Repository Provider](plugins/repository-provider.md)
+  * [Storage Provider](plugins/storage-provider.md)
+  * [Test Provider](plugins/test-provider.md)
 
 ## Management
 
