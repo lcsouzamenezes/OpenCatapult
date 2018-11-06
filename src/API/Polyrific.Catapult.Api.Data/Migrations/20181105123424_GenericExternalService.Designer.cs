@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Polyrific.Catapult.Api.Data;
 
 namespace Polyrific.Catapult.Api.Data.Migrations
 {
     [DbContext(typeof(CatapultDbContext))]
-    partial class CatapultDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181105123424_GenericExternalService")]
+    partial class GenericExternalService
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -317,7 +319,7 @@ namespace Polyrific.Catapult.Api.Data.Migrations
                     b.ToTable("PluginAdditionalConfigs");
 
                     b.HasData(
-                        new { Id = 1, ConcurrencyStamp = "c48cafcc-b3e9-4375-a2c2-f30404382258", Created = new DateTime(2018, 9, 28, 7, 23, 37, 58, DateTimeKind.Utc), IsRequired = true, IsSecret = false, Label = "Admin Email", Name = "AdminEmail", PluginId = 1, Type = "string" },
+                        new { Id = 1, ConcurrencyStamp = "c48cafcc-b3e9-4375-a2c2-f30404382258", Created = new DateTime(2018, 9, 28, 7, 23, 37, 58, DateTimeKind.Utc), IsRequired = true, IsSecret = true, Label = "Connection String", Name = "ConnectionString", PluginId = 1, Type = "string" },
                         new { Id = 2, ConcurrencyStamp = "c48cafcc-b3e9-4375-a2c2-f30404382259", Created = new DateTime(2018, 9, 28, 7, 23, 37, 58, DateTimeKind.Utc), IsRequired = false, IsSecret = false, Label = "Csproj Location", Name = "CsprojLocation", PluginId = 3, Type = "string" },
                         new { Id = 3, ConcurrencyStamp = "c48cafcc-b3e9-4375-a2c2-f3040438225a", Created = new DateTime(2018, 9, 28, 7, 23, 37, 58, DateTimeKind.Utc), IsRequired = false, IsSecret = false, Label = "Configuration", Name = "Configuration", PluginId = 3, Type = "string" },
                         new { Id = 4, ConcurrencyStamp = "c48cafcc-b3e9-4375-a2c2-f3040438225b", Created = new DateTime(2018, 9, 28, 7, 23, 37, 58, DateTimeKind.Utc), IsRequired = false, IsSecret = false, Label = "Startup Project Name", Name = "StartupProjectName", PluginId = 5, Type = "string" },
@@ -327,7 +329,8 @@ namespace Polyrific.Catapult.Api.Data.Migrations
                         new { Id = 8, ConcurrencyStamp = "c48cafcc-b3e9-4375-a2c2-f3040438225e", Created = new DateTime(2018, 9, 28, 7, 23, 37, 58, DateTimeKind.Utc), IsRequired = true, IsSecret = false, Label = "Subscription Id", Name = "SubscriptionId", PluginId = 6, Type = "string" },
                         new { Id = 9, ConcurrencyStamp = "c48cafcc-b3e9-4375-a2c2-f3040438225f", Created = new DateTime(2018, 9, 28, 7, 23, 37, 58, DateTimeKind.Utc), IsRequired = true, IsSecret = false, Label = "Resource Group", Name = "ResourceGroupName", PluginId = 6, Type = "string" },
                         new { Id = 10, ConcurrencyStamp = "c48cafcc-b3e9-4375-a2c2-f30404382260", Created = new DateTime(2018, 9, 28, 7, 23, 37, 58, DateTimeKind.Utc), IsRequired = true, IsSecret = false, Label = "App Service", Name = "AppServiceName", PluginId = 6, Type = "string" },
-                        new { Id = 11, ConcurrencyStamp = "c48cafcc-b3e9-4375-a2c2-f30404382261", Created = new DateTime(2018, 9, 28, 7, 23, 37, 58, DateTimeKind.Utc), IsRequired = false, IsSecret = false, Label = "Deployment Slot", Name = "DeploymentSlot", PluginId = 6, Type = "string" }
+                        new { Id = 11, ConcurrencyStamp = "c48cafcc-b3e9-4375-a2c2-f30404382261", Created = new DateTime(2018, 9, 28, 7, 23, 37, 58, DateTimeKind.Utc), IsRequired = false, IsSecret = false, Label = "Deployment Slot", Name = "DeploymentSlot", PluginId = 6, Type = "string" },
+                        new { Id = 12, ConcurrencyStamp = "c48cafcc-b3e9-4375-a2c2-f30404382300", Created = new DateTime(2018, 9, 28, 7, 23, 37, 58, DateTimeKind.Utc), IsRequired = true, IsSecret = false, Label = "Admin Email", Name = "AdminEmail", PluginId = 1, Type = "string" }
                     );
                 });
 
