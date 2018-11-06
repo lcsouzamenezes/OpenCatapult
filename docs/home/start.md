@@ -17,7 +17,7 @@ _Note: although it is planned that OpenCatapult will support multi-platform envi
   - You can download the latest version of the installer
 - SQL Server 2017 (https://www.microsoft.com/en-us/sql-server/sql-server-2017)
   - You can use the `Express` or `Developer` version for local usage
-- Code editor, e.g. Visual Studio Code (https://code.visualstudio.com/)
+- [Optional] Code editor, e.g. Visual Studio Code (https://code.visualstudio.com/)
 
 **Get the source code**
 
@@ -35,7 +35,7 @@ cd OpenCatapult
 
 From this point you have two options: build the source code using PowerShell scripts, or build manually.
 
-### Build using PowerShell scripts
+### Option 1: Build using PowerShell scripts
 
 Note: when running the scripts, you might get execution policy error. In most of the time it can be fixed by setting the execution policy to `RemoteSigned`:
 ```powershell
@@ -79,13 +79,13 @@ Open a new PowerShell instance, and run the script to publish the CLI:
 .\builds\build-cli.ps1
 ```
 
-### Build from source code manually
+### Option 2: Build from source code manually
 
-If you want more control when building the source code, you could do it manually instead of running the script.
+If for some reason you cannot run the PowerShell scripts, you can always build the source code manually by following these steps:
 
 **Setup database**
 
-Create a database in SQL Server, and put the connection string in `.\src\API\Polyrific.Catapult.Api\appsettings.json`, e.g.
+Please make sure you have access to a SQL Server instance, and put the connection string in `.\src\API\Polyrific.Catapult.Api\appsettings.json`, e.g.
 
 ```json
 {
@@ -94,6 +94,8 @@ Create a database in SQL Server, and put the connection string in `.\src\API\Pol
   }
 }
 ```
+
+Note: You don't need to create the database in advance because EF will automatically create it if it doesn't exist.
 
 Run the migration script to initialize the database:
 ```sh
