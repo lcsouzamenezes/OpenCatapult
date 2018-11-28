@@ -190,6 +190,7 @@ dotnet occli.dll project create --name first-project --client Polyrific
 
 After creating your first project, you can:
 - [add models to the project](../user-guides/data-models.md)
+- [Register the engine](../user-guides/engine-registration.md#register-a-new-engine) and [set the authorization token](../user-guides/engine-registration.md#obtain-token-for-an-engine) so it can talk to the API
 - [explore what else you can do with the project](../user-guides/user-guides.md)
 - [create another project by using Sample project template](../user-guides/sample-project.md)
 - check references of [API](../api/api.md), [Engine](../engine/engine.md), [CLI](../cli/cli.md)
