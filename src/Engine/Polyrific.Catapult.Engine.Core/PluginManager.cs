@@ -17,11 +17,13 @@ namespace Polyrific.Catapult.Engine.Core
     {
         private Dictionary<string, List<PluginItem>> _plugins;
 
+        private readonly IPluginProcess _pluginProcess;
+
         private readonly ILogger _logger;
 
         public List<string> PluginLocations { get; }
 
-        public PluginManager(Dictionary<string, List<PluginItem>> plugins, ICatapultEngineConfig engineConfig, ILogger<PluginManager> logger)
+        public PluginManager(Dictionary<string, List<PluginItem>> plugins, ICatapultEngineConfig engineConfig, IPluginProcess pluginProcess, ILogger<PluginManager> logger)
         {
             _plugins = plugins;
 
@@ -30,15 +32,19 @@ namespace Polyrific.Catapult.Engine.Core
                 engineConfig.PluginsLocation
             };
 
+            _pluginProcess = pluginProcess;
+
             _logger = logger;
         }
 
-        public PluginManager(ICatapultEngineConfig engineConfig, ILogger<PluginManager> logger)
+        public PluginManager(ICatapultEngineConfig engineConfig, IPluginProcess pluginProcess, ILogger<PluginManager> logger)
         {
             PluginLocations = new List<string>()
             {
                 engineConfig.PluginsLocation
             };
+
+            _pluginProcess = pluginProcess;
 
             _logger = logger;
         }
@@ -48,21 +54,21 @@ namespace Polyrific.Catapult.Engine.Core
             PluginLocations.Add(location);
         }
 
-        public PluginItem GetPlugin(string taskType, string name)
+        public PluginItem GetPlugin(string providerType, string name)
         {
-            if (_plugins != null && _plugins.ContainsKey(taskType))
+            if (_plugins != null && _plugins.ContainsKey(providerType))
             {
-                return _plugins[taskType].FirstOrDefault(p => p.Name == name);
+                return _plugins[providerType].FirstOrDefault(p => p.Name == name);
             }
 
             return null;
         }
 
-        public List<PluginItem> GetPlugins(string taskType)
+        public List<PluginItem> GetPlugins(string providerType)
         {
-            if (_plugins != null && _plugins.ContainsKey(taskType))
+            if (_plugins != null && _plugins.ContainsKey(providerType))
             {
-                return _plugins[taskType];
+                return _plugins[providerType];
             }
 
             return new List<PluginItem>();
@@ -124,14 +130,14 @@ namespace Polyrific.Catapult.Engine.Core
                 RedirectStandardError = true
             };
 
-            using (var process = Process.Start(startInfo))
+            using (var process = _pluginProcess.Start(startInfo))
             {
                 if (process != null)
                 {
                     if (!string.IsNullOrEmpty(securedPluginArgs))
                         System.Console.WriteLine($"[Master] Command: {process.StartInfo.FileName} \"{pluginDll}\" \"{securedPluginArgs}\" {(Debugger.IsAttached ? "--attach" : "")}");
 
-                    var reader = process.StandardOutput;
+                    var reader = _pluginProcess.GetStandardOutput(process);
                     while (!reader.EndOfStream)
                     {
                         var line = await reader.ReadLineAsync();
