@@ -16,7 +16,8 @@ _Note: although it is planned that OpenCatapult will support multi-platform envi
 - .Net Core 2.1 SDK (https://dot.net)
   - You can download the latest version of the installer
 - SQL Server 2017 (https://www.microsoft.com/en-us/sql-server/sql-server-2017)
-  - You can use the `Express` or `Developer` version for local usage
+  - If you want to use local instance, you can use the `Express` or `Developer` edition
+  - You can alo use remote instance (e.g. Azure SQL)
 - [Optional] Code editor, e.g. Visual Studio Code (https://code.visualstudio.com/)
 
 **Get the source code**
@@ -60,9 +61,9 @@ Let's run the script to publish and run the API:
 .\builds\build-api.ps1
 ```
 
-By default it will listen to url https://localhost:44305. If you want to set it to different url, please use `-url` parameter:
+By default it will listen to url http://localhost:8005 and https://localhost:44305. If you want to set it to different urls, please use `-http` or `-https` parameter respectively:
 ```powershell
-.\builds\build-api.ps1 -url https://localhost:5001
+.\builds\build-api.ps1 -http http://localhost:5000 -https https://localhost:5001
 ```
 
 **Run Engine build script**
@@ -81,7 +82,7 @@ Open a new PowerShell instance, and run the script to publish the CLI:
 
 ### Option 2: Build from source code manually
 
-If for some reason you cannot run the PowerShell scripts, you can always build the source code manually by following these steps:
+If for any reasons you cannot run the PowerShell scripts, you can always build the source code manually by following these steps:
 
 **Setup database**
 
@@ -109,7 +110,7 @@ Let's publish and run the API in localhost:
 ```sh
 dotnet publish .\src\API\Polyrific.Catapult.Api\Polyrific.Catapult.Api.csproj -c Release -o ..\..\..\publish\api
 cd .\publish\api\
-dotnet .\Polyrific.Catapult.Api.dll
+dotnet .\ocapi.dll --urls "http://localhost:8005;https://localhost:44305"
 ```
 
 **Prepare the Engine**
@@ -123,18 +124,18 @@ dotnet publish .\src\Engine\Polyrific.Catapult.Engine\Polyrific.Catapult.Engine.
 Set API URL in the Engine's config:
 
 ```sh
-dotnet .\publish\engine\ocengine.dll config set -n ApiUrl -v https://localhost:5001
+dotnet .\publish\engine\ocengine.dll config set -n ApiUrl -v https://localhost:44305
 ```
 
 While configuring the Engine environment, let's publish the built-in plugins as well. They will be required later when executing job tasks.
 
 ```sh
-dotnet publish .\src\Plugins\GeneratorProvider\AspNetCoreMvc\src\AspNetCoreMvc.csproj -c Release -o ..\..\..\publish\engine\plugins\GeneratorProvider\AspNetCoreMvc
-dotnet publish .\src\Plugins\HostingProvider\AzureAppService\src\AzureAppService.csproj -c Release -o ..\..\..\publish\engine\plugins\HostingProvider\AzureAppService
-dotnet publish .\src\Plugins\BuildProvider\DotNetCore\src\DotNetCore.csproj -c Release -o ..\..\..\publish\engine\plugins\BuildProvider\DotNetCore
-dotnet publish .\src\Plugins\TestProvider\DotNetCoreTest\src\DotNetCoreTest.csproj -c Release -o ..\..\..\publish\engine\plugins\TestProvider\DotNetCoreTest
-dotnet publish .\src\Plugins\DatabaseProvider\EntityFrameworkCore\src\EntityFrameworkCore.csproj -c Release -o ..\..\..\publish\engine\plugins\DatabaseProvider\EntityFrameworkCore
-dotnet publish .\src\Plugins\RepositoryProvider\GitHub\src\GitHub.csproj -c Release -o ..\..\..\publish\engine\plugins\RepositoryProvider\GitHub
+dotnet publish .\src\Plugins\GeneratorProvider\Polyrific.Catapult.Plugins.AspNetCoreMvc\src\Polyrific.Catapult.Plugins.AspNetCoreMvc.csproj -c Release -o ..\..\..\..\publish\engine\plugins\GeneratorProvider\Polyrific.Catapult.Plugins.AspNetCoreMvc
+dotnet publish .\src\Plugins\HostingProvider\Polyrific.Catapult.Plugins.AzureAppService\src\Polyrific.Catapult.Plugins.AzureAppService.csproj -c Release -o ..\..\..\..\publish\engine\plugins\HostingProvider\Polyrific.Catapult.Plugins.AzureAppService
+dotnet publish .\src\Plugins\BuildProvider\Polyrific.Catapult.Plugins.DotNetCore\src\Polyrific.Catapult.Plugins.DotNetCore.csproj -c Release -o ..\..\..\..\publish\engine\plugins\BuildProvider\Polyrific.Catapult.Plugins.DotNetCore
+dotnet publish .\src\Plugins\TestProvider\Polyrific.Catapult.Plugins.DotNetCoreTest\src\Polyrific.Catapult.Plugins.DotNetCoreTest.csproj -c Release -o ..\..\..\..\publish\engine\plugins\TestProvider\Polyrific.Catapult.Plugins.DotNetCoreTest
+dotnet publish .\src\Plugins\DatabaseProvider\Polyrific.Catapult.Plugins.EntityFrameworkCore\src\Polyrific.Catapult.Plugins.EntityFrameworkCore.csproj -c Release -o ..\..\..\..\publish\engine\plugins\DatabaseProvider\Polyrific.Catapult.Plugins.EntityFrameworkCore
+dotnet publish .\src\Plugins\RepositoryProvider\Polyrific.Catapult.Plugins.GitHub\src\Polyrific.Catapult.Plugins.GitHub.csproj -c Release -o ..\..\..\..\publish\engine\plugins\RepositoryProvider\Polyrific.Catapult.Plugins.GitHub
 ```
 
 **Prepare the CLI**
@@ -148,14 +149,20 @@ dotnet publish .\src\CLI\Polyrific.Catapult.Cli\Polyrific.Catapult.Cli.csproj -c
 Set API URL in the CLI's config:
 
 ```sh
-dotnet .\publish\cli\occli.dll config set -n ApiUrl -v https://localhost:5001
+dotnet .\publish\cli\occli.dll config set -n ApiUrl -v https://localhost:44305
 ```
 
-Note:
+**Note:**
 
 If you have some error related to ssl, you can try to run the following command, and accept the popup prompt:
 ```sh
 dotnet dev-certs https --trust
+```
+
+If for any reasons you cannot use https, you can just use the http url. But please make sure you are not in `Production` environment, otherwise you will be redirected to the https url.
+Setting up `Development` environment can be done via environment variable:
+```sh
+$env:ASPNETCORE_ENVIRONMENT = "Development"
 ```
 
 You are now ready to create your first catapult project.
@@ -174,13 +181,13 @@ When you previously applied migrations to initiate the database, a default user 
 dotnet occli.dll login --user admin@opencatapult.net
 ```
 
-We strongly advise you to change the default password, especially when you deploy the API into public environment:
+We strongly advise you to change the default password (or just remove the default user), especially when you deploy the API into public environment:
 
 ```sh
 dotnet occli.dll account password update
 ```
 
-And now, let's create an empty project:
+And now, you're good to go to create an empty project:
 
 ```sh
 dotnet occli.dll project create --name first-project --client Polyrific
