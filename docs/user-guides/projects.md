@@ -8,10 +8,12 @@ Create a project by specifying the name and optionally the client of this projec
 dotnet occli.dll project create --name MyProject --client Polyrific
 ```
 
-You can also create a project based on a previously exported project, by using the `template` option:
+You can also create a project based on a template to pre-populate the models and jobs, by using the `template` option:
 ```sh
 dotnet occli.dll project create --name MyProject --client Polyrific --template my-previous-project
 ```
+
+Please find the details of the template content [here](../dev-guides/project-template.md).
 
 Finally, [service providers](../home/intro.md#service-providers-plugins) may have some configuration key that you can override for each project. You can set this when creating the project by using the `property` option:
 ```sh
