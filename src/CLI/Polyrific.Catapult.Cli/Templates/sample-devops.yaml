@@ -132,6 +132,33 @@ models:
 jobs:
 - name: Default
   tasks:
+  - name: Clone
+    type: Clone
+    provider: Polyrific.Catapult.Plugins.GitHub
+    configs:
+      GitHubExternalService: github-default
   - name: Generate
     type: Generate
     provider: Polyrific.Catapult.Plugins.AspNetCoreMvc
+  - name: Push
+    type: Push
+    provider: Polyrific.Catapult.Plugins.GitHub
+    configs:
+      GitHubExternalService: github-default
+      CreatePullRequest: true
+  - name: Merge
+    type: Merge
+    provider: Polyrific.Catapult.Plugins.GitHub
+    configs:
+      GitHubExternalService: github-default
+  - name: Build
+    type: Build
+    provider: Polyrific.Catapult.Plugins.DotNetCore
+  - name: DeployDb
+    type: DeployDb
+    provider: Polyrific.Catapult.Plugins.EntityFrameworkCore
+  - name: Deploy
+    type: Deploy
+    provider: Polyrific.Catapult.Plugins.AzureAppService
+    configs:
+      AzureAppServiceExternalService: azure-default
