@@ -22,6 +22,7 @@
   * [Sample project template](user-guides/sample-project.md)
 * [Developer Guide](dev-guides/dev-guides.md)
   * [Create a plugin](dev-guides/create-plugin.md)
+  * [Project template](dev-guides/project-template.md)
   * [Coding Style](dev-guides/coding-style.md)
   * [Code of conduct](dev-guides/contribute.md)
 
