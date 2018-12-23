@@ -1,6 +1,6 @@
 # Copyright (c) Polyrific, Inc 2018. All rights reserved.
 
-$dotnetSdkVersion = [System.Version]"2.1.402"
+$dotnetSdkVersion = [System.Version]"2.1.500"
 $allGood = $true
 
 $currentSdkVersion = dotnet --version

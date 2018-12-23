@@ -2,21 +2,19 @@
 
 This document will guide you to get started with `OpenCatapult`.
 
-_Note: although it is planned that OpenCatapult will support multi-platform environments in the future, but the defined steps below are tested in Windows environment only for now._
-
 ## Setup from release library
 
 [coming soon]
 
 ## Build from source code
 
-**Prerequisites:**
+**Pre-requisites:**
 
 - Git (https://git-scm.com/)
-- .Net Core 2.1 SDK (https://dot.net)
-  - You can download the latest version of the installer
+- .Net Core 2.1 SDK (https://dotnet.microsoft.com/download/dotnet-core/2.1)
+  - `OpenCatapult` requires the LTS version as minimum requirement (which is SDK 2.1.500)
 - SQL Server 2017 (https://www.microsoft.com/en-us/sql-server/sql-server-2017)
-  - If you want to use local instance, you can use the `Express` or `Developer` edition
+  - If you want to use local instance, you can use the free `Express` or `Developer` edition
   - You can alo use remote instance (e.g. Azure SQL)
 - [Optional] Code editor, e.g. Visual Studio Code (https://code.visualstudio.com/)
 
@@ -38,7 +36,9 @@ From this point you have two options: build the source code using PowerShell scr
 
 ### Option 1: Build using PowerShell scripts
 
-Note: when running the scripts, you might get execution policy error. In most of the time it can be fixed by setting the execution policy to `RemoteSigned`:
+> Pro tips: did you know that you can install PowerShell in Mac and Linux? Please check this out: https://docs.microsoft.com/en-us/powershell/scripting/overview
+
+When running the scripts, you might get execution policy error. In most of the time it can be fixed by setting the execution policy to `RemoteSigned`:
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 ```
@@ -47,7 +47,7 @@ Please check the following [article](https://docs.microsoft.com/en-us/powershell
 
 **Run pre-requisites script**
 
-This script will check your environment for required tools to build OpenCatapult source code:
+This script will check your environment for required tools to build `OpenCatapult` source code:
 ```powershell
 .\builds\build-prerequisites.ps1
 ```
@@ -84,6 +84,8 @@ Open a new PowerShell instance, and run the script to publish the CLI:
 
 If for any reasons you cannot run the PowerShell scripts, you can always build the source code manually by following these steps:
 
+> Note: the location paths use backslash (`\`) here, which is the Windows style. If you work on Mac or Linux environment, you might need to replace it with slash (`/`).
+
 **Setup database**
 
 Please make sure you have access to a SQL Server instance, and put the connection string in `.\src\API\Polyrific.Catapult.Api\appsettings.json`, e.g.
@@ -96,7 +98,7 @@ Please make sure you have access to a SQL Server instance, and put the connectio
 }
 ```
 
-Note: You don't need to create the database in advance because EF will automatically create it if it doesn't exist.
+> Note: You don't need to create the concrete database in advance because EF will automatically create it if it doesn't exist. Please make sure though that the user which is defined in connection string has "database create" permission.
 
 Run the migration script to initialize the database:
 ```sh
@@ -138,6 +140,8 @@ dotnet publish .\src\Plugins\DatabaseProvider\Polyrific.Catapult.Plugins.EntityF
 dotnet publish .\src\Plugins\RepositoryProvider\Polyrific.Catapult.Plugins.GitHub\src\Polyrific.Catapult.Plugins.GitHub.csproj -c Release -o ..\..\..\..\publish\engine\plugins\RepositoryProvider\Polyrific.Catapult.Plugins.GitHub
 ```
 
+> Note: There is one more steps required to start the Engine, which is to enter the authorization token. But we will do it later after registering the Engine via CLI.
+
 **Prepare the CLI**
 
 Open new shell, go to the root folder, and build the CLI project:
@@ -165,15 +169,17 @@ Setting up `Development` environment can be done via environment variable:
 $env:ASPNETCORE_ENVIRONMENT = "Development"
 ```
 
-You are now ready to create your first catapult project.
+You are now ready to create your first Catapult project.
 
-## Create your first (empty) project
+## Create your first project
 
 Activate the previously opened CLI shell, and go to the published folder:
 
 ```sh
 cd .\publish\cli\
 ```
+
+### Login
 
 When you previously applied migrations to initiate the database, a default user was created. You can use this user to login. When you're prompted to enter the password, the default password is `opencatapult`.
 
@@ -187,17 +193,75 @@ We strongly advise you to change the default password (or just remove the defaul
 dotnet occli.dll account password update
 ```
 
-And now, you're good to go to create an empty project:
+### Register and Start the Engine
 
+We need to register Engine so it can communicate with the API without problem. It involves step to register the Engine via CLI, and enter the generated token back in the Engine itself. If you have multiple Engine instances, you need to do this procedure on each of them.
+
+Activate the CLI shell, and enter this command:
 ```sh
-dotnet occli.dll project create --name first-project --client Polyrific
+dotnet occli.dll engine register --name Engine001
 ```
+
+After the Engine is registered, let's generate a token for it, and copy the generated token:
+```sh
+dotnet occli.dll engine token --name Engine001
+```
+
+Activate the Engine shell, and set the `AuthorizationToken` config with the copied generated token:
+```sh
+dotnet ocengine.dll config set --name AuthorizationToken --value [the-generated-token]
+```
+
+Let's start the Engine:
+```sh
+dotnet ocengine.dll start
+```
+
+You can find more details about these procedure at [Manage engine registration](../user-guides/engine-registration.md)
+
+### Create sample project
+
+And now, you're good to go to create a project. We will use `sample` template, which will give you some pre-defined models, and a job definition with a single `Generate` task. The task uses a built-in generator plugin called `Polyrific.Catapult.Plugins.AspNetCoreMvc`, which will generate a starter ASP.NET Core MVC application.
+
+Activate the CLI shell, and enter this command:
+```sh
+dotnet occli.dll project create --name first-project --client Polyrific --template sample
+```
+
+During the process you will be prompted to enter `Admin Email`. Please fill it with your email.
+
+After the project is created you can check the created elements in it. For example you might want to check the created data models:
+```sh
+dotnet occli.dll model list -p first-project
+```
+
+### Queue the job
+
+The project that you've just created contains a `Default` job definition with a `Generate` task in it.
+```sh
+dotnet occli.dll job get -n Default -p first-project
+```
+
+Let's add the job to the queue so Engine can pick and execute it.
+```sh
+dotnet occli.dll queue add -j Default -p first-project
+```
+
+You can monitor the live progress by checking the queue log:
+```sh
+dotnet occli.dll queue log -n 1 -p first-project
+```
+
+The final status of the process can be checked by this command:
+```sh
+dotnet occli.dll queue get -n 1 -p first-project
+```
+It will tell you the status of each task execution, whether it's Success or Failed, along with the error remarks if any.
 
 ## Next steps
 
 After creating your first project, you can:
 - [add models to the project](../user-guides/data-models.md)
-- [Register the engine](../user-guides/engine-registration.md#register-a-new-engine) and [set the authorization token](../user-guides/engine-registration.md#obtain-token-for-an-engine) so it can talk to the API
 - [explore what else you can do with the project](../user-guides/user-guides.md)
-- [create another project by using Sample project template](../user-guides/sample-project.md)
+- [create another project by using Sample-DevOps project template](../user-guides/sample-project.md)
 - check references of [API](../api/api.md), [Engine](../engine/engine.md), [CLI](../cli/cli.md)
