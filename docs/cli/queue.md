@@ -63,3 +63,17 @@ dotnet occli.dll queue restart --project [project] --number [number]
 | --- | --- | --- | --- | --- | --- |
 | --project | -p | Name of the project ||| Yes |
 | --number | -n | Identifier of the queue (Id or Code) ||| Yes |
+
+# Cancel
+Cancel the Processing or Pending queue. This is helpful if the job got force-cancelled in the engine, making the job stuck in Processing status. It also can be used to cancel a pending queue if you don't want to continue to process the job.
+
+Usage: 
+```sh
+dotnet occli.dll queue cancel --project [project] --number [number] --reason [reason]
+```
+
+| Option | Alias | Description | Allowed Values | DefaultValue | Mandatory |
+| --- | --- | --- | --- | --- | --- |
+| --project | -p | Name of the project ||| Yes |
+| --number | -n | Identifier of the queue (Id or Code) ||| Yes |
+| --reason | -r | Cancellation reason ||| No |

@@ -20,19 +20,20 @@ dotnet occli.dll queue list --project MyProject
 
 You can get the progressing job status in real time by using this command:
 ```sh
-dotnet occli.dll queue get --number 1
-```
-
-## Cancel job
-
-You can cancel a job before it's processed:
-```sh
-dotnet occli.dll queue cancel --number 1
+dotnet occli.dll queue get --project MyProject --number 1
 ```
 
 ## Restart job
 
 There's a case where the status of the queue is pending. This is usually happened when a user action is needed. For example, the user need to review the updated code, before the engine perform the merge.
 ```sh
-dotnet occli.dll queue restart --number 1
+dotnet occli.dll queue restart --project MyProject --number 1
+```
+
+## Cancel job
+
+You will need to cancel a job when it's force cancelled in the engine, or you don't want to continue a pending job. 
+
+```sh
+dotnet occli.dll queue cancel --project MyProject --number 1
 ```
