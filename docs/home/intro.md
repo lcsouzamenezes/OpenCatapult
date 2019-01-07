@@ -2,7 +2,7 @@
 
 ## What is `OpenCatapult`
 
-`OpenCatapult` is an enterprise digital developer. It helps developers to significantly decrease the development time by intelligently automate things.
+`OpenCatapult` is an enterprise digital developer. It helps developers to significantly decrease application development time through intelligent automation.
 
 `Catapult` was originally created and used internally by folks in [Polyrific](https://polyrific.com), and it has proved to be an essential tool in the success of delivering many [critical projects](https://polyrific.com/past-projects) in a relatively shorter time. However in the spirit of spreading the benefits into larger community, since October 2018, it transforms into `OpenCatapult` which is released as open source project.
 
