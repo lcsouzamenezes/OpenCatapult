@@ -53,22 +53,30 @@ namespace Polyrific.Catapult.Engine.Core.JobTasks
                 return new TaskRunnerResult(result["errorMessage"].ToString(), !TaskConfig.ContinueWhenError);
 
             var remoteUrl = "";
+            var taskRemarks = "";
             if (result.ContainsKey("remoteUrl"))
+            {
                 remoteUrl = result["remoteUrl"].ToString();
+                taskRemarks = $"Changes has been pushed into {remoteUrl}";
+            }
 
             var outputValues = new Dictionary<string, string>();
             if (result.ContainsKey("outputValues") && !string.IsNullOrEmpty(result["outputValues"]?.ToString()))
                 outputValues = JsonConvert.DeserializeObject<Dictionary<string, string>>(result["outputValues"].ToString());
 
             // stop the next process if we're creating a pull request
-            var taskRunnerResult = new TaskRunnerResult(true, remoteUrl, outputValues, TaskConfig.CreatePullRequest);
+            var taskRunnerResult = new TaskRunnerResult(true, remoteUrl, outputValues, TaskConfig.CreatePullRequest)
+            {
+                TaskRemarks = taskRemarks
+            };
+
             if (TaskConfig.CreatePullRequest)
             {
                 var prUrl = "";
                 if (result.ContainsKey("pullRequestUrl"))
                     prUrl = result["pullRequestUrl"].ToString();
 
-                taskRunnerResult.StopRemarks = prUrl;
+                taskRunnerResult.StopRemarks = $"A pull request has been submitted to {prUrl}. Please review it, and restart this queue when it's ready to be merged";
             }
 
             return taskRunnerResult;

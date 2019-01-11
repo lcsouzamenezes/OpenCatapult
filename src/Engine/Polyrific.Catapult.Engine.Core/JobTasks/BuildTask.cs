@@ -54,14 +54,21 @@ namespace Polyrific.Catapult.Engine.Core.JobTasks
                 return new TaskRunnerResult(result["errorMessage"].ToString(), !TaskConfig.ContinueWhenError);
 
             var outputArtifact = "";
+            var taskRemarks = "";
             if (result.ContainsKey("outputArtifact"))
+            {
                 outputArtifact = result["outputArtifact"].ToString();
+                taskRemarks = $"The build artifact is located at {outputArtifact}";
+            }
 
             var outputValues = new Dictionary<string, string>();
             if (result.ContainsKey("outputValues") && !string.IsNullOrEmpty(result["outputValues"]?.ToString()))
                 outputValues = JsonConvert.DeserializeObject<Dictionary<string, string>>(result["outputValues"].ToString());
-
-            return new TaskRunnerResult(true, outputArtifact, outputValues);
+            
+            return new TaskRunnerResult(true, outputArtifact, outputValues)
+            {
+                TaskRemarks = taskRemarks
+            };
         }
 
         public override async Task<TaskRunnerResult> RunPostprocessingTask()

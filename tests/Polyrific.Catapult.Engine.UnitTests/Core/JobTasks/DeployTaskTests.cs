@@ -73,7 +73,7 @@ namespace Polyrific.Catapult.Engine.UnitTests.Core.JobTasks
             _pluginManager.Setup(p => p.InvokeTaskProvider(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .ReturnsAsync((string pluginDll, string pluginArgs, string secretPluginArgs) => new Dictionary<string, object>
                 {
-                    {"hostLocation", "good-result"}
+                    {"hostLocation", "https://test.azurewebsites.net"}
                 });
 
             var config = new Dictionary<string, string>();
@@ -85,7 +85,8 @@ namespace Polyrific.Catapult.Engine.UnitTests.Core.JobTasks
             var result = await task.RunMainTask(new Dictionary<string, string>());
 
             Assert.True(result.IsSuccess);
-            Assert.Equal("good-result", result.ReturnValue);
+            Assert.Equal("https://test.azurewebsites.net", result.ReturnValue);
+            Assert.Equal("The code has been deployed to https://test.azurewebsites.net", result.TaskRemarks);
         }
 
         [Fact]
@@ -130,7 +131,7 @@ namespace Polyrific.Catapult.Engine.UnitTests.Core.JobTasks
             _pluginManager.Setup(p => p.InvokeTaskProvider(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .ReturnsAsync((string pluginDll, string pluginArgs, string secretPluginArgs) => new Dictionary<string, object>
                 {
-                    {"hostLocation", "good-result"}
+                    {"hostLocation", "https://test.azurewebsites.net"}
                 });
             _pluginManager.Setup(p => p.GetPlugins(It.IsAny<string>())).Returns(new List<PluginItem>
             {
@@ -161,7 +162,8 @@ namespace Polyrific.Catapult.Engine.UnitTests.Core.JobTasks
             var result = await task.RunMainTask(new Dictionary<string, string>());
 
             Assert.True(result.IsSuccess);
-            Assert.Equal("good-result", result.ReturnValue);
+            Assert.Equal("https://test.azurewebsites.net", result.ReturnValue);
+            Assert.Equal("The code has been deployed to https://test.azurewebsites.net", result.TaskRemarks);
 
             Assert.Equal(2, task.AdditionalConfigs.Count);
             Assert.Equal(2, task.SecuredAdditionalConfigs.Count);

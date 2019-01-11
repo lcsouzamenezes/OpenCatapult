@@ -53,14 +53,21 @@ namespace Polyrific.Catapult.Engine.Core.JobTasks
                 return new TaskRunnerResult(result["errorMessage"].ToString(), !TaskConfig.ContinueWhenError);
 
             var databaseLocation = "";
+            var taskRemarks = "";
             if (result.ContainsKey("databaseLocation"))
+            {
                 databaseLocation = result["databaseLocation"].ToString();
+                taskRemarks = $"The database changes have been applied to {databaseLocation}";
+            }                
 
             var outputValues = new Dictionary<string, string>();
             if (result.ContainsKey("outputValues") && !string.IsNullOrEmpty(result["outputValues"]?.ToString()))
                 outputValues = JsonConvert.DeserializeObject<Dictionary<string, string>>(result["outputValues"].ToString());
 
-            return new TaskRunnerResult(true, databaseLocation, outputValues);
+            return new TaskRunnerResult(true, databaseLocation, outputValues)
+            {
+                TaskRemarks = taskRemarks
+            };
         }
 
         public override async Task<TaskRunnerResult> RunPostprocessingTask()

@@ -60,14 +60,21 @@ namespace Polyrific.Catapult.Engine.Core.JobTasks
                 return new TaskRunnerResult(result["errorMessage"].ToString(), !TaskConfig.ContinueWhenError);
 
             var remoteUrl = "";
+            var taskRemarks = "";
             if (result.ContainsKey("remoteUrl"))
+            {
                 remoteUrl = result["remoteUrl"].ToString();
+                taskRemarks = $"Pull request #{prNumber} has been merged";
+            }
 
             var outputValues = new Dictionary<string, string>();
             if (result.ContainsKey("outputValues") && !string.IsNullOrEmpty(result["outputValues"]?.ToString()))
                 outputValues = JsonConvert.DeserializeObject<Dictionary<string, string>>(result["outputValues"].ToString());
 
-            return new TaskRunnerResult(true, remoteUrl, outputValues);
+            return new TaskRunnerResult(true, remoteUrl, outputValues)
+            {
+                TaskRemarks = taskRemarks
+            };
         }
 
         public override async Task<TaskRunnerResult> RunPostprocessingTask()
