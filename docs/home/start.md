@@ -45,6 +45,14 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 
 Please check the following [article](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies?view=powershell-6) for more details about execution policies.
 
+**Prepare the powershell windows**
+
+If you want to run opencatapult solely on your local machine, you would need three separate powershell windows to build the API, CLI, and Engine:
+
+![Architecture](../img/shell-windows.JPG)
+
+In production scenario, all three typically installed in separated machine.
+
 **Run pre-requisites script**
 
 This script will check your environment for required tools to build `OpenCatapult` source code:
@@ -65,6 +73,8 @@ By default it will listen to url http://localhost:8005 and https://localhost:443
 ```powershell
 .\builds\build-api.ps1 -http http://localhost:5000 -https https://localhost:5001
 ```
+
+If it all succeeded, the API will run in the powershell window. Please don't close this window when you are using the CLI or Engine, since they all depend on the API.
 
 **Run Engine build script**
 
@@ -207,8 +217,9 @@ After the Engine is registered, let's generate a token for it, and copy the gene
 dotnet occli.dll engine token --name Engine001
 ```
 
-Activate the Engine shell, and set the `AuthorizationToken` config with the copied generated token:
+Activate the Engine shell, go to the engine's published folder, and set the `AuthorizationToken` config with the copied generated token:
 ```sh
+cd .\publish\engine\
 dotnet ocengine.dll config set --name AuthorizationToken --value [the-generated-token]
 ```
 
