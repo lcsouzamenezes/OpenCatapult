@@ -49,7 +49,7 @@ Please check the following [article](https://docs.microsoft.com/en-us/powershell
 
 If you want to run opencatapult solely on your local machine, you would need three separate powershell windows to build the API, CLI, and Engine:
 
-![Architecture](../img/shell-windows.JPG)
+![Shell windows arangement](../img/shell-windows.JPG)
 
 In production scenario, all three typically installed in separated machine.
 
