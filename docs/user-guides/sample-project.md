@@ -1,6 +1,6 @@
 # Create Project by using Sample template
 
-Sample project template contains the following job tasks:
+Sample Devops project template contains the following job tasks:
 
 ```
 CLONE -> GENERATE --> PUSH -> MERGE --> BUILD --> DEPLOYDB --> DEPLOY
@@ -22,7 +22,7 @@ _DEPLOY_ task will deploy the artifact to Azure App service.
 
 ## Pre-requisites
 
-Before generating a project with Sample template, you need to prepare some pre-requisites to make connection to external services.
+Before generating a project with Sample Devops template, you need to prepare some pre-requisites to make connection to external services.
 
 **GitHub**
 
@@ -64,10 +64,10 @@ Then you will be prompted to enter the required details for `AzureAppService`.
 
 ## Create project
 
-After all required components in place, now you can start to create the project by using Sample template.
+After all required components in place, now you can start to create the project by using Sample Devops template.
 
 ```sh
-dotnet occli.dll project create --name SampleProject --client Polyrific --template sample
+dotnet occli.dll project create --name SampleProject --client Polyrific --template sample-devops
 ```
 
 You will be prompted to enter some additional configurations.
