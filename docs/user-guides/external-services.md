@@ -33,7 +33,7 @@ It's used to connect to the GitHub repository using either an authorization toke
 | RemotePassword | The github password | | - | Yes if the RemoteCredentialType = userPassword |
 | RepoAuthToken | The github authorization token | | - | Yes if the RemoteCredentialType = authToken |
 
-### AzureAppService
+### Azure
 It's used to connect to the Azure services using azure active directory.
 | Name |  Description | Allowed Values | DefaultValue | Mandatory |
 | --- | --- | --- | --- | --- |

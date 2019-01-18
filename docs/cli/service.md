@@ -9,7 +9,7 @@ dotnet occli.dll service add --name [name] --type [service type] --description [
 | Option | Alias | Description | Allowed Values | DefaultValue | Mandatory |
 | --- | --- | --- | --- | --- | --- |
 | --name | -n | Name of the service connection ||| Yes |
-| --type | -t | Type of the service | generic, AzureAppService, GitHub || Yes |
+| --type | -t | Type of the service | generic, Azure, GitHub || Yes |
 | --description | -d | Description of the service connection ||| No |
 | --property [key]:[value] | -prop | Property of the service | allowed multiple || No |
 
@@ -39,7 +39,7 @@ dotnet occli.dll service list
 
 | Option | Alias | Description | Allowed Values | DefaultValue | Mandatory |
 | --- | --- | --- | --- | --- | --- |
-| --type | -t | Type of the service | all, Generic, AzureAppService, GitHub | all | No |
+| --type | -t | Type of the service | all, Generic, Azure, GitHub | all | No |
 
 # Remove
 Remove an external service
