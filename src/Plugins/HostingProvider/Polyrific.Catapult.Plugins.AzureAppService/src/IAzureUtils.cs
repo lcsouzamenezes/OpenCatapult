@@ -7,15 +7,6 @@ namespace Polyrific.Catapult.Plugins.AzureAppService
     public interface IAzureUtils
     {
         /// <summary>
-        /// Get the azure website
-        /// </summary>
-        /// <param name="subscriptionId">Subscription Id used to access</param>
-        /// <param name="resourceGroupName">Resource group name where the website located</param>
-        /// <param name="name">instance name of the azure app service</param>
-        /// <returns>The azure website</returns>
-        IWebApp GetWebsite(string subscriptionId, string resourceGroupName, string name);
-
-        /// <summary>
         /// Get the azure deployment slot
         /// </summary>
         /// <param name="webApp">The azure website</param>
@@ -46,5 +37,16 @@ namespace Polyrific.Catapult.Plugins.AzureAppService
         /// <param name="connectionString">Connection string</param>
         /// <returns>The updated web or slot</returns>
         IWebAppBase SetConnectionString(IWebAppBase deployTarget, string connectionStringName, string connectionString);
+
+        /// <summary>
+        /// Get an azure web app or create it if it's not yet exist
+        /// </summary>
+        /// <param name="subscriptionId">Subscription Id used to access</param>
+        /// <param name="resourceGroupName">Resource group name where the website located</param>
+        /// <param name="name">instance name of the azure app service</param>
+        /// <param name="regionName">The region for which the web will be created</param>
+        /// <param name="planName">The plan name to be used for web create</param>
+        /// <returns></returns>
+        IWebApp GetOrCreateWebsite(string subscriptionId, string resourceGroupName, string appName, string regionName, string planName);
     }
 }
