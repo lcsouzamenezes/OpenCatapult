@@ -129,7 +129,12 @@ namespace Polyrific.Catapult.Cli.Commands.Task
                         foreach (var additionalConfig in provider.AdditionalConfigs)
                         {
                             string input = string.Empty;
-                            string prompt = $"{(!string.IsNullOrEmpty(additionalConfig.Label) ? additionalConfig.Label : additionalConfig.Name)}{(additionalConfig.IsRequired ? " (Required):" : " (Leave blank to use default value):")}";
+
+                            string hint = !string.IsNullOrEmpty(additionalConfig.Hint) ? $" - {additionalConfig.Hint}" : "";
+                            string requiredAndHintText = additionalConfig.IsRequired ? $"(Required{hint}):" : $"(Leave blank to use default value{hint}):";
+                            string label = !string.IsNullOrEmpty(additionalConfig.Label) ? additionalConfig.Label : additionalConfig.Name;
+                            string prompt = $"{label} {requiredAndHintText}";
+
                             bool validInput = true;
                             do
                             {
