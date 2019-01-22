@@ -1,32 +1,7 @@
-# Generator Provider
+# Introduction
+This project is generated using opencatapult's built-in code generator provider. It uses ASP NET Core MVC as the Web Framework and Entity Framework Core as the ORM. 
 
-Generator providers can be used in [Generate task](../user-guides/job-definitions.md#generate). The main role of this provider is to provide a specific implementation of source code generation based on the project configuration and the defined data models.
-
-## Polyrific.Catapult.Plugins.AspNetCoreMvc
-
-`OpenCatapult` provides `Polyrific.Catapult.Plugins.AspNetCoreMvc` as the built-in provider for Generator Provider. This provider will create an AspNet Core Mvc application. The generated code further explained in the last section.
-
-### Usage
-
-This provider can only be used in Generate task. You can use the name `Polyrific.Catapult.Plugins.AspNetCoreMvc` when adding or updating a Generate task:
-
-```sh
-dotnet occli.dll task add -p SampleProject -j Default -n Generate -t Generate -prov Polyrific.Catapult.Plugins.AspNetCoreMvc
-```
-
-```sh
-dotnet occli.dll task update -p SampleProject -j Default -n Generate -prov Polyrific.Catapult.Plugins.AspNetCoreMvc
-```
-
-### Additional configs
-
-This provider has several additional configurations that you can use to fit your use case:
-
-| Name | Description | Default Value | Mandatory |
-| --- | --- | --- | --- | --- |
-| AdminEmail | The email of the admin user used to login to the application | - | Yes |
-
-### Running the generated code
+## Quick Start
 You would require [dotnet core sdk](https://dotnet.microsoft.com/download/dotnet-core/2.1) to run this in your local. Please go to the directory by using the cd command
 ```sh
 cd path/to/solution_folder
@@ -66,11 +41,10 @@ password: opencatapult
 
 We highly recommend you to update the password. You can do that in https://localhost:44306/Identity/Account/Manage/ChangePassword
 
-### Structures of generated code
+## Customizing the code
+The codes are organized into several projects
 
-The AspNetCoreMvc generator will generate the code with the following structure:
-
-#### Web Project
+### {{SampleProject}}
 This is the web mvc project. It contains the view models, controllers, and views for you to modify the web UI looks. 
 
 The front facing web pages are located in folders:
@@ -82,21 +56,20 @@ There's also admin web pages which you can find in the `Areas\Admin` folder.
 
 The `AutoMapperProfiles` contains the mapper profile files between your Entities in Core project and your ViewModels.
 
-#### Core Project
+### {{SampleProject}}.Core
 This is where the core business logic resides. It contains the entities and logics of your application. It also contains the abstraction for the repository.
 
-#### Data Project
+### {{SampleProject}}.Data
 This is Database specific project that implements the repository abstraction from the Core project. It uses Entity Framework Core. Here you can find:
 - Repository classes: The class used to retrieve data from the database
 - Entity Configs: Defines the physical database configuration you want to override. It defaults to the structure defined in the `Core.Entities`
 
-#### Infrastructure Project
+### {{SampleProject}}.Infrastructure
 This is a bootstrapper project, to link the Dependency Injection from Data project to Web project. This way, we can have a cleaner dependency map where the Web only depend on the Core project.
 
+## Advanced
 
-### Advanced
-
-#### Setting up email
+### Setting up email
 You can setup an smtp server to have the email functionality runnning. This would be required if you want to enable forgot password feature. To setup the smtp, modify the following section in `appsettings.json`
 ```json
 "SmtpSetting": {
