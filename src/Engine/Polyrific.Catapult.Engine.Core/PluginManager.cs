@@ -158,9 +158,10 @@ namespace Polyrific.Catapult.Engine.Core
             {
                 if (process != null)
                 {
+                    Console.WriteLine($"Invoking Task Provider {Path.GetFileNameWithoutExtension(pluginStartFile)}...");
+
                     if (!string.IsNullOrEmpty(securedPluginArgs))
                     {
-                        Console.WriteLine($"[PluginManager] Command: {fileName} {securedArguments}");
                         _logger.LogDebug($"[PluginManager] Command: {fileName} {securedArguments}");
                     }                        
 
