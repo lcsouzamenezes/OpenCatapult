@@ -22,13 +22,13 @@ namespace Polyrific.Catapult.Plugins.AzureAppService
 
         public async Task<(string, string)> DeployWebsite(string artifactLocation, 
             string subscriptionId, string resourceGroupName, string appServiceName, 
-            string deploymentSlot, string connectionString, string regionName, string planName)
+            string deploymentSlot, string connectionString, string regionName, string planName, bool allowAutomaticRename)
         {
             try
             {
                 var hostLocation = "";
 
-                var website = _azureUtils.GetOrCreateWebsite(subscriptionId, resourceGroupName, appServiceName, regionName, planName);
+                var website = _azureUtils.GetOrCreateWebsite(subscriptionId, resourceGroupName, appServiceName, regionName, planName, allowAutomaticRename);
                 if (website == null)
                 {
                     var error = $"Website {appServiceName} is not found in {resourceGroupName}";
@@ -49,7 +49,7 @@ namespace Polyrific.Catapult.Plugins.AzureAppService
                     var publishProfile = _azureUtils.GetPublishingProfile(slot);
                     if (!(await _deployUtils.ExecuteDeployWebsiteAsync(publishProfile.GitUrl, publishProfile.GitUsername, publishProfile.GitPassword, artifactLocation)))
                     {
-                        var error = $"Failed to deploy website to {appServiceName}-{deploymentSlot}.";
+                        var error = $"Failed to deploy website to {website.Name}-{deploymentSlot}.";
                         _logger.LogError(error);
                         return (hostLocation, error);
                     }

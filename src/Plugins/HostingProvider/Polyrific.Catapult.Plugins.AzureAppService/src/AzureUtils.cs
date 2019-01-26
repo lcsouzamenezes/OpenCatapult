@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Polyrific, Inc 2018. All rights reserved.
 
 using System;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using Microsoft.Azure.Management.AppService.Fluent;
+using Microsoft.Azure.Management.AppService.Fluent.Models;
 using Microsoft.Azure.Management.Fluent;
 using Microsoft.Azure.Management.ResourceManager.Fluent;
 using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
@@ -86,7 +86,7 @@ namespace Polyrific.Catapult.Plugins.AzureAppService
             return web;
         }
 
-        public IWebApp GetOrCreateWebsite(string subscriptionId, string resourceGroupName, string appName, string regionName, string planName)
+        public IWebApp GetOrCreateWebsite(string subscriptionId, string resourceGroupName, string appName, string regionName, string planName, bool allowAutomaticRename)
         {
             var resourceGroup = GetOrCreateResourceGroup(subscriptionId, resourceGroupName, regionName);
 
@@ -113,7 +113,7 @@ namespace Polyrific.Catapult.Plugins.AzureAppService
                 
                 if (plan != null)
                 {
-                    webApp = ExecuteWithRetry(() => _authenticatedAzure.WithSubscription(subscriptionId).WebApps.Define(appName).WithExistingWindowsPlan(plan).WithExistingResourceGroup(resourceGroupName).Create());
+                    webApp = CreateWebsite(subscriptionId, appName, resourceGroupName, plan, allowAutomaticRename);
                 }
                 else
                 {
@@ -163,6 +163,50 @@ namespace Polyrific.Catapult.Plugins.AzureAppService
         }
 
         #region Private Methods
+        private IWebApp CreateWebsite(string subscriptionId, string appName, string resourceGroupName, IAppServicePlan plan, bool allowAutomaticRename)
+        {
+            int attempt = 1;
+            while (attempt <= 5)
+            {
+                try
+                {
+                    _logger.LogInformation($"Creating new website \"{appName}\". Attempt {attempt}");
+                    return ExecuteWithRetry(() => _authenticatedAzure.WithSubscription(subscriptionId).WebApps.Define(appName).WithExistingWindowsPlan(plan).WithExistingResourceGroup(resourceGroupName).Create());
+                }
+                catch (DefaultErrorResponseException ex)
+                {
+                    if (ex.Message.Equals("Operation returned an invalid status code 'Conflict'", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        if (allowAutomaticRename)
+                        {
+                            _logger.LogWarning($"The application name \"{appName}\" is not available. Trying other name...");
+                            appName = GetAlternativeAppName(appName);
+                            attempt++;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+
+            if (attempt > 5)
+                throw new Exception("Failed getting available name after 5 attempts");
+
+            return null;
+        }
+
+        private string GetAlternativeAppName(string appName)
+        {
+            var r = new Random();
+            return $"{appName}-{r.Next(1000, 9999).ToString()}";
+        }
+
         private T ExecuteWithRetry<T>(Func<T> function)
         {
             var attempt = 0;
