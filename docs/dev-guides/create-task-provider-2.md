@@ -429,7 +429,15 @@ To modify the generated components based on the model's property, we'd need to a
 
 
 ## Call the CodeGenerator in Program.cs
-The last thing is to call the `CodeGenerator` in the `Program.cs`:
+The last thing is to call the `CodeGenerator` in the `Program.cs`. The generate method will return an error message if exists. If there's an error message, we should return it at the third tupple item.
+```csharp
+var error = await _codeGenerator.Generate(ProjectName, projectTitle, Config.OutputLocation, Models);
+
+if (!string.IsNullOrEmpty(error))
+    return ("", null, error);
+```
+
+
 Here's how the `Program.cs` should look now:
 ```csharp
 using System;

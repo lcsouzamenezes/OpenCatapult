@@ -1,6 +1,6 @@
 # Create a task provider - Part 4 (Installing the task Pprovider)
 
-For now, there's two step to install the task provider
+For now, there're two steps to install the task provider
 
 ## Copy the published binary to the plugin folder
 
@@ -31,5 +31,5 @@ And that's it, you can now create a generate task using the provider:
 dotnet occli.dll task add --name Generate --type Generate --provider Polyrific.Catapult.Plugins.Angular
 ```
 
-### Summary
+## Summary
 That is it for the task provider tutorial. We hope it gives you a general idea on how opencatapult task provider work. If you want to learn more about other task providers, please go to the [task provider reference](../task-providers/task-provider.md)
