@@ -55,7 +55,7 @@ You will need to build the API, CLI, and Engine application to run opencatapult.
 
 The script will ask you to input the connection string for the API. After the API build succeed, it will open two new powershell windows. One is for Engine and one is for CLI.
 
-> Please don't close the first powershell window since it is being used to run the API, which is being used by CLI and Engine.
+> Please don't close the first powershell window since it is being used to run the API, which is being used by CLI and Engine. To learn more about how opencatapult components relate to each other, please check the following [article](./intro.md#the-components).
 
 If you want to build the API, CLI, or Engine one by one, for example if you want to install them in separate machines, you can follow the guide [here](../user-guides/build-scripts.md).
 
