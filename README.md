@@ -1,5 +1,5 @@
-# OpenCatapult by [Polyrific](https://polyrific.com)
-The home of open source Catapult project
+# OpenCatapult Digital Developer
+The home of open source Catapult project created by the custom application development experts at [Polyrific](https://polyrific.com). 
 
 Build status:
 
