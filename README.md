@@ -1,4 +1,4 @@
-# OpenCatapult
+# OpenCatapult by [Polyrific](https://polyrific.com)
 The home of open source Catapult project
 
 Build status:
