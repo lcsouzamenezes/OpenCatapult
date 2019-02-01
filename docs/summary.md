@@ -20,6 +20,7 @@
   * [Manage engine registration](user-guides/engine-registration.md)
   * [Manage plugins](user-guides/plugins.md)
   * [Sample Devops project template](user-guides/sample-project.md)
+  * [Build Scripts](user-guides/build-scripts.md)
 * [Developer Guide](dev-guides/dev-guides.md)
   * [Project template](dev-guides/project-template.md)
   * [Coding Style](dev-guides/coding-style.md)
