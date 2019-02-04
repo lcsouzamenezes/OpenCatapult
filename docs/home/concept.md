@@ -2,7 +2,7 @@
 
 This section will guide you to understand the concept of some key elements in `OpenCatapult` system.
 
-![Concept](../img/catapult-concept.jpg)
+![Concept](../img/catapult-concept-2.jpeg)
 
 After setting up a new `OpenCatapult` instance, you will get a blank workspace. You can start to fill it with:
 
@@ -10,7 +10,7 @@ After setting up a new `OpenCatapult` instance, you will get a blank workspace. 
 - Project
 - External Service Connection
 - Engine Registration
-- Plugin Registration
+- Task Provider Registration
 
 ## User Account
 
@@ -73,11 +73,11 @@ Engine is a component in `OpenCatapult` which will execute queued jobs. For scal
 
 [See more details](../user-guides/engine-registration.md)
 
-## Plugin Registration
+## Task Provider Registration
 
-Plugin is the extension of Engine which implement specific action. Plugin needs to be registered as well to:
+Task provider is the extension of Engine which implement specific action. Task provider needs to be registered as well to:
 
-- allow Plugin to ask for specific configuration input from user
-- allow syncronization of the installed Plugins across Engine instances
+- allow task provider to ask for specific configuration input from user
+- allow syncronization of the installed task providers across Engine instances
 
-[See more details](../user-guides/plugins.md)
+[See more details](../user-guides/task-providers.md)

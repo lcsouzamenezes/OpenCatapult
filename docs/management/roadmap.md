@@ -8,7 +8,7 @@ When the items are ready, they will be listed in [Issues](https://github.com/Pol
 
 - Web interface
 - Allow to create external service instances from Catapult
-- More plugins:
+- More task providers:
   - Repository provider: Azure Repo
   - Build provider: Azure Pipeline
   - Hosting provider: AWS, GCP
@@ -23,5 +23,5 @@ The features which get many votes from the community will be promoted to backlog
 - Mobile app interface
 - Generic job task
 - Support for non-SQL Server database
-- Marketplace for plugins
+- Marketplace for task providers
 - Multi tenant

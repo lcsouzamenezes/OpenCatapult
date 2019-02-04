@@ -1,33 +1,33 @@
 # Get
-Get a single plugin details
+Get a single task provider details
 
 Usage: 
 ```sh
-dotnet occli.dll plugin get --name [name]
+dotnet occli.dll provider get --name [name]
 ```
 
 | Option | Alias | Description | Allowed Values | DefaultValue | Mandatory |
 | --- | --- | --- | --- | --- | --- |
-| --name | -n | Name of the plugin ||| Yes |
+| --name | -n | Name of the task provider ||| Yes |
 
 # List
-List all registered plugins
+List all registered task providers
 
 Usage: 
 ```sh
-dotnet occli.dll plugin list --type [type]
+dotnet occli.dll provider list --type [type]
 ```
 
 | Option | Alias | Description | Allowed Values | DefaultValue | Mandatory |
 | --- | --- | --- | --- | --- | --- |
-| --type | -t | Type of the plugins | all, BuildProvider, DatabaseProvider, GeneratorProvider, HostingProvider, RepositoryProvider, StorageProvider, TestProvider | all | No |
+| --type | -t | Type of the task providers | all, BuildProvider, DatabaseProvider, GeneratorProvider, HostingProvider, RepositoryProvider, StorageProvider, TestProvider | all | No |
 
 # Register
-Register a plugin
+Register a task provider
 
 Usage: 
 ```sh
-dotnet occli.dll plugin register --file [path to plugin.yml file]
+dotnet occli.dll provider register --file [path to plugin.yml file]
 ``` 
 
 | Option | Alias | Description | Allowed Values | DefaultValue | Mandatory |
@@ -35,14 +35,14 @@ dotnet occli.dll plugin register --file [path to plugin.yml file]
 | --file | -f | Path to the `plugin.yml` file ||| Yes |
 
 # Remove
-Remove a plugin
+Remove a task provider
 
 Usage: 
 ```sh
-dotnet occli.dll plugin remove --name [name]
+dotnet occli.dll provider remove --name [name]
 ``` 
 
 | Option | Alias | Description | Allowed Values | DefaultValue | Mandatory |
 | --- | --- | --- | --- | --- | --- |
-| --name | -n | Name of the plugin ||| Yes |
+| --name | -n | Name of the task provider ||| Yes |
 | --autoconfirm | -ac | Perform the removal without asking for confirmation || false | No |

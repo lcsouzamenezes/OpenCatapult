@@ -9,5 +9,5 @@ This section is intended to be used as guidance for users to make use of `OpenCa
 - [Manage Job Queues](job-queues.md)
 - [Manage External Services](external-services.md)
 - [Manage Engine registrations](engine-registration.md)
-- [Manage Plugins](plugins.md)
+- [Manage Task Providers](task-providers.md)
 - [Manage Users](users.md)

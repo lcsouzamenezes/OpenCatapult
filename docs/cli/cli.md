@@ -142,20 +142,20 @@ dotnet occli.dll model [subcommands]
 * [remove](model.md#remove)
 * [update](model.md#update)
 
-### Plugin		
-Plugin registration commands
+### Provider		
+Task provider registration commands
 
 Usage: 
 ```sh
-dotnet occli.dll plugin [subcommands]
+dotnet occli.dll provider [subcommands]
 ```
 
 #### Subcommands
 
-* [get](plugin.md#get)
-* [list](plugin.md#list)
-* [register](plugin.md#register)
-* [remove](plugin.md#remove)
+* [get](provider.md#get)
+* [list](provider.md#list)
+* [register](provider.md#register)
+* [remove](provider.md#remove)
 
 ### Project		
 Project related commands
@@ -239,3 +239,11 @@ dotnet occli.dll task [subcommands]
 * [list](task.md#list)
 * [remove](task.md#remove)
 * [update](task.md#update)
+
+### Version		
+Get the versions of opencatapult components: CLI, API, engines, and task providers
+
+Usage: 
+```sh
+dotnet occli.dll version
+```

@@ -15,12 +15,12 @@ dotnet occli.dll project create --name MyProject --client Polyrific --template m
 
 Please find the details of the template content [here](../dev-guides/project-template.md).
 
-Finally, [service providers](../home/intro.md#service-providers-plugins) may have some configuration key that you can override for each project. You can set this when creating the project by using the `property` option:
+Finally, [task providers](../home/intro.md#task-providers) may have some configuration key that you can override for each project. You can set this when creating the project by using the `property` option:
 ```sh
 dotnet occli.dll project create --name MyProject --client Polyrific --property createAdmin:false  
 ```
 
-For the configuration key that the service provider have, please refer to each service provider's page.
+For the configuration key that the task provider have, please refer to each task provider's [page](../task-providers/task-provider.md).
 
 All of the created projects can be viewed using the `list` command:
 ```sh

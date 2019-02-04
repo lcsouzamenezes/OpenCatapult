@@ -2,7 +2,7 @@
 
 ## Architecture
 
-![Architecture](../img/api-arch-2.jpeg)
+![Architecture](../img/api-arch-3.jpeg)
 
 ## Endpoints
 The following sections explain the details for each endpoints:
@@ -13,11 +13,12 @@ The following sections explain the details for each endpoints:
 - [Health](health.md)
 - [Job Definition](job-definition.md)
 - [Job Queue](job-queue.md)
-- [Plugin](plugin.md)
 - [Project](Project.md)
 - [Project Data Model](project-data-model.md)
 - [Project Member](project-member.md)
+- [Provider](provider.md)
 - [Token](token.md)
+- [Version](version.md)
 
 Note: In most of the time, users don't need to access the API endpoints directly. They can interact with them via [CLI](../cli.cli.md).
 
