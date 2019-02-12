@@ -1,11 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProjectComponent } from './project/project.component';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
+import { ProjectInfoComponent } from './project-info/project-info.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProjectComponent
+    component: ProjectComponent,
+    children:
+    [
+      {
+        path: ':id',
+        component: ProjectDetailComponent,
+        children: [
+          {path: '', redirectTo: 'info', pathMatch: 'full'},
+          {path: 'info', component: ProjectInfoComponent },
+          {path: 'data-model', loadChildren: './data-model/data-model.module#DataModelModule' },
+          {path: 'job-definition', loadChildren: './job-definition/job-definition.module#JobDefinitionModule'},
+          {path: 'job-queue', loadChildren: './job-queue/job-queue.module#JobQueueModule'},
+          {path: 'member', loadChildren: './member/member.module#MemberModule'}
+        ]
+      }
+    ]
   }
 ];
 
