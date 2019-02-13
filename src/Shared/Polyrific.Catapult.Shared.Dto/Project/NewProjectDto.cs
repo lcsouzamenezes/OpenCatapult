@@ -16,6 +16,11 @@ namespace Polyrific.Catapult.Shared.Dto.Project
         public string Name { get; set; }
 
         /// <summary>
+        /// Display name of the project
+        /// </summary>
+        public string DisplayName { get; set; }
+
+        /// <summary>
         /// Members of the project
         /// </summary>
         [Required]
@@ -25,11 +30,6 @@ namespace Polyrific.Catapult.Shared.Dto.Project
         /// Client of the project
         /// </summary>
         public string Client { get; set; }
-
-        /// <summary>
-        /// Config of the project
-        /// </summary>
-        public Dictionary<string, string> Config { get; set; }
 
         /// <summary>
         /// Data models of the project
