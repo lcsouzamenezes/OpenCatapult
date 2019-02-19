@@ -9,7 +9,7 @@
             </mat-panel-title>
           </mat-expansion-panel-header>       
           <div class="button">
-              <button mat-raised-button color="primary">New Project</button>
+              <button mat-raised-button color="primary" routerLink="/project/new">New Project</button>
           </div>             
           <mat-nav-list>
             <a mat-list-item *ngFor="let project of projects" routerLink='/project/{{project.id}}' [routerLinkActive]="['is-active']">{{project.name}}</a>

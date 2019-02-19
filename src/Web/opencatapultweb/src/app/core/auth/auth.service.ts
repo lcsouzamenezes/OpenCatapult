@@ -9,9 +9,7 @@ import { AuthorizePolicy } from './authorize-policy';
 import { Role } from './role';
 import { ProjectMemberRole } from './project-member-role';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {  
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;

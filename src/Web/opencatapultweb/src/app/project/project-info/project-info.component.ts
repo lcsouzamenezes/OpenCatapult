@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ProjectService, ProjectDto } from '@app/core';
 import { DatePipe } from '@angular/common';
-import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { SnackbarService } from '@app/shared';
 
 @Component({
   selector: 'app-project-info',
@@ -20,7 +20,7 @@ export class ProjectInfoComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private projectService: ProjectService,
-    private snackBar: MatSnackBar,
+    private snackBar: SnackbarService,
     private route: ActivatedRoute
     ) { }
 
@@ -74,9 +74,7 @@ export class ProjectInfoComponent implements OnInit {
       })
         .subscribe(
             data => {
-              this.snackBar.open("Project info has been updated", null, {
-                duration: 2000
-              });  
+              this.snackBar.open("Project info has been updated");  
               this.loading = false;
               this.project = {
                 ...this.projectInfoForm.value,
@@ -86,9 +84,7 @@ export class ProjectInfoComponent implements OnInit {
               this.editing = false;
             },
             err => {
-              this.snackBar.open(err, null, {
-                duration: 2000
-              });
+              this.snackBar.open(err);
               this.loading = false;
             });
     }

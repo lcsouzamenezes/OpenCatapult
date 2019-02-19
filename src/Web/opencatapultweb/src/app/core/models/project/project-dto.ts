@@ -5,5 +5,4 @@ export interface ProjectDto {
     client: string;
     status: string;
     created: Date;
-    config: Map<string, string>;
 }

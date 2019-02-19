@@ -23,7 +23,6 @@ namespace Polyrific.Catapult.Shared.Dto.Project
         /// <summary>
         /// Members of the project
         /// </summary>
-        [Required]
         public List<NewProjectMemberDto> Members { get; set; }
         
         /// <summary>

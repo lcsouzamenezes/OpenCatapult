@@ -1,0 +1,28 @@
+<h3>New Project</h3>
+<div fxLayout="row" fxLayout.xs="column" class="form-container">  
+  <form fxFlex="50" fxFlex.md="70" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+      <mat-progress-bar mode='indeterminate' *ngIf='loading'></mat-progress-bar>      
+      <app-project-info-form (formReady)="formInitialized($event)" [disableForm]="false" [formSubmitAttempt]="formSubmitAttempt"></app-project-info-form>
+      
+      <mat-form-field class="full-width-input">
+        <mat-select #templateSelect placeholder="Project template" [formControl]="template" (selectionChange)="onTemplateChanged($event)">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let template of templates" [value]="template[0]">
+            {{template[1]}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div *ngIf="uploadTemplate" class="upload-template-container">
+          <input [hidden]="true" id="input-file-id" type="file" accept=".yml, .yaml" (change)="onFileProjectTemplateChanged($event)" />
+          <label for="input-file-id" class="mat-raised-button">Choose File</label>
+          <span class="custom-file">{{customTemplateFile}}</span>
+      </div>
+
+      <app-job-list-form *ngIf="projectTemplate && projectTemplate.jobs" [jobDefinitions]="projectTemplate.jobs" (formReady)="onJobsFormReady($event)"></app-job-list-form>
+
+      <div class="margin10"></div>
+      <button mat-raised-button color="primary" [disabled]="loading">Save</button>
+      <button mat-raised-button [disabled]="loading" routerLink="/project">Cancel</button>
+    </form>
+</div>

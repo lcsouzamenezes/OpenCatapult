@@ -120,7 +120,7 @@ namespace Polyrific.Catapult.Api.Controllers
 
             try
             {
-                var projectMembers = newProject.Members.Select(m => (m.UserId, m.ProjectMemberRoleId)).ToList();
+                var projectMembers = newProject.Members?.Select(m => (m.UserId, m.ProjectMemberRoleId)).ToList();
                 var currentUserId = User.GetUserId();
 
                 List<ProjectDataModel> models = null;

@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CoreModule } from './core/core.module';
     MatCardModule,
     MatInputModule,
     ReactiveFormsModule,
-    ProjectModule
+    ProjectModule,
+    SharedModule.forRoot()
   ],
   bootstrap: [AppComponent]
 })

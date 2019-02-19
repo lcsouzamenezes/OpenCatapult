@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { ProjectService, ProjectStatusFilterType, ProjectDto } from '@app/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-project',
@@ -21,11 +22,18 @@ export class ProjectComponent implements OnInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private route: ActivatedRoute
     ) { }
 
   ngOnInit() {
     this.getProjects();
+
+    this.route.paramMap.subscribe(() =>
+    {
+      // refresh the project when some dummy param is supplied
+      this.getProjects();
+    })
   }
 
   getProjects() {
