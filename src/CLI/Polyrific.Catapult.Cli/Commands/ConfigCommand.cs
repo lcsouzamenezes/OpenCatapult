@@ -7,10 +7,10 @@ using Polyrific.Catapult.Cli.Commands.Config;
 namespace Polyrific.Catapult.Cli.Commands
 {
     [Command(Description = "Configure the CLI")]
-    [Subcommand("get", typeof(GetCommand))]
-    [Subcommand("set", typeof(SetCommand))]
-    [Subcommand("remove", typeof(RemoveCommand))]
-    [Subcommand("import", typeof(ImportCommand))]
+    [Subcommand(typeof(GetCommand))]
+    [Subcommand(typeof(SetCommand))]
+    [Subcommand(typeof(RemoveCommand))]
+    [Subcommand(typeof(ImportCommand))]
     public class ConfigCommand : BaseCommand
     {
         public ConfigCommand(IConsole console, ILogger<ConfigCommand> logger) : base(console, logger)
