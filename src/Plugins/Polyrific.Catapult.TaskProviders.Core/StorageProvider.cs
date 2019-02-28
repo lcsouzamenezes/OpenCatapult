@@ -3,20 +3,20 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Polyrific.Catapult.Plugins.Core.Configs;
+using Polyrific.Catapult.TaskProviders.Core.Configs;
 using Polyrific.Catapult.Shared.Dto.Constants;
 
-namespace Polyrific.Catapult.Plugins.Core
+namespace Polyrific.Catapult.TaskProviders.Core
 {
-    public abstract class DatabaseProvider : TaskProvider
+    public abstract class StorageProvider : TaskProvider
     {
-        protected DatabaseProvider(string[] args) 
+        protected StorageProvider(string[] args) 
             : base(args)
         {
             ParseArguments();
         }
 
-        public override string Type => PluginType.DatabaseProvider;
+        public override string Type => PluginType.StorageProvider;
 
         public sealed override void ParseArguments()
         {
@@ -30,7 +30,7 @@ namespace Polyrific.Catapult.Plugins.Core
                         ProjectName = ParsedArguments[key].ToString();
                         break;
                     case "config":
-                        Config = JsonConvert.DeserializeObject<DeployDbTaskConfig>(ParsedArguments[key].ToString());
+                        Config = JsonConvert.DeserializeObject<BuildTaskConfig>(ParsedArguments[key].ToString());
                         break;
                     case "additional":
                         AdditionalConfigs = JsonConvert.DeserializeObject<Dictionary<string, string>>(ParsedArguments[key].ToString());
@@ -46,27 +46,27 @@ namespace Polyrific.Catapult.Plugins.Core
             switch (ProcessToExecute)
             {
                 case "pre":
-                    var error = await BeforeDeployDatabase();
+                    var error = await BeforePublishArtifact();
                     if (!string.IsNullOrEmpty(error))
                         result.Add("errorMessage", error);
                     break;
                 case "main":
-                    (string databaseLocation, Dictionary<string, string> outputValues, string errorMessage) = await DeployDatabase();
-                    result.Add("databaseLocation", databaseLocation);
+                    (string storageLocation, Dictionary<string, string> outputValues, string errorMessage) = await PublishArtifact();
+                    result.Add("storageLocation", storageLocation);
                     result.Add("outputValues", outputValues);
                     result.Add("errorMessage", errorMessage);
                     break;
                 case "post":
-                    error = await AfterDeployDatabase();
+                    error = await AfterPublishArtifact();
                     if (!string.IsNullOrEmpty(error))
                         result.Add("errorMessage", error);
                     break;
                 default:
-                    await BeforeDeployDatabase();
-                    (databaseLocation, outputValues, errorMessage) = await DeployDatabase();
-                    await AfterDeployDatabase();
+                    await BeforePublishArtifact();
+                    (storageLocation, outputValues, errorMessage) = await PublishArtifact();
+                    await AfterPublishArtifact();
 
-                    result.Add("databaseLocation", databaseLocation);
+                    result.Add("storageLocation", storageLocation);
                     result.Add("outputValues", outputValues);
                     result.Add("errorMessage", errorMessage);
                     break;
@@ -81,9 +81,9 @@ namespace Polyrific.Catapult.Plugins.Core
         public string ProjectName { get; set; }
 
         /// <summary>
-        /// DeployDb task configuration
+        /// Build task configuration
         /// </summary>
-        public DeployDbTaskConfig Config { get; set; }
+        public BuildTaskConfig Config { get; set; }
 
         /// <summary>
         /// Additional configurations for specific provider
@@ -91,25 +91,25 @@ namespace Polyrific.Catapult.Plugins.Core
         public Dictionary<string, string> AdditionalConfigs { get; set; }
 
         /// <summary>
-        /// Process to run before executing deploy database
+        /// Process to run before publishing artifact
         /// </summary>
         /// <returns></returns>
-        public virtual Task<string> BeforeDeployDatabase()
+        public virtual Task<string> BeforePublishArtifact()
         {
             return Task.FromResult("");
         }
 
         /// <summary>
-        /// Deploy database
+        /// Publish artifact to a storage
         /// </summary>
         /// <returns></returns>
-        public abstract Task<(string databaseLocation, Dictionary<string, string> outputValues, string errorMessage)> DeployDatabase();
+        public abstract Task<(string storageLocation, Dictionary<string, string> outputValues, string errorMessage)> PublishArtifact();
 
         /// <summary>
-        /// Process to run after executing deploy database
+        /// Process to run after publishing artifact
         /// </summary>
         /// <returns></returns>
-        public virtual Task<string> AfterDeployDatabase()
+        public virtual Task<string> AfterPublishArtifact()
         {
             return Task.FromResult("");
         }

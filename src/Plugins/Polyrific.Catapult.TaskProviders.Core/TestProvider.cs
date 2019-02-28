@@ -3,34 +3,31 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Polyrific.Catapult.Plugins.Core.Configs;
+using Polyrific.Catapult.TaskProviders.Core.Configs;
 using Polyrific.Catapult.Shared.Dto.Constants;
 
-namespace Polyrific.Catapult.Plugins.Core
+namespace Polyrific.Catapult.TaskProviders.Core
 {
-    public abstract class HostingProvider : TaskProvider
+    public abstract class TestProvider : TaskProvider
     {
-        protected HostingProvider(string[] args) 
+        protected TestProvider(string[] args) 
             : base(args)
         {
             ParseArguments();
         }
 
-        public override string Type => PluginType.HostingProvider;
+        public override string Type => PluginType.TestProvider;
 
         public sealed override void ParseArguments()
         {
             base.ParseArguments();
-            
+
             foreach (var key in ParsedArguments.Keys)
             {
                 switch (key.ToLower())
                 {
-                    case "project":
-                        ProjectName = ParsedArguments[key].ToString();
-                        break;
                     case "config":
-                        Config = JsonConvert.DeserializeObject<DeployTaskConfig>(ParsedArguments[key].ToString());
+                        Config = JsonConvert.DeserializeObject<TestTaskConfig>(ParsedArguments[key].ToString());
                         break;
                     case "additional":
                         AdditionalConfigs = JsonConvert.DeserializeObject<Dictionary<string, string>>(ParsedArguments[key].ToString());
@@ -46,27 +43,27 @@ namespace Polyrific.Catapult.Plugins.Core
             switch (ProcessToExecute)
             {
                 case "pre":
-                    var error = await BeforeDeploy();
+                    var error = await BeforeTest();
                     if (!string.IsNullOrEmpty(error))
                         result.Add("errorMessage", error);
                     break;
                 case "main":
-                    (string hostLocation, Dictionary<string, string> outputValues, string errorMessage) = await Deploy();
-                    result.Add("hostLocation", hostLocation);
+                    (string testResultLocation, Dictionary<string, string> outputValues, string errorMessage) = await Test();
+                    result.Add("testResultLocation", testResultLocation);
                     result.Add("outputValues", outputValues);
                     result.Add("errorMessage", errorMessage);
                     break;
                 case "post":
-                    error = await AfterDeploy();
+                    error = await AfterTest();
                     if (!string.IsNullOrEmpty(error))
                         result.Add("errorMessage", error);
                     break;
                 default:
-                    await BeforeDeploy();
-                    (hostLocation, outputValues, errorMessage) = await Deploy();
-                    await AfterDeploy();
+                    await BeforeTest();
+                    (testResultLocation, outputValues, errorMessage) = await Test();
+                    await AfterTest();
 
-                    result.Add("hostLocation", hostLocation);
+                    result.Add("testResultLocation", testResultLocation);
                     result.Add("outputValues", outputValues);
                     result.Add("errorMessage", errorMessage);
                     break;
@@ -76,14 +73,9 @@ namespace Polyrific.Catapult.Plugins.Core
         }
 
         /// <summary>
-        /// Name of the project
+        /// Test task configuration
         /// </summary>
-        public string ProjectName { get; set; }
-        
-        /// <summary>
-        /// Deploy task configuration
-        /// </summary>
-        public DeployTaskConfig Config { get; set; }
+        public TestTaskConfig Config { get; set; }
 
         /// <summary>
         /// Additional configurations for specific provider
@@ -91,25 +83,25 @@ namespace Polyrific.Catapult.Plugins.Core
         public Dictionary<string, string> AdditionalConfigs { get; set; }
 
         /// <summary>
-        /// Process to run before executing the deployment
+        /// Process to run before executing test
         /// </summary>
         /// <returns></returns>
-        public virtual Task<string> BeforeDeploy()
+        public virtual Task<string> BeforeTest()
         {
             return Task.FromResult("");
         }
 
         /// <summary>
-        /// Deploy artifact
+        /// Run test scenario
         /// </summary>
         /// <returns></returns>
-        public abstract Task<(string hostLocation, Dictionary<string, string> outputValues, string errorMessage)> Deploy();
+        public abstract Task<(string testResultLocation, Dictionary<string, string> outputValues, string errorMessage)> Test();
 
         /// <summary>
-        /// Process to run after executing deployment
+        /// Process to run after executing test
         /// </summary>
         /// <returns></returns>
-        public virtual Task<string> AfterDeploy()
+        public virtual Task<string> AfterTest()
         {
             return Task.FromResult("");
         }

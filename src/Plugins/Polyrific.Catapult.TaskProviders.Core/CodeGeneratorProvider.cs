@@ -3,11 +3,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Polyrific.Catapult.Plugins.Core.Configs;
+using Polyrific.Catapult.TaskProviders.Core.Configs;
 using Polyrific.Catapult.Shared.Dto.Constants;
 using Polyrific.Catapult.Shared.Dto.ProjectDataModel;
 
-namespace Polyrific.Catapult.Plugins.Core
+namespace Polyrific.Catapult.TaskProviders.Core
 {
     public abstract class CodeGeneratorProvider : TaskProvider
     {
