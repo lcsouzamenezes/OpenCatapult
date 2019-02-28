@@ -3,12 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-      <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
     <PropertyGroup>
-        <OutputPath>..\..\..\..\Engine\Polyrific.Catapult.Engine\bin\$(Configuration)\plugins\TestProvider\Polyrific.Catapult.Plugins.DotNetCoreTest\</OutputPath>
+        <OutputPath>..\..\..\..\Engine\Polyrific.Catapult.Engine\bin\$(Configuration)\plugins\BuildProvider\Polyrific.Catapult.TaskProviders.DotNetCore\</OutputPath>
     </PropertyGroup>
 
   <ItemGroup>
