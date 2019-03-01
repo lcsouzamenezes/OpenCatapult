@@ -280,8 +280,34 @@ namespace Polyrific.Catapult.Api.UnitTests.Core.Services
         }
 
         [Fact]
+        public async void UpdateJobQueueWithProjectId_ValidItem()
+        {
+            _jobQueueRepository.Setup(r =>
+                    r.GetSingleBySpec(It.IsAny<JobQueueFilterSpecification>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync((JobQueueFilterSpecification spec, CancellationToken cancellationToken) =>
+                    _data.FirstOrDefault(spec.Criteria.Compile()));
+
+            var jobQueueService = new JobQueueService(_jobQueueRepository.Object, _projectRepository.Object, _jobCounterService.Object, _textWriter.Object);
+            await jobQueueService.UpdateJobQueue(new JobQueue
+            {
+                Id = 1,
+                ProjectId = 1,
+                CatapultEngineId = "1"
+            });
+
+            var jobQueue = _data.First(d => d.Id == 1);
+
+            Assert.Equal("1", jobQueue.CatapultEngineId);
+        }
+
+        [Fact]
         public async void UpdateJobQueue_ValidItem()
         {
+            _jobQueueRepository.Setup(r =>
+                    r.GetSingleBySpec(It.IsAny<JobQueueFilterSpecification>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync((JobQueueFilterSpecification spec, CancellationToken cancellationToken) =>
+                    _data.FirstOrDefault(spec.Criteria.Compile()));
+
             var jobQueueService = new JobQueueService(_jobQueueRepository.Object, _projectRepository.Object, _jobCounterService.Object, _textWriter.Object);
             await jobQueueService.UpdateJobQueue(new JobQueue
             {
@@ -298,6 +324,11 @@ namespace Polyrific.Catapult.Api.UnitTests.Core.Services
         [Fact]
         public void UpdateJobQueue_JobProcessedByOtherEngineException()
         {
+            _jobQueueRepository.Setup(r =>
+                    r.GetSingleBySpec(It.IsAny<JobQueueFilterSpecification>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync((JobQueueFilterSpecification spec, CancellationToken cancellationToken) =>
+                    _data.FirstOrDefault(spec.Criteria.Compile()));
+
             _data.Add(new JobQueue
             {
                 Id = 2,
@@ -311,7 +342,7 @@ namespace Polyrific.Catapult.Api.UnitTests.Core.Services
             var exception = Record.ExceptionAsync(() => jobQueueService.UpdateJobQueue(new JobQueue
             {
                 Id = 2,
-                ProjectId = 1,
+                ProjectId = 0,
                 JobType = JobType.Update,
                 Status = JobStatus.Processing,
                 CatapultEngineId = "2"

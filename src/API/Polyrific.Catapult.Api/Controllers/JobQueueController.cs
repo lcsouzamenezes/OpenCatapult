@@ -196,11 +196,36 @@ namespace Polyrific.Catapult.Api.Controllers
         /// <summary>
         /// Update a job queue
         /// </summary>
+        /// <param name="projectId">Id of the project</param>
+        /// <param name="queueId">Id of the job queue</param>
+        /// <param name="job">Update job queue request body</param>
+        /// <returns></returns>
+        [HttpPut("Project/{projectId}/queue/{queueId}")]
+        [Authorize(Policy = AuthorizePolicy.ProjectMaintainerAccess)]
+        public async Task<IActionResult> UpdateJobQueue(int projectId, int queueId, UpdateJobDto job)
+        {
+            _logger.LogInformation("Update job queue {queueId} in project {projectId}", queueId, projectId);
+
+            if (queueId != job.Id)
+            {
+                return BadRequest("Queue Id doesn't match.");
+            }
+
+            var entity = _mapper.Map<JobQueue>(job);
+            entity.ProjectId = projectId;
+            await _jobQueueService.UpdateJobQueue(entity);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Update a job queue
+        /// </summary>
         /// <param name="queueId">Id of the job queue</param>
         /// <param name="job">Update job queue request body</param>
         /// <returns></returns>
         [HttpPut("Queue/{queueId}")]
-        [Authorize(Policy = AuthorizePolicy.UserRoleEngineAccess)]
+        [Authorize(Policy = AuthorizePolicy.UserRoleBasicEngineAccess)]
         public async Task<IActionResult> UpdateJobQueue(int queueId, UpdateJobDto job)
         {
             if (!await CheckEngineStatus())
@@ -252,6 +277,24 @@ namespace Polyrific.Catapult.Api.Controllers
                 _logger.LogWarning(ex, "Filter type not found");
                 return BadRequest(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Get a job log
+        /// </summary>
+        /// <param name="projectId">Id of the project</param>
+        /// <param name="queueId">Id of the job queue</param>
+        /// <param name="taskName">Name of the task</param>
+        /// <returns>Text log of a job</returns>
+        [HttpGet("Project/{projectId}/queue/{queueId}/task/name/{taskName}/logs")]
+        [Authorize(Policy = AuthorizePolicy.ProjectMaintainerAccess)]
+        public async Task<IActionResult> GetTaskLogs(int projectId, int queueId, string taskName)
+        {
+            _logger.LogInformation("Getting logs for task {taskName} in job queue {queueId}", taskName, queueId);
+
+            var logs = await _jobQueueService.GetTaskLogs(projectId, queueId, taskName);
+
+            return Ok(logs);
         }
 
         /// <summary>
