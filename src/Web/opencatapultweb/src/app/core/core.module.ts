@@ -14,6 +14,8 @@ import { DataModelService } from './services/data-model.service';
 import { JobQueueService } from './services/job-queue.service';
 import { JobDefinitionService } from './services/job-definition.service';
 import { SignalrService } from './services/signalr.service';
+import { MemberService } from './services/member.service';
+import { AccountService } from './services/account.service';
 
 @NgModule({
   declarations: [],
@@ -33,7 +35,9 @@ import { SignalrService } from './services/signalr.service';
     DataModelService,
     JobQueueService,
     JobDefinitionService,
-    SignalrService
+    SignalrService,
+    MemberService,
+    AccountService
   ]
 })
 export class CoreModule {
