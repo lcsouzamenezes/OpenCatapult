@@ -1,10 +1,22 @@
-.dockerignore
+# IDE and tools settings
 .env
 .git
 .gitignore
+.github
+.idea
 .vs
 .vscode
+
+# docker files
+.dockerignore
 docker-compose.yml
 docker-compose.*.yml
+
+# build output folders
 */bin
 */obj
+*/logs
+*/publish
+
+# env-specific settings
+*/appsettings.*.json

@@ -3,12 +3,12 @@ version: '3.4'
 services:
   polyrific.catapult.api:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_HTTPS_PORT=44306
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ASPNETCORE_URLS=${ASPNETCORE_URLS}
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=${ASPNETCORE_HTTPS_PATH}/${CERTIFICATE_FILE}
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERTIFICATE_PASSWORD}
     ports:
-      - "63042:80"
-      - "44306:443"
+      - ${LOCAL_HTTP_PORT}:80
+      - ${LOCAL_HTTPS_PORT}:443
     volumes:
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${LOCAL_HTTPS_PATH}:${ASPNETCORE_HTTPS_PATH}:ro

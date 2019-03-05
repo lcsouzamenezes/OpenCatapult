@@ -1,9 +1,7 @@
-FROM microsoft/dotnet:aspnetcore-runtime AS base
+FROM microsoft/dotnet:2.1.8-aspnetcore-runtime AS base
 WORKDIR /app
-EXPOSE 63042
-EXPOSE 44306
 
-FROM microsoft/dotnet:sdk AS build
+FROM microsoft/dotnet:2.1.504-sdk AS build
 WORKDIR /src
 COPY src/API/Polyrific.Catapult.Api/Polyrific.Catapult.Api.csproj src/API/Polyrific.Catapult.Api/
 COPY src/Shared/Polyrific.Catapult.Shared.Common/Polyrific.Catapult.Shared.Common.csproj src/Shared/Polyrific.Catapult.Shared.Common/
