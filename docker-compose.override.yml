@@ -1,14 +1,24 @@
 version: '3.4'
 
 services:
-  polyrific.catapult.api:
+  api:
+    container_name: ${API_CONTAINER_NAME}
     environment:
       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
       - ASPNETCORE_URLS=${ASPNETCORE_URLS}
       - ASPNETCORE_Kestrel__Certificates__Default__Path=${ASPNETCORE_HTTPS_PATH}/${CERTIFICATE_FILE}
       - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERTIFICATE_PASSWORD}
+      - ConnectionStrings__DefaultConnection=${CONNECTION_STRING}
     ports:
       - ${LOCAL_HTTP_PORT}:80
       - ${LOCAL_HTTPS_PORT}:443
     volumes:
       - ${LOCAL_HTTPS_PATH}:${ASPNETCORE_HTTPS_PATH}:ro
+  mssqldb:
+    container_name: ${MSSQLDB_CONTAINER_NAME}
+    environment:
+      - SA_PASSWORD=${SA_PASSWORD}
+    ports:
+      - 1433:1433
+    volumes:
+      - ${LOCAL_MSSQL_PATH}:/var/opt/mssql
