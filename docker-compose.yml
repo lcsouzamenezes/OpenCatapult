@@ -1,14 +1,20 @@
 version: '3.4'
 
 services:
+  mssqldb:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+      ACCEPT_EULA: "Y"
+    healthcheck:
+      test: ["CMD", "sqlcmd", "-U", "sa", "-P", $SA_PASSWORD, "-Q", "select 1"]
+      interval: 1s
+      retries: 20
   api:
     image: polyrific/opencatapult:1.0.0-beta2-api
     build:
       context: .
       dockerfile: src/API/Polyrific.Catapult.Api/Dockerfile
     depends_on:
-      - mssqldb
-  mssqldb:
-    image: "mcr.microsoft.com/mssql/server:2017-latest"
-    environment:
-      - ACCEPT_EULA="Y"
+      mssqldb:
+        condition: service_healthy
+  

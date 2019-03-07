@@ -18,8 +18,9 @@ RUN dotnet build Polyrific.Catapult.Api.csproj -c Release -o /app
 
 FROM build AS publish
 RUN dotnet publish Polyrific.Catapult.Api.csproj -c Release -o /app
+COPY builds/api-docker-entrypoint.sh /app/
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "ocapi.dll"]
+ENTRYPOINT ["api-docker-entrypoint.sh"]
