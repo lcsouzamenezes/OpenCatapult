@@ -6,6 +6,7 @@ using System.Web;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Polyrific.Catapult.Api.Core.Entities;
 using Polyrific.Catapult.Api.Core.Exceptions;
@@ -27,7 +28,11 @@ namespace Polyrific.Catapult.Api.Controllers
         private readonly INotificationProvider _notificationProvider;
         private readonly ILogger _logger;
 
-        public AccountController(IUserService service, IMapper mapper, INotificationProvider notificationProvider, ILogger<AccountController> logger)
+        public AccountController(
+            IUserService service, 
+            IMapper mapper, 
+            INotificationProvider notificationProvider,
+            ILogger<AccountController> logger)
         {
             _userService = service;
             _mapper = mapper;
@@ -322,17 +327,37 @@ namespace Polyrific.Catapult.Api.Controllers
 
             var token = await _userService.GetResetPasswordToken(user.Id);
 
-            await _notificationProvider.SendNotification(new SendNotificationRequest
+            var originUrl = Request.Headers["Origin"];
+
+            if (!string.IsNullOrEmpty(originUrl))
             {
-                MessageType = NotificationConfig.ResetPassword,
-                Emails = new List<string>
+
+                await _notificationProvider.SendNotification(new SendNotificationRequest
+                {
+                    MessageType = NotificationConfig.ResetPasswordWeb,
+                    Emails = new List<string>
                         {
                             user.Email
                         }
-            }, new Dictionary<string, string>
+                }, new Dictionary<string, string>
+                    {
+                        {MessageParameter.ResetPasswordLink, $"{originUrl}/reset-password?email={email}&token={HttpUtility.UrlEncode(token)}"}
+                    });
+            }
+            else
+            {
+                await _notificationProvider.SendNotification(new SendNotificationRequest
+                {
+                    MessageType = NotificationConfig.ResetPassword,
+                    Emails = new List<string>
+                        {
+                            user.Email
+                        }
+                }, new Dictionary<string, string>
                     {
                         {MessageParameter.ResetPasswordToken, token}
                     });
+            }
 
             return Ok();
         }

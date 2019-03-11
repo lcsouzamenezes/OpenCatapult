@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Polyrific.Catapult.Api.Controllers;
@@ -393,13 +394,55 @@ namespace Polyrific.Catapult.Api.UnitTests.Controllers
             _notificationProvider.Setup(n => n.SendNotification(It.IsAny<SendNotificationRequest>(), It.IsAny<Dictionary<string, string>>()))
                 .Returns(Task.CompletedTask);
 
+            var httpContext = new DefaultHttpContext();
+            httpContext.Request.Headers["Origin"] = "";
+            var controllerContext = new ControllerContext()
+            {
+                HttpContext = httpContext,
+            };
+
             var controller = new AccountController(_userService.Object, _mapper, _notificationProvider.Object,
-                _logger.Object);
+                _logger.Object)
+            {
+                ControllerContext = controllerContext
+            };
 
             var result = await controller.ResetPassword("test@test.com");
 
             Assert.IsType<OkResult>(result);
-            _notificationProvider.Verify(n => n.SendNotification(It.IsAny<SendNotificationRequest>(), It.IsAny<Dictionary<string, string>>()), Times.Once);
+            _notificationProvider.Verify(n => 
+                n.SendNotification(It.Is<SendNotificationRequest>(p => p.MessageType == NotificationConfig.ResetPassword), 
+                    It.IsAny<Dictionary<string, string>>()), Times.Once);
+        }
+
+        [Fact]
+        public async void ResetPassword_WebOrigin_ReturnSuccess()
+        {
+            _userService.Setup(s => s.GetResetPasswordToken(It.IsAny<int>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync("xxx");
+            _userService.Setup(s => s.GetUserByEmail(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync((string email, CancellationToken cancellationToken) => new User(email));
+            _notificationProvider.Setup(n => n.SendNotification(It.IsAny<SendNotificationRequest>(), It.IsAny<Dictionary<string, string>>()))
+                .Returns(Task.CompletedTask);
+            
+            var httpContext = new DefaultHttpContext();
+            httpContext.Request.Headers["Origin"] = "http://localhost";
+            var controllerContext = new ControllerContext()
+            {
+                HttpContext = httpContext,
+            };
+
+            var controller = new AccountController(_userService.Object, _mapper, _notificationProvider.Object, _logger.Object)
+                {
+                    ControllerContext = controllerContext
+                };
+
+            var result = await controller.ResetPassword("test@test.com");
+
+            Assert.IsType<OkResult>(result);
+            _notificationProvider.Verify(n => 
+                n.SendNotification(It.Is<SendNotificationRequest>(p => p.MessageType == NotificationConfig.ResetPasswordWeb), 
+                    It.IsAny<Dictionary<string, string>>()), Times.Once);
         }
 
         [Fact]
