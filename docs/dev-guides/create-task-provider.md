@@ -2,7 +2,7 @@
 
 Here we will guide you into creating your own custom task provider. We will create a simple code generator provider that will generate an angular website. We will create the provider using dotnet core framework, though you can also create it using .NET Framework.
 
-> You can find the code in this tutorial in our GitHub repository: https://github.com/Polyrific-Inc/Polyrific.Catapult.Plugins.Angular/tree/tutorial-part-1
+> You can find the code in this tutorial in our GitHub repository: https://github.com/Polyrific-Inc/Polyrific.Catapult.TaskProviders.Angular/tree/tutorial-part-1
 
 ## Prerequisites
 - A code editor. We will use [Visual Studio Code](https://code.visualstudio.com/download) in this example
@@ -14,17 +14,17 @@ Here we will guide you into creating your own custom task provider. We will crea
 ## Create the provider project
 Create a new dotnet core console project by using the dotnet cli:
 ```sh
-dotnet new console --name Polyrific.Catapult.Plugins.Angular
+dotnet new console --name Polyrific.Catapult.TaskProviders.Angular
 ``` 
 
 Go into your project folder:
 ```sh
-cd Polyrific.Catapult.Plugins.Angular
+cd Polyrific.Catapult.TaskProviders.Angular
 ```
 
-Next, you'd need to add the plugin core library that is available on [nuget](https://www.nuget.org/packages/Polyrific.Catapult.Plugins.Core/)
+Next, you'd need to add the plugin core library that is available on [nuget](https://www.nuget.org/packages/Polyrific.Catapult.TaskProviders.Core/)
 ```sh
-dotnet add package Polyrific.Catapult.Plugins.Core --version 1.0.0-beta1-15556
+dotnet add package Polyrific.Catapult.TaskProviders.Core --version 1.0.0-beta2-*
 ```
 
 Angular follows the kebab naming convention for its components. Since the model names that are provided might not follow this convention, we need to convert those name into kebab case. To do this, we can use the [humanizer](https://github.com/Humanizr/Humanizer) library:
@@ -41,7 +41,7 @@ code .
 ### Add plugin.yml
 Create a new file inside the project folder named `plugin.yml`. This is the metadata of our task provider. It describe the name of the task provider, the additional configs that can be passed, and any [external services](../user-guides/external-services.md) that it requires.
 ```yml
-name: 'Polyrific.Catapult.Plugins.Angular'
+name: 'Polyrific.Catapult.TaskProviders.Angular'
 type: 'GeneratorProvider'
 author: 'Polyrific'
 version: '1.0.0'
@@ -57,12 +57,12 @@ additional-configs:
 Note that we have an additional configs `Title`. This is an optional config that will be used by our task provider to set the title of our angular website. Though, we'd not use this config until [Part 2](./create-task-provider-2.md).
 
 ### Prepare the csproj
-First, let's set the language version to c# 7.1. This will allow us to have async main method. Add the following line to the `<PropertyGroup>` section in `Polyrific.Catapult.Plugins.Angular.csproj` file:
+First, let's set the language version to c# 7.1. This will allow us to have async main method. Add the following line to the `<PropertyGroup>` section in `Polyrific.Catapult.TaskProviders.Angular.csproj` file:
 ```xml
 <LangVersion>7.1</LangVersion>
 ```
 
-The `Polyrific.Catapult.Plugins.Angular.csproj` file should like this:
+The `Polyrific.Catapult.TaskProviders.Angular.csproj` file should like this:
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
 
@@ -74,7 +74,7 @@ The `Polyrific.Catapult.Plugins.Angular.csproj` file should like this:
 
   <ItemGroup>
     <PackageReference Include="Humanizer.Core" Version="2.5.16" />
-    <PackageReference Include="Polyrific.Catapult.Plugins.Core" Version="1.0.0-beta1-15556" />
+    <PackageReference Include="Polyrific.Catapult.TaskProviders.Core" Version="1.0.0-beta2-*" />
   </ItemGroup>
 
 </Project>
@@ -88,9 +88,9 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Polyrific.Catapult.Plugins.Core;
+using Polyrific.Catapult.TaskProviders.Core;
 
-namespace Polyrific.Catapult.Plugins.Angular
+namespace Polyrific.Catapult.TaskProviders.Angular
 {
   class Program : CodeGeneratorProvider
   {
@@ -98,7 +98,7 @@ namespace Polyrific.Catapult.Plugins.Angular
     {
     }
 
-    public override string Name => "Polyrific.Catapult.Plugins.Angular";
+    public override string Name => "Polyrific.Catapult.TaskProviders.Angular";
 
     static void Main(string[] args)
     {
@@ -183,9 +183,9 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Humanizer;
-using Polyrific.Catapult.Plugins.Core;
+using Polyrific.Catapult.TaskProviders.Core;
 
-namespace Polyrific.Catapult.Plugins.Angular
+namespace Polyrific.Catapult.TaskProviders.Angular
 {
   class Program : CodeGeneratorProvider
   {
@@ -193,7 +193,7 @@ namespace Polyrific.Catapult.Plugins.Angular
     {
     }
 
-    public override string Name => "Polyrific.Catapult.Plugins.Angular";
+    public override string Name => "Polyrific.Catapult.TaskProviders.Angular";
 
     static async Task Main(string[] args)
     {
