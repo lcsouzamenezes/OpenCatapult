@@ -19,6 +19,7 @@ namespace Polyrific.Catapult.Engine.Core
         private readonly IHealthService _healthService;
         private readonly IJobQueueService _jobQueueService;
         private readonly IJobDefinitionService _jobDefinitionService;
+        private readonly IProjectService _projectService;
         private readonly IJobLogWriter _jobLogWriter;
         private readonly ILogger<CatapultEngine> _logger;
 
@@ -27,6 +28,7 @@ namespace Polyrific.Catapult.Engine.Core
             IHealthService healthService,
             IJobQueueService jobQueueService, 
             IJobDefinitionService jobDefinitionService,
+            IProjectService projectService,
             IJobLogWriter jobLogWriter,
             ILogger<CatapultEngine> logger)
         {
@@ -35,6 +37,7 @@ namespace Polyrific.Catapult.Engine.Core
             _healthService = healthService;
             _jobQueueService = jobQueueService;
             _jobDefinitionService = jobDefinitionService;
+            _projectService = projectService;
             _jobLogWriter = jobLogWriter;
             _logger = logger;
         }
@@ -64,6 +67,14 @@ namespace Polyrific.Catapult.Engine.Core
                         jobQueue.Status = JobStatus.Error;
                     else
                         jobQueue.Status = JobStatus.Completed;
+
+                    if (jobQueue.Status == JobStatus.Completed && 
+                        jobQueue.IsDeletion && 
+                        jobQueue.ProjectStatus == ProjectStatusFilterType.Deleting)
+                    {
+                        _logger.LogInformation($"Deleting project {jobQueue.ProjectId}");
+                        await _projectService.DeleteProject(jobQueue.ProjectId);
+                    }
                 }
                 catch (Exception ex)
                 {
