@@ -122,6 +122,56 @@ namespace Polyrific.Catapult.Api.Data.Migrations
                     );
                 });
 
+            modelBuilder.Entity("Polyrific.Catapult.Api.Core.Entities.HelpContext", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Section");
+
+                    b.Property<int>("Sequence");
+
+                    b.Property<string>("SubSection");
+
+                    b.Property<DateTime?>("Updated");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HelpContexts");
+
+                    b.HasData(
+                        new { Id = 1, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d65", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "Project", Sequence = 0 },
+                        new { Id = 2, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d66", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "Project", Sequence = 0, SubSection = "Create Project" },
+                        new { Id = 3, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d67", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "Project", Sequence = 0, SubSection = "Project List" },
+                        new { Id = 4, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d68", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "ProjectModel", Sequence = 0 },
+                        new { Id = 5, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d69", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "ProjectModel", Sequence = 0, SubSection = "Properties" },
+                        new { Id = 6, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d70", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "ProjectModelProperty", Sequence = 0 },
+                        new { Id = 7, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d71", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "JobDefinition", Sequence = 0 },
+                        new { Id = 8, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d72", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "JobDefinition", Sequence = 0, SubSection = "Job Task" },
+                        new { Id = 9, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d73", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "JobDefinition", Sequence = 0, SubSection = "Job Queue" },
+                        new { Id = 10, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d74", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "JobTaskDefinition", Sequence = 0 },
+                        new { Id = 11, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d75", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "JobQueue", Sequence = 0 },
+                        new { Id = 12, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d76", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "JobQueue", Sequence = 0, SubSection = "Logs" },
+                        new { Id = 13, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d77", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "JobQueue", Sequence = 0, SubSection = "Detail" },
+                        new { Id = 14, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d78", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "ProjectMember", Sequence = 0 },
+                        new { Id = 15, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d79", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "ProjectMember", Sequence = 0, SubSection = "Project Role" },
+                        new { Id = 16, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d7a", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "ExternalService", Sequence = 0 },
+                        new { Id = 17, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d7b", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "ExternalService", Sequence = 0, SubSection = "External Service Type" },
+                        new { Id = 18, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d7c", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "Engine", Sequence = 0 },
+                        new { Id = 19, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d7d", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "Engine", Sequence = 0, SubSection = "Engine Token" },
+                        new { Id = 20, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d7e", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "TaskProvider", Sequence = 0 },
+                        new { Id = 21, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d7f", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "User", Sequence = 0 },
+                        new { Id = 22, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d80", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "User", Sequence = 0, SubSection = "User Role" },
+                        new { Id = 23, ConcurrencyStamp = "504200ee-f48a-4efa-be48-e09d16ee8d81", Created = new DateTime(2018, 9, 19, 8, 14, 52, 52, DateTimeKind.Utc), Section = "UserProfile", Sequence = 0 }
+                    );
+                });
+
             modelBuilder.Entity("Polyrific.Catapult.Api.Core.Entities.JobCounter", b =>
                 {
                     b.Property<int>("Id")
