@@ -33,7 +33,8 @@ namespace Polyrific.Catapult.Cli.UnitTests.Commands
                 new UserDto
                 {
                     Id = "1",
-                    Email = "user1@opencatapult.net"
+                    Email = "user1@opencatapult.net",
+                    UserName = "user1@opencatapult.net"
                 }
             };
 
@@ -42,7 +43,6 @@ namespace Polyrific.Catapult.Cli.UnitTests.Commands
 
             _accountService = new Mock<IAccountService>();
             _accountService.Setup(s => s.GetUsers(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(users);
-            _accountService.Setup(s => s.GetUserByEmail(It.IsAny<string>())).ReturnsAsync((string email) => users.FirstOrDefault(u => u.Email == email));
             _accountService.Setup(s => s.GetUserByUserName(It.IsAny<string>())).ReturnsAsync((string userName) => users.FirstOrDefault(u => u.UserName == userName));
             _accountService.Setup(s => s.RemoveUser(It.IsAny<int>())).Returns(Task.CompletedTask).Callback((int id) =>
             {
