@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Polyrific, Inc 2018. All rights reserved.
 
+using Microsoft.Extensions.Configuration;
 using Moq;
 using Polyrific.Catapult.Api.Core.Entities;
 using Polyrific.Catapult.Api.Core.Exceptions;

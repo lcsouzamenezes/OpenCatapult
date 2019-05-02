@@ -295,6 +295,7 @@ namespace Polyrific.Catapult.Api.Core.Services
 
             var users = await _userRepository.GetUsersByIds(jobQueue.Project.Members.Select(m => m.UserId).ToArray());
 
+            var jobQueueWebUrl = $"{webUrl}/project/{jobQueue.ProjectId}/job-queue/{jobQueueId}";
             await _notificationProvider.SendNotification(new SendNotificationRequest
             {
                 MessageType = NotificationConfig.JobQueueCompleted,
@@ -306,7 +307,7 @@ namespace Polyrific.Catapult.Api.Core.Services
                         {MessageParameter.ProjectName, jobQueue.Project.Name},
                         {MessageParameter.JobStatus, jobQueue.Status},
                         {MessageParameter.Remarks, jobQueue.Remarks},
-                        {MessageParameter.WebUrl, webUrl},
+                        {MessageParameter.WebUrl, jobQueueWebUrl},
                         {MessageParameter.JobTaskStatus, GenerateJobTaskStatusNotificationMessage(jobQueue.JobTasksStatus)}
                     });
         }

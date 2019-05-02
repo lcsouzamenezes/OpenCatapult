@@ -3,6 +3,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Polyrific.Catapult.Api.Core.Exceptions;
 using Polyrific.Catapult.Api.Core.Services;
@@ -20,22 +21,19 @@ namespace Polyrific.Catapult.Api.Controllers
     public class ProjectMemberController : ControllerBase
     {
         private readonly IProjectMemberService _projectMemberService;
-        private readonly IUserService _userService;
-        private readonly INotificationProvider _notificationProvider;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
         private readonly ILogger _logger;
 
         public ProjectMemberController(
             IProjectMemberService projectMemberService,
-            IUserService userService,
-            INotificationProvider notificationProvider,
             IMapper mapper, 
+            IConfiguration configuration,
             ILogger<ProjectMemberController> logger)
         {
             _projectMemberService = projectMemberService;
-            _userService = userService;
-            _notificationProvider = notificationProvider;
             _mapper = mapper;
+            _configuration = configuration;
             _logger = logger;
         }
 
@@ -87,37 +85,13 @@ namespace Polyrific.Catapult.Api.Controllers
                 }
                 else
                 {
-                    var temporaryPassword = await _userService.GeneratePassword();
-
                     (newProjectMemberId, newUserId) = await _projectMemberService.AddProjectMember(newProjectMember.ProjectId, 
                         newProjectMember.Email, 
                         newProjectMember.FirstName, 
                         newProjectMember.LastName, 
                         newProjectMember.ExternalAccountIds,
-                        temporaryPassword,
-                        newProjectMember.ProjectMemberRoleId);
-
-                    if (newUserId > 0)
-                    {
-                        var token = await _userService.GenerateConfirmationToken(newUserId);
-                        string confirmToken = HttpUtility.UrlEncode(token);
-
-                        // TODO: We might need to change the confirm url into the web UI url, when it's ready
-                        var confirmUrl = $"{this.Request.Scheme}://{Request.Host}/account/{newUserId}/confirm?token={confirmToken}";
-                        await _notificationProvider.SendNotification(new SendNotificationRequest
-                        {
-                            MessageType = NotificationConfig.RegistrationCompleted,
-                            Emails = new List<string>
-                        {
-                            newProjectMember.Email
-                        }
-                        }, new Dictionary<string, string>
-                        {
-                            {MessageParameter.ConfirmUrl, confirmUrl},
-                            {MessageParameter.UserName, newProjectMember.Email },
-                            {MessageParameter.TemporaryPassword, temporaryPassword}
-                        });
-                    }
+                        newProjectMember.ProjectMemberRoleId,
+                        _configuration[ConfigurationKey.WebUrl]);
                 }
 
                 var projectMember = await _projectMemberService.GetProjectMemberById(newProjectMemberId);
@@ -130,6 +104,11 @@ namespace Polyrific.Catapult.Api.Controllers
             {
                 _logger.LogWarning(userEx, "User not found");
                 return BadRequest(userEx.Message);
+            }
+            catch (UserCreationFailedException userCreateEx)
+            {
+                _logger.LogWarning(userCreateEx, "User creation failed");
+                return BadRequest(userCreateEx.Message);
             }
             catch (DuplicateUserEmailException dupUserEx)
             {
