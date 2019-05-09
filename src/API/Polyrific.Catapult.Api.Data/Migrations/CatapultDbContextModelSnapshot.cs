@@ -666,6 +666,8 @@ namespace Polyrific.Catapult.Api.Data.Migrations
 
                     b.Property<DateTime>("Created");
 
+                    b.Property<string>("DatabaseTableName");
+
                     b.Property<string>("Description");
 
                     b.Property<bool?>("IsManaged");
@@ -702,6 +704,10 @@ namespace Polyrific.Catapult.Api.Data.Migrations
 
                     b.Property<string>("DataType");
 
+                    b.Property<string>("DatabaseColumnName");
+
+                    b.Property<bool>("IsKey");
+
                     b.Property<bool?>("IsManaged");
 
                     b.Property<bool>("IsRequired");
@@ -715,6 +721,8 @@ namespace Polyrific.Catapult.Api.Data.Migrations
                     b.Property<int?>("RelatedProjectDataModelId");
 
                     b.Property<string>("RelationalType");
+
+                    b.Property<int?>("Sequence");
 
                     b.Property<DateTime?>("Updated");
 
