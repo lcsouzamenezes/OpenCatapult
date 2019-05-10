@@ -6,6 +6,7 @@ import { SnackbarService, ConfirmationWithInputDialogComponent, ConfirmationDial
 import { JobDefinitionNewDialogComponent } from '../components/job-definition-new-dialog/job-definition-new-dialog.component';
 import { JobDefinitionInfoDialogComponent } from '../components/job-definition-info-dialog/job-definition-info-dialog.component';
 import { JobTaskDefinitionNewDialogComponent } from '../components/job-task-definition-new-dialog/job-task-definition-new-dialog.component';
+import { MessageDialogComponent } from '@app/shared/components/message-dialog/message-dialog.component';
 
 interface JobDefinitionViewModel extends JobDefinitionDto {
   selected: boolean;
@@ -67,7 +68,8 @@ export class JobDefinitionComponent implements OnInit {
     const dialogRef = this.dialog.open(JobDefinitionNewDialogComponent, {
       data: {
         projectId: this.projectId
-      }
+      },
+      minWidth: 480
     });
 
     dialogRef.afterClosed().subscribe(success => {
@@ -135,8 +137,11 @@ export class JobDefinitionComponent implements OnInit {
           originUrl: window.location.origin
         }).subscribe(data => this.router.navigateByUrl(`project/${this.projectId}/job-queue`),
           err => {
-            this.snackbar.open(err, null, {
-              duration: 3000
+            this.dialog.open(MessageDialogComponent, {
+              data: {
+                title: 'Queue Job Failed',
+                message: `${err}\n\nPlease make sure each task configuration is properly set.`
+              }
             });
           });
       }
@@ -211,5 +216,13 @@ export class JobDefinitionComponent implements OnInit {
       this.getJobTaskDefinitions(jobDefinition);
       jobDefinition.expanded = true;
     }
+  }
+
+  onSetDefaultClick(jobDefinition: JobDefinitionDto) {
+    this.jobDefinitionService.setJobDefinitionAsDefault(this.projectId, jobDefinition.id)
+      .subscribe(data => {
+        this.snackbar.open(`Job ${jobDefinition.name} is set to default`);
+        this.getJobDefinitions();
+      }, err => this.snackbar.open(err));
   }
 }
