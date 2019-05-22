@@ -41,12 +41,12 @@ namespace Polyrific.Catapult.Engine.Core
         public const string JobCheckingIntervalKey = "JobCheckingInterval";
         public int JobCheckingInterval => GetConfigIntegerValue(JobCheckingIntervalKey, 30);
 
-        public const string PluginsLocationKey = "PluginsLocation";
-        public string PluginsLocation => GetConfigValue(PluginsLocationKey, Path.Combine(AppContext.BaseDirectory, "plugins"));
+        public const string TaskProvidersLocationKey = "TaskProvidersLocation";
+        public string TaskProvidersLocation => GetConfigValue(TaskProvidersLocationKey, Path.Combine(AppContext.BaseDirectory, "taskproviders"));
 
         public const string WorkingLocationKey = "WorkingLocation";
         public string WorkingLocation => GetConfigValue(WorkingLocationKey, Path.Combine(AppContext.BaseDirectory, "working"));
-        
+
         public Dictionary<string, string> Configs => _configs;
 
         public async Task Load()
@@ -66,7 +66,7 @@ namespace Polyrific.Catapult.Engine.Core
         public async Task Save()
         {
             _logger.LogInformation("Saving configs into config file..");
-            await FileHelper.WriteAllTextAsync(EngineConfigFile, JsonConvert.SerializeObject(new { EngineConfig = _configs}));
+            await FileHelper.WriteAllTextAsync(EngineConfigFile, JsonConvert.SerializeObject(new { EngineConfig = _configs }));
         }
 
         public string GetValue(string configName)
@@ -179,7 +179,7 @@ namespace Polyrific.Catapult.Engine.Core
             else
                 _configs.Add(key, value.ToString());
         }
-        
+
         /// <summary>
         /// Get engine config default values
         /// </summary>
@@ -192,7 +192,7 @@ namespace Polyrific.Catapult.Engine.Core
                 {ApiRequestTimeoutKey, "00:01:00"},
                 {AuthorizationTokenKey, ""},
                 {JobCheckingIntervalKey, "30"},
-                {PluginsLocationKey, Path.Combine(AppContext.BaseDirectory, "plugins")},
+                {TaskProvidersLocationKey, Path.Combine(AppContext.BaseDirectory, "taskproviders")},
                 {WorkingLocationKey, Path.Combine(AppContext.BaseDirectory, "working")}
             };
 
