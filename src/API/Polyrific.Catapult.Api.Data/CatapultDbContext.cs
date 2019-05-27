@@ -46,6 +46,8 @@ namespace Polyrific.Catapult.Api.Data
 
         public virtual DbSet<ExternalAccountType> ExternalAccountType { get; set; }
 
+        public virtual DbSet<ApplicationSetting> ApplicationSettings { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -78,6 +80,7 @@ namespace Polyrific.Catapult.Api.Data
             modelBuilder.ApplyConfiguration(new TaskProviderTagConfig());
             modelBuilder.ApplyConfiguration(new HelpContextConfig());
             modelBuilder.ApplyConfiguration(new ExternalAccountTypeConfig());
+            modelBuilder.ApplyConfiguration(new ApplicationSettingConfig());
         }
     }
 }

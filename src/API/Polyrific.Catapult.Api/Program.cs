@@ -1,13 +1,14 @@
 ﻿// Copyright (c) Polyrific, Inc 2018. All rights reserved.
 
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Serilog;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Polyrific.Catapult.Api.Infrastructure;
+using Serilog;
 
 namespace Polyrific.Catapult.Api
 {
@@ -20,7 +21,7 @@ namespace Polyrific.Catapult.Api
             _isService = args.Contains("--service");
 
             Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(GetConfiguration(_isService))
+                .ReadFrom.Configuration(GetConfiguration())
                 .CreateLogger();
 
             try
@@ -52,12 +53,13 @@ namespace Polyrific.Catapult.Api
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseConfiguration(GetConfiguration(_isService))
+                .UseConfiguration(GetConfiguration())
+                .ConfigureAppConfiguration(AddDbConfiguration)
                 .UseSerilog();
 
-        public static IConfiguration GetConfiguration(bool isService) {
+        public static IConfiguration GetConfiguration() {
             var basePath = Directory.GetCurrentDirectory();
-            if (isService)
+            if (_isService)
             {
                 var pathToExe = Process.GetCurrentProcess().MainModule.FileName;
                 basePath = Path.GetDirectoryName(pathToExe);
@@ -72,8 +74,14 @@ namespace Polyrific.Catapult.Api
                         optional: true)
                     .AddEnvironmentVariables()
                     .Build();
-            
+
             return config;
+        }
+
+        public static void AddDbConfiguration(WebHostBuilderContext context, IConfigurationBuilder builder)
+        {
+            builder.AddDbConfiguration(context.Configuration);
+            builder.Build();
         }
     }
 }
