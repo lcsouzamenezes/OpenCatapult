@@ -353,7 +353,7 @@ namespace Polyrific.Catapult.Api.Core.Services
                 var tasks = await _jobDefinitionService.GetJobTaskDefinitions(jobDefinition.Id, cancellationToken: cancellationToken);
                 foreach (var task in tasks)
                 {
-                    await _jobDefinitionService.ValidateJobTaskDefinition(jobDefinition, task, encryptConfig: false, cancellationToken: cancellationToken);
+                    await _jobDefinitionService.ValidateJobTaskDefinition(jobDefinition, task, cancellationToken: cancellationToken);
                 }
             }
             catch (Exception ex)
