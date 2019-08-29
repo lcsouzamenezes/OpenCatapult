@@ -10,7 +10,7 @@
 ## Guides
 
 * [User Guide](user-guides/user-guides.md)
-  * [Manage projects](user-guides/projects.md)
+  * [Manage projects](user-guides/projects-web.md)
   * [Manage project members](user-guides/project-members.md)
   * [Manage data models](user-guides/data-models.md)
   * [Manage job definitions](user-guides/job-definitions.md)

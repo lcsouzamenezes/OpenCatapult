@@ -1,6 +1,8 @@
+[Web UI](projects-web.md) | CLI
+
 # Manage projects
 
-In catapult, a project is a software project you are working on. It can have several applications in it. For example, a project can contain an API, an Admin application, and a front-facing customer application.
+In `OpenCatapult` terminology, Project is a unit of work which your team can collaborate to create an application. The structure of the application itself can be adjusted based on your needs. For example, a project can contain an API, an Admin application, and a front-facing customer application.
 
 ## Create project
 Create a project by specifying the name and optionally the client of this project
