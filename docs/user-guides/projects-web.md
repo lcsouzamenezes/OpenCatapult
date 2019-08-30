@@ -6,17 +6,15 @@ In `OpenCatapult` terminology, Project is a unit of work which your team can col
 
 ## Create project
 
-Creating a new project can be done by clicking the "New Project" button on top of the "Project" page.
+Creating a new project can be done by clicking the "New Project" button on top of the "Project" section.
 
-In the "New Project" form you can define some of the project properties. The only required field is the "Project Name".
+![New Project](../img/web-new-project.png)
 
-You can also create a project based on a template to pre-populate the models and jobs.
+In the "New Project" form you can define some of the project properties. The only required field is the "Project Name", and it needs to be unique. The "Project Display Name" is automatically filled while you type the "Project Name", although it can be modified again later. You can optionally select the provided Project template or upload a yaml file.
 
-Please find the details of the template content [here](../dev-guides/project-template.md).
+![New Project Form](../img/web-new-project-form.png)
 
-Finally, [task providers](../home/intro.md#task-providers) may have some configuration key that you can override for each project.
-
-For the configuration key that the task provider have, please refer to each task provider's [page](../task-providers/task-provider.md).
+You can find more info about Project template [here](../dev-guides/project-template.md).
 
 ## Update project
 
