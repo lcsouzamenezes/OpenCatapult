@@ -2,7 +2,7 @@
 
 This section is intended to be used as guidance for users to make use of `OpenCatapult` features.
 
-- [Manage Projects](projects.md)
+- [Manage Projects](projects-web.md)
 - [Manage Project Members](project-members.md)
 - [Manage Project Data Models](data-models.md)
 - [Manage Job Definitions](job-definitions.md)
