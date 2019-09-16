@@ -1,17 +1,18 @@
 ﻿// Copyright (c) Polyrific, Inc 2018. All rights reserved.
 
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Polyrific.Catapult.Api.Core.Entities;
 using Polyrific.Catapult.Api.Core.Services;
 using Polyrific.Catapult.Api.Identity;
 using Polyrific.Catapult.Shared.Dto.CatapultEngine;
+using Polyrific.Catapult.Shared.Dto.Constants;
 using Polyrific.Catapult.Shared.Dto.User;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace Polyrific.Catapult.Api.Controllers
 {
@@ -23,15 +24,17 @@ namespace Polyrific.Catapult.Api.Controllers
         private readonly IProjectService _projectService;
         private readonly ICatapultEngineService _catapultEngineService;
         private readonly IConfiguration _configuration;
+        private readonly ApplicationSettingValue _applicationSetting;
         private readonly ILogger _logger;
 
         public TokenController(IUserService userService, IProjectService projectService, ICatapultEngineService catapultEngineService, 
-            IConfiguration configuration, ILogger<TokenController> logger)
+            IConfiguration configuration, ApplicationSettingValue applicationSetting, ILogger<TokenController> logger)
         {
             _userService = userService;
             _projectService = projectService;
             _catapultEngineService = catapultEngineService;
             _configuration = configuration;
+            _applicationSetting = applicationSetting;
             _logger = logger;
         }
 
@@ -45,11 +48,40 @@ namespace Polyrific.Catapult.Api.Controllers
         {
             _logger.LogRequest("Requesting user token for user {UserName}", dto?.UserName);
 
-            if (!await _userService.ValidateUserPassword(dto.UserName, dto.Password))
+            var signInResult = await _userService.ValidateUserPassword(dto.UserName, dto.Password);
+            if (!signInResult.Succeeded)
             {
-                _logger.LogWarning("Username or password is invalid. Username: {UserName}", dto?.UserName);
-                return BadRequest("Username or password is invalid");
-            }                
+                if (signInResult.RequiresTwoFactor && _applicationSetting.EnableTwoFactorAuth)
+                {
+                    if (!string.IsNullOrEmpty(dto.AuthenticatorCode))
+                    {
+                        var twoFactorResult = await _userService.VerifyTwoFactorToken(dto.UserName, dto.AuthenticatorCode);
+
+                        if (!twoFactorResult)
+                        {
+                            return BadRequest("Authenticator Code is not correct");
+                        }
+                    }
+                    else if (!string.IsNullOrEmpty(dto.RecoveryCode))
+                    {
+                        var recoveryResult = await _userService.RedeemTwoFactorRecoveryCode(dto.UserName, dto.RecoveryCode);
+
+                        if (!recoveryResult)
+                        {
+                            return BadRequest("Recovery Code is not correct");
+                        }
+                    }
+                    else
+                    {
+                        return Accepted("/account/token", TokenResponses.RequiresTwoFactor);
+                    }                    
+                }
+                else if (!signInResult.RequiresTwoFactor)
+                {
+                    _logger.LogWarning("Username or password is invalid. Username: {UserName}", dto?.UserName);
+                    return BadRequest("Username or password is invalid");
+                }
+            }
 
             var user = await _userService.GetUser(dto.UserName);
             if (!user.IsActive)

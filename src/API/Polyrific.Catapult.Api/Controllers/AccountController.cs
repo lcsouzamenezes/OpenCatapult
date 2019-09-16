@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Polyrific.Catapult.Api.Core.Entities;
 using Polyrific.Catapult.Api.Core.Exceptions;
 using Polyrific.Catapult.Api.Core.Services;
+using Polyrific.Catapult.Api.Filters;
 using Polyrific.Catapult.Api.Identity;
 using Polyrific.Catapult.Shared.Common;
 using Polyrific.Catapult.Shared.Common.Notification;
@@ -485,6 +486,107 @@ namespace Polyrific.Catapult.Api.Controllers
             _logger.LogResponse("List of external account types retrieved. Response body: {@dto}", results);
 
             return Ok(results);
+        }
+
+        [HttpGet("two-factor-key")]
+        [Authorize]
+        [FeatureToggle(ApplicationSettings.EnableTwoFactorAuth)]
+        public async Task<IActionResult> GetTwoFactorAuthKey()
+        {
+            _logger.LogRequest("Getting two factor auth key and QR code");
+
+            var (sharedKey, authUri) = await _userService.GetAuthenticatorKeyAndQrCodeUri(User.GetUserId());
+
+            var dto = new TwoFactorKeyDto
+            {
+                SharedKey = sharedKey,
+                AuthenticatorUri = authUri
+            };
+
+            _logger.LogResponse("Two factor shared key and authenticator uri retrieved");
+
+            return Ok(dto);
+        }
+
+        [HttpPost("verify-two-factor-code")]
+        [Authorize]
+        [FeatureToggle(ApplicationSettings.EnableTwoFactorAuth)]
+        public async Task<IActionResult> VerifyTwoFactorCode(VerifyTwoFactorCodeDto dto)
+        {
+            _logger.LogRequest("Verify two factor auth code");
+
+            var result = await _userService.VerifyTwoFactorToken(User.Identity.Name, dto.VerificationCode);
+
+            _logger.LogRequest("Two factor auth code verified. Result: {result}", result);
+
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest("Supplied verification code is invalid");
+            }
+        }
+
+        [HttpGet("2fa-info")]
+        [Authorize]
+        [FeatureToggle(ApplicationSettings.EnableTwoFactorAuth)]
+        public async Task<IActionResult> GetUser2faInfo()
+        {
+            _logger.LogRequest("Getting the 2fa info of the current user");
+
+            var user2faInfo = await _userService.GetUser2faInfo(User.GetUserId());
+            var result = _mapper.Map<User2faInfoDto>(user2faInfo);
+
+            _logger.LogRequest("2fa info retrieved. Result: {result}", result);
+
+            return Ok(result);
+        }
+
+        [HttpPost("2fa-recovery")]
+        [Authorize]
+        [FeatureToggle(ApplicationSettings.EnableTwoFactorAuth)]
+        public async Task<IActionResult> Generate2faRecoveryCodes()
+        {
+            _logger.LogRequest("Generating the 2fa recovery code for the current user {Name}", User.Identity.Name);
+
+            var recoveryCodes = await _userService.GenerateNewTwoFactorRecoveryCodes(User.GetUserId());
+
+            _logger.LogRequest("2fa recovery code generated for the current user {Name}", User.Identity.Name);
+
+            return Ok(new Generate2faRecoveryCodesDto
+            {
+                RecoveryCodes = recoveryCodes
+            });
+        }
+
+        [HttpPut("reset-authenticator")]
+        [Authorize]
+        [FeatureToggle(ApplicationSettings.EnableTwoFactorAuth)]
+        public async Task<IActionResult> ResetAuthenticatorKey()
+        {
+            _logger.LogRequest("Resetting the 2fa authenticator key for user {Name}", User.Identity.Name);
+
+            await _userService.ResetAuthenticatorKey(User.GetUserId());
+
+            _logger.LogRequest("2fa authenticator key has been reset for the current user {Name}", User.Identity.Name);
+
+            return Ok();
+        }
+
+        [HttpPut("disable-2fa")]
+        [Authorize]
+        [FeatureToggle(ApplicationSettings.EnableTwoFactorAuth)]
+        public async Task<IActionResult> DisableTwoFactor()
+        {
+            _logger.LogRequest("Disabling the 2fa for the current user {Name}", User.Identity.Name);
+
+            await _userService.DisableTwoFactor(User.GetUserId());
+
+            _logger.LogRequest("2fa disabled for the current user {Name}", User.Identity.Name);
+
+            return Ok();
         }
     }
 }

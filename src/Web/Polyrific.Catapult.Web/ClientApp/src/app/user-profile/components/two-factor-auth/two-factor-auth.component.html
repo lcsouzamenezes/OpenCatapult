@@ -1,0 +1,18 @@
+<mat-progress-bar mode='indeterminate' *ngIf='loading'></mat-progress-bar>
+<div *ngIf="!loading">
+  <div *ngIf="user2faInfo.is2faEnabled">
+      <div *ngIf="user2faInfo.recoveryCodesLeft <= 3">
+        <p>You have {{user2faInfo.recoveryCodesLeft}} recovery code(s) left.</p>
+        <p>You should <a [routerLink]="['reset-recovery']" routerLinkActive="router-link-active" >generate a new set of recovery codes</a>.</p>
+      </div>
+      <h4>Two-factor authentication (2FA)</h4>
+      <button mat-raised-button [routerLink]="['disable']" routerLinkActive="router-link-active" >Disable 2FA</button>
+      <button mat-raised-button [routerLink]="['reset-recovery']" routerLinkActive="router-link-active" >Reset recovery codes</button>
+  </div>
+
+  <h4>Authenticator app</h4>
+  <button mat-raised-button [routerLink]="['enable']" routerLinkActive="router-link-active" *ngIf="!user2faInfo.hasAuthenticator">Add authenticator app</button>
+  <button mat-raised-button [routerLink]="['enable']" routerLinkActive="router-link-active" *ngIf="user2faInfo.hasAuthenticator">Set up authenticator app</button>
+  <button mat-raised-button [routerLink]="['reset']" routerLinkActive="router-link-active" *ngIf="user2faInfo.hasAuthenticator">Reset authenticator app</button>
+  <router-outlet></router-outlet>
+</div>

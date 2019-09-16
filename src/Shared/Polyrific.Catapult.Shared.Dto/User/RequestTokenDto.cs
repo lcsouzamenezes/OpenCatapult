@@ -13,5 +13,15 @@ namespace Polyrific.Catapult.Shared.Dto.User
         /// Password of the user
         /// </summary>
         public string Password { get; set; }
+
+        /// <summary>
+        /// Authenticator code
+        /// </summary>
+        public string AuthenticatorCode { get; set; }
+
+        /// <summary>
+        /// Recovery code
+        /// </summary>
+        public string RecoveryCode { get; set; }
     }
 }
